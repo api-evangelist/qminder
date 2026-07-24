@@ -1,0 +1,397 @@
+openapi: 3.1.0
+info:
+  title: Qminder Appointments Input Fields API
+  version: '1.0'
+  description: The Qminder API allows you to integrate queue management into your own applications.
+servers:
+- url: https://api.qminder.com
+security:
+- sec0: []
+tags:
+- name: Input Fields
+  description: Manage custom data fields for locations
+paths:
+  /input-fields:
+    post:
+      summary: Create an input field
+      description: Creates a new input field for a location. The client must generate a UUID for the input field ID. EMAIL and PHONE_NUMBER types are singletons — only one of each is allowed per location.
+      operationId: create-input-field
+      parameters:
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - id
+              - location
+              - type
+              - isMandatoryBeforeAdded
+              - isMandatoryBeforeServed
+              - isMandatoryInRemoteSignIn
+              - isVisibleInWaitingDrawer
+              - isVisibleInServingDrawer
+              - showInRemoteSignIn
+              - visibleForLines
+              properties:
+                id:
+                  type: string
+                  format: uuid
+                  description: Client-generated UUID for the input field.
+                location:
+                  type: object
+                  required:
+                  - id
+                  description: Location reference.
+                  properties:
+                    id:
+                      type: integer
+                      description: Location ID.
+                type:
+                  type: string
+                  enum:
+                  - FIRST_NAME
+                  - LAST_NAME
+                  - EMAIL
+                  - PHONE_NUMBER
+                  - TEXT
+                  - SELECT
+                  - URL
+                  - DATE
+                  - NUMERIC
+                  description: Input field type.
+                title:
+                  type: string
+                  description: Display title. Required for TEXT, SELECT, URL, DATE, and NUMERIC types.
+                isMandatoryBeforeAdded:
+                  type: boolean
+                  description: Must be filled before ticket is added.
+                isMandatoryBeforeServed:
+                  type: boolean
+                  description: Must be filled before ticket is served.
+                isMandatoryInRemoteSignIn:
+                  type: boolean
+                  description: Must be filled in remote sign-in.
+                isVisibleInWaitingDrawer:
+                  type: boolean
+                  description: Shown in the waiting drawer.
+                isVisibleInServingDrawer:
+                  type: boolean
+                  description: Shown in the serving drawer.
+                showInRemoteSignIn:
+                  type: boolean
+                  description: Show in remote sign-in. Always treated as false for URL fields.
+                visibleForLines:
+                  type: array
+                  description: Lines this field applies to. Empty array means all lines.
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: Line ID.
+                visitorFacingTitle:
+                  type: string
+                  description: Title shown to visitors. Available for TEXT, SELECT, DATE, and NUMERIC types.
+                multiSelect:
+                  type: boolean
+                  description: Allow multiple selections. Required for SELECT type.
+                options:
+                  type: array
+                  description: Select options. Required for SELECT type.
+                  items:
+                    type: object
+                    required:
+                    - id
+                    - title
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                        description: Client-generated UUID for the option.
+                      title:
+                        type: string
+                        description: Option display title.
+                      color:
+                        type: string
+                        description: Option color.
+                constraints:
+                  type: object
+                  description: Numeric constraints. Available for NUMERIC type.
+                  required:
+                  - scale
+                  properties:
+                    min:
+                      type: number
+                      description: Minimum allowed value.
+                    max:
+                      type: number
+                      description: Maximum allowed value.
+                    scale:
+                      type: integer
+                      description: Number of decimal places.
+                translations:
+                  type: array
+                  description: Translations. Available for TEXT, SELECT, URL, DATE, and NUMERIC types.
+                  items:
+                    type: object
+                    required:
+                    - languageCode
+                    properties:
+                      languageCode:
+                        type: string
+                        description: Language code (e.g. "fr", "es").
+                      title:
+                        type: string
+                        description: Translated field title.
+                      visitorFacingTitle:
+                        type: string
+                        description: Translated visitor-facing title.
+                isRequiredInAppointments:
+                  type: boolean
+                  description: Whether required in appointments. Available for LAST_NAME and EMAIL types.
+            example:
+              id: 550e8400-e29b-41d4-a716-446655440000
+              location:
+                id: 12345
+              type: TEXT
+              title: Reason for visit
+              isMandatoryBeforeAdded: true
+              isMandatoryBeforeServed: false
+              isMandatoryInRemoteSignIn: false
+              isVisibleInWaitingDrawer: true
+              isVisibleInServingDrawer: true
+              showInRemoteSignIn: true
+              visibleForLines: []
+      responses:
+        '201':
+          description: Input field created successfully. Response body is empty.
+        '400':
+          description: Bad request — missing or invalid fields
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                    description: Error code.
+                  message:
+                    type: string
+                    description: Error message.
+              examples:
+                duplicate_options:
+                  summary: Duplicate SELECT option titles
+                  value:
+                    code: duplicate_items_in_request
+                    message: Duplicate option titles
+                blank_translation:
+                  summary: Blank translation title
+                  value:
+                    code: parameter_invalid_blank
+                    message: Translation title must not be blank
+        '404':
+          description: Location not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+              example:
+                code: resource_missing
+                message: Location not found
+        '409':
+          description: Conflict — duplicate input field ID, or singleton type already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  code:
+                    type: string
+                  message:
+                    type: string
+              example:
+                code: input_field_duplicate
+                message: Input field with this ID already exists
+      tags:
+      - Input Fields
+  /input-fields/{inputFieldId}:
+    patch:
+      summary: Edit an input field
+      description: Updates an existing input field. Only include fields you want to change — omitted fields remain unchanged. Set `visitorFacingTitle` to `null` to clear it.
+      operationId: edit-input-field
+      parameters:
+      - name: inputFieldId
+        in: path
+        description: UUID of the input field to update.
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      requestBody:
+        description: Input field properties to update. All fields are optional — only include fields you want to change.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  maxLength: 50
+                  description: Display title. Only for TEXT, SELECT, URL, DATE, and NUMERIC types.
+                visitorFacingTitle:
+                  type: string
+                  maxLength: 200
+                  nullable: true
+                  description: Title shown to visitors. Set to `null` to clear. Only for TEXT, SELECT, DATE, and NUMERIC types.
+                isVisibleInWaitingDrawer:
+                  type: boolean
+                  description: Shown in the waiting drawer.
+                isVisibleInServingDrawer:
+                  type: boolean
+                  description: Shown in the serving drawer.
+                isMandatoryBeforeAdded:
+                  type: boolean
+                  description: Must be filled before ticket is added.
+                isMandatoryBeforeServed:
+                  type: boolean
+                  description: Must be filled before ticket is served.
+                isMandatoryInRemoteSignIn:
+                  type: boolean
+                  description: Must be filled in remote sign-in.
+                showInRemoteSignIn:
+                  type: boolean
+                  description: Show in remote sign-in. Always treated as false for URL fields.
+                visibleForLines:
+                  type: array
+                  description: Lines this field applies to. Empty array means all lines.
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        description: Line ID.
+                multiSelect:
+                  type: boolean
+                  description: Allow multiple selections. Only for SELECT type.
+                options:
+                  type: array
+                  description: Select options. Only for SELECT type. Options are matched by ID — existing options are updated, new IDs are added, missing IDs are removed.
+                  items:
+                    type: object
+                    required:
+                    - id
+                    - title
+                    properties:
+                      id:
+                        type: string
+                        format: uuid
+                        description: Option UUID. Use an existing ID to update, or a new UUID to add.
+                      title:
+                        type: string
+                        description: Option display title.
+                      color:
+                        type: string
+                        description: Option color.
+                constraints:
+                  type: object
+                  description: Numeric constraints. Only for NUMERIC type.
+                  properties:
+                    min:
+                      type: number
+                      description: Minimum allowed value.
+                    max:
+                      type: number
+                      description: Maximum allowed value.
+                    scale:
+                      type: integer
+                      description: Number of decimal places.
+                translations:
+                  type: array
+                  description: Translations. Available for TEXT, SELECT, URL, DATE, and NUMERIC types. Replaces all existing translations.
+                  items:
+                    type: object
+                    required:
+                    - languageCode
+                    properties:
+                      languageCode:
+                        type: string
+                        description: Language code (e.g. "fr", "es").
+                      title:
+                        type: string
+                        description: Translated field title.
+                      visitorFacingTitle:
+                        type: string
+                        description: Translated visitor-facing title.
+            example:
+              title: Visit reason
+              isVisibleInWaitingDrawer: false
+              isMandatoryBeforeServed: true
+      responses:
+        '200':
+          description: Input field updated successfully
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              examples:
+                InvalidArguments:
+                  summary: Type-specific field set on wrong type
+                  value:
+                    code: invalid_arguments
+                    message: title is not applicable for this input field type
+                DuplicateOptions:
+                  summary: SELECT options have duplicate titles
+                  value:
+                    code: duplicate_items_in_request
+                    message: Duplicate option titles
+                BlankTitle:
+                  summary: Title is blank
+                  value:
+                    code: parameter_invalid_blank
+                    message: Title must not be blank
+        '404':
+          description: Input field not found
+          content:
+            application/json:
+              example:
+                code: resource_missing
+                message: Input field not found
+      tags:
+      - Input Fields
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: X-Qminder-REST-API-Key
+      x-default: yourbusinessapikey
+x-readme:
+  headers: []
+  explorer-enabled: false
+  proxy-enabled: true
+x-readme-fauxas: true

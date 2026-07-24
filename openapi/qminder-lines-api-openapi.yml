@@ -1,0 +1,509 @@
+openapi: 3.1.0
+info:
+  title: Qminder Appointments Lines API
+  version: '1.0'
+  description: The Qminder API allows you to integrate queue management into your own applications.
+servers:
+- url: https://api.qminder.com
+security:
+- sec0: []
+tags:
+- name: Lines
+  description: Manage virtual queues within locations
+paths:
+  /v1/locations/{id}/lines:
+    post:
+      summary: Create a line
+      description: Creates a new line (queue) within a location.
+      operationId: create-line
+      parameters:
+      - name: id
+        in: path
+        description: ID of a Location
+        schema:
+          type: integer
+          format: int32
+          default: 123
+        required: true
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - color
+              properties:
+                name:
+                  type: string
+                  maxLength: 30
+                  description: Line name (max 30 characters).
+                color:
+                  type: string
+                  enum:
+                  - VIOLET
+                  - LAVENDER
+                  - MARSHMALLOW
+                  - TEAL
+                  - MINT
+                  - CORAL
+                  - YELLOW
+                  - ROSE
+                  - INDIGO
+                  - BLUE
+                  description: Line color.
+                disabled:
+                  type: boolean
+                  description: 'Whether the line starts disabled. Default: false.'
+                translations:
+                  type: array
+                  description: Name translations for multi-language support.
+                  items:
+                    type: object
+                    required:
+                    - languageCode
+                    properties:
+                      languageCode:
+                        type: string
+                        description: Language code (e.g. "et", "fi", "de").
+                      name:
+                        type: string
+                        maxLength: 30
+                        description: Translated line name (max 30 characters).
+                appointmentSettings:
+                  type: object
+                  description: Appointment configuration for this line.
+                  required:
+                  - enabled
+                  - duration
+                  properties:
+                    enabled:
+                      type: boolean
+                      description: Whether appointments are enabled for this line.
+                    duration:
+                      type: integer
+                      enum:
+                      - 15
+                      - 30
+                      - 45
+                      - 60
+                      - 90
+                      - 120
+                      - 180
+                      description: Default appointment duration in minutes.
+            example:
+              name: Customer Support
+              color: TEAL
+              translations:
+              - languageCode: fr
+                name: Service client
+              appointmentSettings:
+                enabled: true
+                duration: 30
+      responses:
+        '201':
+          description: Line created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the created line.
+                    example: '12345'
+              example:
+                id: '12345'
+        '400':
+          description: Validation error - invalid input data
+        '409':
+          description: A line with the same name already exists in this location
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl -X POST https://api.qminder.com/v1/locations/123/lines \\\n  -H \"X-Qminder-REST-API-Key: KEY\" \\\n  -H \"X-Qminder-API-Version: 2020-09-01\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"Customer Support\",\n    \"color\": \"TEAL\"\n  }'"
+        samples-languages:
+        - curl
+      tags:
+      - Lines
+    get:
+      summary: Get list of lines
+      description: ''
+      operationId: get-list-of-lines
+      parameters:
+      - name: id
+        in: path
+        description: ID of a location
+        schema:
+          type: integer
+          format: int32
+          default: 123
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"data\": [\n    {\n      \"id\": 1827,\n      \"name\": \"Example Line\",\n      \"location\": 123,\n      \"color\": \"#ff00ff\",\n      \"disabled\": false\n    },\n    {\n      \"id\": 1829,\n      \"name\": \"Example Line 2\",\n      \"location\": 123,\n      \"color\": \"#ff00ff\",\n      \"disabled\": false\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1827
+                          default: 0
+                        name:
+                          type: string
+                          example: Example Line
+                        location:
+                          type: integer
+                          example: 123
+                          default: 0
+                        color:
+                          type: string
+                          example: '#ff00ff'
+                        disabled:
+                          type: boolean
+                          example: false
+                          default: true
+      deprecated: false
+      tags:
+      - Lines
+  /v1/lines/{id}:
+    post:
+      summary: Editing a line
+      description: ''
+      operationId: editing-a-line
+      parameters:
+      - name: id
+        in: path
+        description: ID of a Line
+        schema:
+          type: integer
+          format: int32
+          default: 123
+        required: true
+      - name: Content-Type
+        in: header
+        schema:
+          type: string
+          default: application/x-www-form-urlencoded
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the Line. The maximum length is 30 characters.
+                  default: My New Cool Line
+                color:
+                  type: string
+                  enum:
+                  - VIOLET
+                  - LAVENDER
+                  - MARSHMALLOW
+                  - TEAL
+                  - MINT
+                  - CORAL
+                  - YELLOW
+                  - ROSE
+                  - INDIGO
+                  - BLUE
+                  description: The color of the Line. Must be one of the predefined color values.
+                  default: VIOLET
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: The name of the Line. The maximum length is 30 characters.
+                  default: My New Cool Line
+                color:
+                  type: string
+                  enum:
+                  - VIOLET
+                  - LAVENDER
+                  - MARSHMALLOW
+                  - TEAL
+                  - MINT
+                  - CORAL
+                  - YELLOW
+                  - ROSE
+                  - INDIGO
+                  - BLUE
+                  description: The color of the Line. Must be one of the predefined color values.
+                  default: VIOLET
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl --request POST \\\n     --url https://api.qminder.com/v1/lines/123 \\\n     --header 'X-Qminder-REST-API-Key: yourbusinessapikey' \\\n     -d \"name=My New Cool Line\" \\\n     -d \"color=VIOLET\""
+        samples-languages:
+        - curl
+      tags:
+      - Lines
+    get:
+      summary: Get details of a line
+      description: ''
+      operationId: get-details-of-a-line
+      parameters:
+      - name: id
+        in: path
+        description: ID of a line
+        schema:
+          type: integer
+          format: int32
+          default: 1827
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"id\": 1827,\n  \"name\": \"Example Line\",\n  \"location\": 4052,\n  \"color\": \"#ff00ff\",\n  \"disabled\": false\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  id:
+                    type: integer
+                    example: 1827
+                    default: 0
+                  name:
+                    type: string
+                    example: Example Line
+                  location:
+                    type: integer
+                    example: 4052
+                    default: 0
+                  color:
+                    type: string
+                    example: '#ff00ff'
+                  disabled:
+                    type: boolean
+                    example: false
+                    default: true
+      deprecated: false
+      tags:
+      - Lines
+    delete:
+      summary: Deletion of a line
+      description: ''
+      operationId: deletion
+      parameters:
+      - name: id
+        in: path
+        description: ID of a line
+        schema:
+          type: integer
+          format: int32
+          default: 123
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+      deprecated: false
+      tags:
+      - Lines
+  /v1/lines/{id}/enable:
+    post:
+      summary: Enabling a line
+      description: ''
+      operationId: enabling-a-line
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+          format: int32
+          default: 123
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+      deprecated: false
+      tags:
+      - Lines
+  /v1/lines/{id}/disable:
+    post:
+      summary: Disabling a line
+      description: ''
+      operationId: disabling-a-line
+      parameters:
+      - name: id
+        in: path
+        description: ID of a line
+        schema:
+          type: integer
+          format: int32
+          default: 123
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+        '400':
+          description: '400'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: ''
+      deprecated: false
+      tags:
+      - Lines
+  /v1/lines/{id}/archive:
+    post:
+      summary: Archiving a line
+      description: ''
+      operationId: archiving-a-line
+      parameters:
+      - name: id
+        in: path
+        description: ID of a line
+        schema:
+          type: integer
+          format: int32
+          default: 123
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+      deprecated: false
+      tags:
+      - Lines
+  /v1/lines/{id}/unarchive:
+    post:
+      summary: Unarchiving a line
+      description: ''
+      operationId: unarchiving-a-line
+      parameters:
+      - name: id
+        in: path
+        description: ID of a line
+        schema:
+          type: integer
+          format: int32
+          default: 123
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+      deprecated: false
+      tags:
+      - Lines
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: X-Qminder-REST-API-Key
+      x-default: yourbusinessapikey
+x-readme:
+  headers: []
+  explorer-enabled: false
+  proxy-enabled: true
+x-readme-fauxas: true

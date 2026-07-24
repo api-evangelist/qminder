@@ -1,0 +1,110 @@
+openapi: 3.1.0
+info:
+  title: Qminder Appointments Webhooks API
+  version: '1.0'
+  description: The Qminder API allows you to integrate queue management into your own applications.
+servers:
+- url: https://api.qminder.com
+security:
+- sec0: []
+tags:
+- name: Webhooks
+  description: Manage webhook subscriptions
+paths:
+  /v1/webhooks:
+    post:
+      summary: Adding a webhook
+      description: ''
+      operationId: adding-a-webhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - url
+              properties:
+                url:
+                  type: string
+                  description: The URL that Qminder will send HTTP requests to.
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - url
+              properties:
+                url:
+                  type: string
+                  description: The URL that Qminder will send HTTP requests to.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"id\": \"4ef258d7-e56e-4c9f-bb6e-4eaec6d9408e\",\n  \"secret\": \"wfdfghfhfgdsfderthyndf4356hyfds\"\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  id:
+                    type: string
+                    example: 4ef258d7-e56e-4c9f-bb6e-4eaec6d9408e
+                  secret:
+                    type: string
+                    example: wfdfghfhfgdsfderthyndf4356hyfds
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl \\\n  -X POST \\\n  https://api.qminder.com/v1/webhooks \\\n  --data \"url=https://www.example.com\" \\\n  -H \"X-Qminder-REST-API-Key: KEY\""
+        samples-languages:
+        - curl
+      tags:
+      - Webhooks
+  /v1/webhooks/{id}:
+    delete:
+      summary: Removing a webhook
+      description: ''
+      operationId: removing-a-webhook
+      parameters:
+      - name: id
+        in: path
+        description: ID of a webhook to delete
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+      deprecated: false
+      tags:
+      - Webhooks
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: X-Qminder-REST-API-Key
+      x-default: yourbusinessapikey
+x-readme:
+  headers: []
+  explorer-enabled: false
+  proxy-enabled: true
+x-readme-fauxas: true

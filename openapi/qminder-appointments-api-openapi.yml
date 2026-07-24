@@ -1,0 +1,472 @@
+openapi: 3.1.0
+info:
+  title: Qminder Appointments API
+  version: '1.0'
+  description: The Qminder API allows you to integrate queue management into your own applications.
+servers:
+- url: https://api.qminder.com
+security:
+- sec0: []
+tags:
+- name: Appointments
+  description: Manage scheduled appointments
+paths:
+  /v1/appointments:
+    post:
+      summary: Create an appointment
+      description: Creates a scheduled appointment for a visitor. Appointments have a specific time slot and are assigned to a user.
+      operationId: create-appointment
+      parameters:
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - lineId
+              - firstName
+              - startTime
+              - endTime
+              - assigneeId
+              properties:
+                lineId:
+                  type: integer
+                  description: ID of the line to create the appointment in.
+                firstName:
+                  type: string
+                  minLength: 2
+                  maxLength: 50
+                  description: Visitor's first name (2-50 characters).
+                lastName:
+                  type: string
+                  maxLength: 50
+                  description: Visitor's last name (max 50 characters).
+                phoneNumber:
+                  type: string
+                  pattern: ^(\+)?([0-9]){5,20}$
+                  description: Phone number with optional + prefix (5-20 digits).
+                email:
+                  type: string
+                  format: email
+                  maxLength: 100
+                  description: Visitor's email address.
+                languageCode:
+                  type: string
+                  minLength: 2
+                  maxLength: 5
+                  default: en
+                  description: 'Language code for the visitor (default: en).'
+                startTime:
+                  type: string
+                  format: date-time
+                  description: Appointment start time in ISO 8601 format.
+                endTime:
+                  type: string
+                  format: date-time
+                  description: Appointment end time in ISO 8601 format.
+                assigneeId:
+                  type: integer
+                  description: ID of the user to assign the appointment to.
+                fields:
+                  type: array
+                  description: Custom input fields for the appointment. See [Input Fields query](/reference/queries/input-fields) to discover available IDs.
+                  items:
+                    type: object
+                    required:
+                    - inputFieldId
+                    properties:
+                      inputFieldId:
+                        type: string
+                        format: uuid
+                        description: UUID of the input field.
+                      value:
+                        type: string
+                        maxLength: 500
+                        description: Value for text input fields.
+                      optionIds:
+                        type: array
+                        items:
+                          type: string
+                          format: uuid
+                        description: UUIDs of selected options for select-type fields.
+                labels:
+                  type: array
+                  description: Labels to attach to the appointment.
+                  items:
+                    type: object
+                    required:
+                    - value
+                    properties:
+                      value:
+                        type: string
+                        description: Label text.
+            example:
+              lineId: 12345
+              firstName: John
+              lastName: Doe
+              phoneNumber: '+12125551234'
+              email: john@example.com
+              startTime: '2024-12-15T10:00:00Z'
+              endTime: '2024-12-15T10:30:00Z'
+              assigneeId: 789
+      responses:
+        '201':
+          description: Appointment created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Internal appointment ticket ID.
+                  publicId:
+                    type: string
+                    description: Public-facing ticket ID.
+              example:
+                id: '226859'
+                publicId: A-42
+        '400':
+          description: Validation error - invalid input data
+        '404':
+          description: Line, user, or input fields not found
+        '409':
+          description: Line is disabled or archived
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl -X POST https://api.qminder.com/v1/appointments \\\n  -H \"X-Qminder-REST-API-Key: YOUR_API_KEY\" \\\n  -H \"X-Qminder-API-Version: 2020-09-01\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"lineId\": 12345,\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"startTime\": \"2024-12-15T10:00:00Z\",\n    \"endTime\": \"2024-12-15T10:30:00Z\",\n    \"assigneeId\": 789\n  }'"
+        - language: typescript
+          code: "const response = await fetch('https://api.qminder.com/v1/appointments', {\n  method: 'POST',\n  headers: {\n    'X-Qminder-REST-API-Key': 'YOUR_API_KEY',\n    'X-Qminder-API-Version': '2020-09-01',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    lineId: 12345,\n    firstName: 'John',\n    lastName: 'Doe',\n    startTime: '2024-12-15T10:00:00Z',\n    endTime: '2024-12-15T10:30:00Z',\n    assigneeId: 789\n  })\n});\n\nconst { id, publicId } = await response.json();"
+        samples-languages:
+        - curl
+        - typescript
+      tags:
+      - Appointments
+  /v1/appointments/auto-assign:
+    post:
+      summary: Create an auto-assigning appointment
+      description: Creates a scheduled appointment that will be automatically assigned to an available user based on their availability.
+      operationId: create-auto-assign-appointment
+      parameters:
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - lineId
+              - firstName
+              - startTime
+              - endTime
+              properties:
+                lineId:
+                  type: integer
+                  description: ID of the line to create the appointment in.
+                firstName:
+                  type: string
+                  minLength: 2
+                  maxLength: 50
+                  description: Visitor's first name (2-50 characters).
+                lastName:
+                  type: string
+                  maxLength: 50
+                  description: Visitor's last name (max 50 characters).
+                phoneNumber:
+                  type: string
+                  pattern: ^(\+)?([0-9]){5,20}$
+                  description: Phone number with optional + prefix (5-20 digits).
+                email:
+                  type: string
+                  format: email
+                  maxLength: 100
+                  description: Visitor's email address.
+                languageCode:
+                  type: string
+                  minLength: 2
+                  maxLength: 5
+                  default: en
+                  description: 'Language code for the visitor (default: en).'
+                startTime:
+                  type: string
+                  format: date-time
+                  description: Appointment start time in ISO 8601 format.
+                endTime:
+                  type: string
+                  format: date-time
+                  description: Appointment end time in ISO 8601 format.
+                fields:
+                  type: array
+                  description: Custom input fields for the appointment. See [Input Fields query](/reference/queries/input-fields) to discover available IDs.
+                  items:
+                    type: object
+                    required:
+                    - inputFieldId
+                    properties:
+                      inputFieldId:
+                        type: string
+                        format: uuid
+                        description: UUID of the input field.
+                      value:
+                        type: string
+                        maxLength: 500
+                        description: Value for text input fields.
+                      optionIds:
+                        type: array
+                        items:
+                          type: string
+                          format: uuid
+                labels:
+                  type: array
+                  description: Labels to attach to the appointment.
+                  items:
+                    type: object
+                    required:
+                    - value
+                    properties:
+                      value:
+                        type: string
+            example:
+              lineId: 12345
+              firstName: John
+              lastName: Doe
+              startTime: '2024-12-15T10:00:00Z'
+              endTime: '2024-12-15T10:30:00Z'
+      responses:
+        '201':
+          description: Appointment created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  publicId:
+                    type: string
+              example:
+                id: '226859'
+                publicId: A-42
+        '400':
+          description: Validation error - invalid input data
+        '404':
+          description: Line or input fields not found
+        '409':
+          description: Line is disabled or archived
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl -X POST https://api.qminder.com/v1/appointments/auto-assign \\\n  -H \"X-Qminder-REST-API-Key: YOUR_API_KEY\" \\\n  -H \"X-Qminder-API-Version: 2020-09-01\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"lineId\": 12345,\n    \"firstName\": \"John\",\n    \"startTime\": \"2024-12-15T10:00:00Z\",\n    \"endTime\": \"2024-12-15T10:30:00Z\"\n  }'"
+        - language: typescript
+          code: "const response = await fetch('https://api.qminder.com/v1/appointments/auto-assign', {\n  method: 'POST',\n  headers: {\n    'X-Qminder-REST-API-Key': 'YOUR_API_KEY',\n    'X-Qminder-API-Version': '2020-09-01',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    lineId: 12345,\n    firstName: 'John',\n    startTime: '2024-12-15T10:00:00Z',\n    endTime: '2024-12-15T10:30:00Z'\n  })\n});\n\nconst { id, publicId } = await response.json();"
+        samples-languages:
+        - curl
+        - typescript
+      tags:
+      - Appointments
+  /v1/appointments/{ticketId}:
+    patch:
+      summary: Edit an appointment
+      description: Updates an appointment's time slot or assignee. Only include fields you want to change.
+      operationId: edit-appointment
+      parameters:
+      - name: ticketId
+        in: path
+        description: ID of the appointment ticket to update
+        required: true
+        schema:
+          type: string
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                startTime:
+                  type: string
+                  format: date-time
+                  description: New appointment start time in ISO 8601 format.
+                endTime:
+                  type: string
+                  format: date-time
+                  description: New appointment end time in ISO 8601 format.
+                assigneeId:
+                  type: integer
+                  description: ID of the user to reassign the appointment to.
+            example:
+              startTime: '2024-12-15T11:00:00Z'
+              endTime: '2024-12-15T11:30:00Z'
+      responses:
+        '200':
+          description: Appointment updated successfully
+        '404':
+          description: Appointment or user not found
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl -X PATCH https://api.qminder.com/v1/appointments/14848 \\\n  -H \"X-Qminder-REST-API-Key: YOUR_API_KEY\" \\\n  -H \"X-Qminder-API-Version: 2020-09-01\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"startTime\": \"2024-12-15T11:00:00Z\",\n    \"endTime\": \"2024-12-15T11:30:00Z\"\n  }'"
+        - language: typescript
+          code: "await fetch('https://api.qminder.com/v1/appointments/14848', {\n  method: 'PATCH',\n  headers: {\n    'X-Qminder-REST-API-Key': 'YOUR_API_KEY',\n    'X-Qminder-API-Version': '2020-09-01',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    startTime: '2024-12-15T11:00:00Z',\n    endTime: '2024-12-15T11:30:00Z'\n  })\n});"
+        samples-languages:
+        - curl
+        - typescript
+      tags:
+      - Appointments
+  /v1/appointments/{ticketId}/cancel:
+    post:
+      summary: Cancel an appointment
+      description: Cancels a scheduled appointment.
+      operationId: cancel-appointment
+      parameters:
+      - name: ticketId
+        in: path
+        description: ID of the appointment ticket to cancel
+        required: true
+        schema:
+          type: string
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      responses:
+        '200':
+          description: Appointment cancelled successfully
+        '400':
+          description: Ticket is not in scheduled status
+        '404':
+          description: Appointment not found
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl -X POST https://api.qminder.com/v1/appointments/14848/cancel \\\n  -H \"X-Qminder-REST-API-Key: YOUR_API_KEY\" \\\n  -H \"X-Qminder-API-Version: 2020-09-01\""
+        - language: typescript
+          code: "await fetch('https://api.qminder.com/v1/appointments/14848/cancel', {\n  method: 'POST',\n  headers: {\n    'X-Qminder-REST-API-Key': 'YOUR_API_KEY',\n    'X-Qminder-API-Version': '2020-09-01'\n  }\n});"
+        samples-languages:
+        - curl
+        - typescript
+      tags:
+      - Appointments
+  /v1/appointments/{ticketId}/checkin:
+    post:
+      summary: Check in an appointment
+      description: Checks in a visitor for their scheduled appointment, moving them to the queue.
+      operationId: checkin-appointment
+      parameters:
+      - name: ticketId
+        in: path
+        description: ID of the appointment ticket to check in
+        required: true
+        schema:
+          type: string
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      responses:
+        '200':
+          description: Appointment checked in successfully
+        '400':
+          description: Ticket is not in scheduled status
+        '404':
+          description: Appointment not found
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl -X POST https://api.qminder.com/v1/appointments/14848/checkin \\\n  -H \"X-Qminder-REST-API-Key: YOUR_API_KEY\" \\\n  -H \"X-Qminder-API-Version: 2020-09-01\""
+        - language: typescript
+          code: "await fetch('https://api.qminder.com/v1/appointments/14848/checkin', {\n  method: 'POST',\n  headers: {\n    'X-Qminder-REST-API-Key': 'YOUR_API_KEY',\n    'X-Qminder-API-Version': '2020-09-01'\n  }\n});"
+        samples-languages:
+        - curl
+        - typescript
+      tags:
+      - Appointments
+  /v1/appointments/{ticketId}/marknoshow:
+    post:
+      summary: Mark appointment as no-show
+      description: Marks a scheduled appointment as no-show when the visitor doesn't arrive.
+      operationId: mark-appointment-noshow
+      parameters:
+      - name: ticketId
+        in: path
+        description: ID of the appointment ticket to mark as no-show
+        required: true
+        schema:
+          type: string
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      responses:
+        '200':
+          description: Appointment marked as no-show successfully
+        '400':
+          description: Ticket is not in scheduled status
+        '404':
+          description: Appointment not found
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl -X POST https://api.qminder.com/v1/appointments/14848/marknoshow \\\n  -H \"X-Qminder-REST-API-Key: YOUR_API_KEY\" \\\n  -H \"X-Qminder-API-Version: 2020-09-01\""
+        - language: typescript
+          code: "await fetch('https://api.qminder.com/v1/appointments/14848/marknoshow', {\n  method: 'POST',\n  headers: {\n    'X-Qminder-REST-API-Key': 'YOUR_API_KEY',\n    'X-Qminder-API-Version': '2020-09-01'\n  }\n});"
+        samples-languages:
+        - curl
+        - typescript
+      tags:
+      - Appointments
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: X-Qminder-REST-API-Key
+      x-default: yourbusinessapikey
+x-readme:
+  headers: []
+  explorer-enabled: false
+  proxy-enabled: true
+x-readme-fauxas: true

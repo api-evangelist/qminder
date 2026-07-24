@@ -1,0 +1,684 @@
+openapi: 3.1.0
+info:
+  title: Qminder Appointments Locations API
+  version: '1.0'
+  description: The Qminder API allows you to integrate queue management into your own applications.
+servers:
+- url: https://api.qminder.com
+security:
+- sec0: []
+tags:
+- name: Locations
+  description: Manage physical service locations
+paths:
+  /locations:
+    post:
+      summary: Create a location
+      description: Creates a new location in the account.
+      operationId: create-location
+      parameters:
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
+              - latitude
+              - longitude
+              - address
+              - country
+              properties:
+                name:
+                  type: string
+                  maxLength: 30
+                  description: Location name (max 30 characters).
+                latitude:
+                  type: number
+                  minimum: -90
+                  maximum: 90
+                  description: Geographical latitude (-90 to 90).
+                longitude:
+                  type: number
+                  minimum: -180
+                  maximum: 180
+                  description: Geographical longitude (-180 to 180).
+                address:
+                  type: string
+                  maxLength: 300
+                  description: Postal address (max 300 characters).
+                country:
+                  type: string
+                  pattern: ^[A-Z]{2}$
+                  description: ISO 3166-1 alpha-2 country code (e.g. "US", "CA").
+                languages:
+                  type: array
+                  items:
+                    type: string
+                  description: Languages available at this location. An array of ISO 639 / BCP 47 language codes (e.g. "en", "et", "fr-CA"). Must include "en". No duplicates allowed. Order is preserved. Defaults to ["en"] if omitted.
+                inputFields:
+                  type: array
+                  description: Custom input fields to create with the location. If omitted, three default fields are created (first name, last name, phone number). Must include at least one FIRST_NAME and one LAST_NAME field. Each field uses the same schema as POST /input-fields, but without location and visibleForLines.
+                  maxItems: 50
+                  items:
+                    $ref: '#/components/schemas/LocationInputField'
+                lines:
+                  type: array
+                  description: Custom lines (queues) to create with the location. If omitted, two default lines are created ("Main Service" and "Information"). Uses the same schema as POST /locations/{id}/lines, but without appointmentSettings.
+                  minItems: 1
+                  maxItems: 50
+                  items:
+                    $ref: '#/components/schemas/LineRequest'
+                openingHours:
+                  type: object
+                  description: Opening hours configuration. If omitted, the location defaults to 24/7 (00:00–23:59 every day).
+                  properties:
+                    regular:
+                      type: object
+                      description: 'Weekly schedule with keys: mon, tue, wed, thu, fri, sat, sun.'
+                      properties:
+                        mon:
+                          $ref: '#/components/schemas/DaySchedule'
+                        tue:
+                          $ref: '#/components/schemas/DaySchedule'
+                        wed:
+                          $ref: '#/components/schemas/DaySchedule'
+                        thu:
+                          $ref: '#/components/schemas/DaySchedule'
+                        fri:
+                          $ref: '#/components/schemas/DaySchedule'
+                        sat:
+                          $ref: '#/components/schemas/DaySchedule'
+                        sun:
+                          $ref: '#/components/schemas/DaySchedule'
+                    exceptions:
+                      type: array
+                      description: Date-specific overrides.
+                      items:
+                        type: object
+                        required:
+                        - date
+                        properties:
+                          date:
+                            type: string
+                            format: date
+                            description: ISO 8601 date (e.g. "2026-05-01").
+                          closed:
+                            type: boolean
+                            description: If true, the location is closed on this date.
+                          closedReason:
+                            type: string
+                            description: Reason for closure (e.g. "Holiday").
+                          businessHours:
+                            type: array
+                            description: Custom hours for this date.
+                            items:
+                              $ref: '#/components/schemas/TimeRange'
+            example:
+              name: SF City Hall
+              latitude: 37.7792792
+              longitude: -122.4214304
+              address: 1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102, United States
+              country: US
+              languages:
+              - en
+              - et
+              - fr-CA
+              inputFields:
+              - id: 550e8400-e29b-41d4-a716-446655440001
+                type: FIRST_NAME
+                isMandatoryBeforeAdded: false
+                isMandatoryBeforeServed: false
+                isMandatoryInRemoteSignIn: false
+                isVisibleInWaitingDrawer: true
+                isVisibleInServingDrawer: true
+                showInRemoteSignIn: true
+              - id: 550e8400-e29b-41d4-a716-446655440002
+                type: LAST_NAME
+                isMandatoryBeforeAdded: false
+                isMandatoryBeforeServed: false
+                isMandatoryInRemoteSignIn: false
+                isVisibleInWaitingDrawer: true
+                isVisibleInServingDrawer: true
+                showInRemoteSignIn: true
+              - id: 550e8400-e29b-41d4-a716-446655440003
+                type: TEXT
+                title: Reason for visit
+                isMandatoryBeforeAdded: true
+                isMandatoryBeforeServed: false
+                isMandatoryInRemoteSignIn: false
+                isVisibleInWaitingDrawer: true
+                isVisibleInServingDrawer: true
+                showInRemoteSignIn: true
+              lines:
+              - name: Customer Support
+                color: TEAL
+              - name: Returns
+                color: CORAL
+              openingHours:
+                regular:
+                  mon:
+                    businessHours:
+                    - opens:
+                        hours: 9
+                        minutes: 0
+                      closes:
+                        hours: 17
+                        minutes: 0
+                  tue:
+                    businessHours:
+                    - opens:
+                        hours: 9
+                        minutes: 0
+                      closes:
+                        hours: 17
+                        minutes: 0
+                  wed:
+                    businessHours:
+                    - opens:
+                        hours: 9
+                        minutes: 0
+                      closes:
+                        hours: 17
+                        minutes: 0
+                  thu:
+                    businessHours:
+                    - opens:
+                        hours: 9
+                        minutes: 0
+                      closes:
+                        hours: 17
+                        minutes: 0
+                  fri:
+                    businessHours:
+                    - opens:
+                        hours: 9
+                        minutes: 0
+                      closes:
+                        hours: 17
+                        minutes: 0
+                  sat:
+                    closed: true
+                  sun:
+                    closed: true
+                exceptions:
+                - date: '2026-05-01'
+                  closed: true
+                  closedReason: Holiday
+      responses:
+        '201':
+          description: Location created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: The ID of the created location.
+                    example: '12345'
+              example:
+                id: '12345'
+        '400':
+          description: Validation error - invalid input data
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl -X POST https://api.qminder.com/locations \\\n  -H \"X-Qminder-REST-API-Key: KEY\" \\\n  -H \"X-Qminder-API-Version: 2020-09-01\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"SF City Hall\",\n    \"latitude\": 37.7792792,\n    \"longitude\": -122.4214304,\n    \"address\": \"1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102, United States\",\n    \"country\": \"US\"\n  }'"
+        samples-languages:
+        - curl
+      tags:
+      - Locations
+  /locations/{locationId}:
+    patch:
+      summary: Edit a location
+      description: Updates an existing location. Only include the fields you want to change. Omitted fields remain unchanged.
+      operationId: edit-location
+      parameters:
+      - name: locationId
+        in: path
+        description: ID of the location to update.
+        required: true
+        schema:
+          type: integer
+          format: int64
+          default: 12345
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      requestBody:
+        description: Location properties to update. All fields are optional — only include the fields you want to change.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  maxLength: 30
+                  description: Location name (max 30 characters). Must not be blank if provided.
+                latitude:
+                  type: number
+                  minimum: -90
+                  maximum: 90
+                  description: Geographical latitude (-90 to 90).
+                longitude:
+                  type: number
+                  minimum: -180
+                  maximum: 180
+                  description: Geographical longitude (-180 to 180).
+            example:
+              name: SF City Hall
+              latitude: 37.7792792
+              longitude: -122.4214304
+      responses:
+        '200':
+          description: Location updated successfully
+        '400':
+          description: Validation error - invalid input data
+          content:
+            application/json:
+              examples:
+                TimezoneConflict:
+                  summary: Coordinates would change the location's timezone
+                  value:
+                    code: invalid_location_timezone
+                    message: The provided coordinates would change the location's timezone, which is not allowed
+        '404':
+          description: Location not found
+          content:
+            application/json:
+              example:
+                code: resource_missing
+                message: 'Locations with following ids were not found: [12345]'
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl -X PATCH https://api.qminder.com/locations/12345 \\\n  -H \"X-Qminder-REST-API-Key: KEY\" \\\n  -H \"X-Qminder-API-Version: 2020-09-01\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"name\": \"SF City Hall\",\n    \"latitude\": 37.7792792,\n    \"longitude\": -122.4214304\n  }'"
+        samples-languages:
+        - curl
+      tags:
+      - Locations
+  /v1/locations/{id}:
+    get:
+      summary: Get details of a location
+      description: ''
+      operationId: get-details-of-a-location
+      parameters:
+      - name: id
+        in: path
+        description: ID of a Location
+        schema:
+          type: integer
+          format: int32
+          default: 123
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"id\": 57175,\n  \"name\": \"White House\",\n  \"latitude\": 38.8976805,\n  \"longitude\": -77.0387185,\n  \"country\": \"us\",\n  \"address\": \"1600 Pennsylvania Ave NW, Washington, DC 20500, United States\",\n  \"selectingDeskMandatory\": true,\n  \"timezoneOffset\": -240\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  id:
+                    type: integer
+                    example: 57175
+                    default: 0
+                  name:
+                    type: string
+                    example: White House
+                  latitude:
+                    type: number
+                    example: 38.8976805
+                    default: 0
+                  longitude:
+                    type: number
+                    example: -77.0387185
+                    default: 0
+                  country:
+                    type: string
+                    example: us
+                  address:
+                    type: string
+                    example: 1600 Pennsylvania Ave NW, Washington, DC 20500, United States
+                  selectingDeskMandatory:
+                    type: boolean
+                    example: true
+                    default: true
+                  timezoneOffset:
+                    type: integer
+                    example: -240
+                    default: 0
+      deprecated: false
+      tags:
+      - Locations
+  /v1/locations/{id}/desks:
+    get:
+      summary: Get desks of a Location
+      description: ''
+      operationId: get-desks-of-a-location
+      parameters:
+      - name: id
+        in: path
+        description: ID of a Location
+        schema:
+          type: integer
+          format: int32
+          default: 123
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"statusCode\": 200,\n    \"desks\": [\n      {\n        \"id\": 159909,\n        \"name\": \"Front desk\"\n      },\n      {\n        \"id\": 159533,\n        \"name\": \"Cabinet 1\"\n      },\n      {\n        \"id\": 159534,\n        \"name\": \"Cabinet 2\"\n      },\n      {\n        \"id\": 1595643,\n        \"name\": \"Cabinet 3\"\n      }\n    ]\n  }"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  desks:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 159909
+                          default: 0
+                        name:
+                          type: string
+                          example: Front desk
+      deprecated: false
+      tags:
+      - Locations
+  /v1/locations:
+    get:
+      summary: Get the list of locations
+      description: ''
+      operationId: get-the-list-of-locations
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"data\": [\n    {\n      \"id\": 28594,\n      \"name\": \"White House\",\n      \"latitude\": 38.8976763,\n      \"longitude\": -77.0365298,\n      \"country\": \"United States\",\n      \"address\": \"1600 Pennsylvania Ave NW, Washington, DC 20500, United States\",\n      \"selectingDeskMandatory\": false,\n      \"timezoneOffset\": -240\n    },\n    {\n      \"id\": 39599,\n      \"name\": \"SF City Hall\",\n      \"latitude\": 37.7792792,\n      \"longitude\": -122.4214304,\n      \"country\": \"United States\",\n      \"address\": \"1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102, United States\",\n      \"selectingDeskMandatory\": false,\n      \"timezoneOffset\": -420\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 28594
+                          default: 0
+                        name:
+                          type: string
+                          example: White House
+                        latitude:
+                          type: number
+                          example: 38.8976763
+                          default: 0
+                        longitude:
+                          type: number
+                          example: -77.0365298
+                          default: 0
+                        country:
+                          type: string
+                          example: United States
+                        address:
+                          type: string
+                          example: 1600 Pennsylvania Ave NW, Washington, DC 20500, United States
+                        selectingDeskMandatory:
+                          type: boolean
+                          example: false
+                          default: true
+                        timezoneOffset:
+                          type: integer
+                          example: -240
+                          default: 0
+      deprecated: false
+      tags:
+      - Locations
+components:
+  schemas:
+    TimeOfDay:
+      type: object
+      description: A time of day.
+      properties:
+        hours:
+          type: integer
+          minimum: 0
+          maximum: 23
+          description: Hour (0-23).
+        minutes:
+          type: integer
+          minimum: 0
+          maximum: 59
+          description: Minutes (0-59).
+    LineTranslationRequest:
+      type: object
+      description: A name translation for a line.
+      required:
+      - languageCode
+      properties:
+        languageCode:
+          type: string
+          description: Language code (e.g. "fr", "es").
+        name:
+          type: string
+          maxLength: 30
+          description: Translated line name (max 30 characters). Can be null as a placeholder.
+          nullable: true
+    LineRequest:
+      type: object
+      description: A line (service) to create with the location.
+      required:
+      - name
+      - color
+      properties:
+        name:
+          type: string
+          maxLength: 30
+          description: Line name (max 30 characters, trimmed).
+        color:
+          type: string
+          enum:
+          - VIOLET
+          - LAVENDER
+          - MARSHMALLOW
+          - TEAL
+          - MINT
+          - CORAL
+          - YELLOW
+          - ROSE
+          - INDIGO
+          - BLUE
+          description: Line color.
+        disabled:
+          type: boolean
+          description: 'Whether the line starts disabled (default: false).'
+        translations:
+          type: array
+          description: Name translations for multi-language support. Referenced language codes must be included in the location's languages field.
+          items:
+            $ref: '#/components/schemas/LineTranslationRequest'
+    LocationInputField:
+      type: object
+      description: An input field to create with the location. Uses the same schema as POST /input-fields, but without `location` (auto-set) and `visibleForLines` (lines don't exist yet).
+      required:
+      - id
+      - type
+      - isMandatoryBeforeAdded
+      - isMandatoryBeforeServed
+      - isMandatoryInRemoteSignIn
+      - isVisibleInWaitingDrawer
+      - isVisibleInServingDrawer
+      - showInRemoteSignIn
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Client-generated UUID for the input field.
+        type:
+          type: string
+          enum:
+          - FIRST_NAME
+          - LAST_NAME
+          - EMAIL
+          - PHONE_NUMBER
+          - TEXT
+          - SELECT
+          - URL
+          - DATE
+          - NUMERIC
+          description: Input field type.
+        title:
+          type: string
+          description: Display title. Required for TEXT, SELECT, URL, DATE, and NUMERIC types.
+        isMandatoryBeforeAdded:
+          type: boolean
+          description: Must be filled before ticket is added.
+        isMandatoryBeforeServed:
+          type: boolean
+          description: Must be filled before ticket is served.
+        isMandatoryInRemoteSignIn:
+          type: boolean
+          description: Must be filled in remote sign-in.
+        isVisibleInWaitingDrawer:
+          type: boolean
+          description: Shown in the waiting drawer.
+        isVisibleInServingDrawer:
+          type: boolean
+          description: Shown in the serving drawer.
+        showInRemoteSignIn:
+          type: boolean
+          description: Show in remote sign-in. Always treated as false for URL fields.
+        visitorFacingTitle:
+          type: string
+          description: Title shown to visitors. Available for TEXT, SELECT, DATE, and NUMERIC types.
+        multiSelect:
+          type: boolean
+          description: Allow multiple selections. Required for SELECT type.
+        options:
+          type: array
+          description: Select options. Required for SELECT type.
+          items:
+            type: object
+            required:
+            - id
+            - title
+            properties:
+              id:
+                type: string
+                format: uuid
+                description: Client-generated UUID for the option.
+              title:
+                type: string
+                description: Option display title.
+              color:
+                type: string
+                description: Option color in hex format (#RRGGBB).
+        constraints:
+          type: object
+          description: Numeric constraints. Available for NUMERIC type.
+          required:
+          - scale
+          properties:
+            min:
+              type: number
+              description: Minimum allowed value.
+            max:
+              type: number
+              description: Maximum allowed value.
+            scale:
+              type: integer
+              description: Number of decimal places.
+        translations:
+          type: array
+          description: Translations. Available for TEXT, SELECT, URL, DATE, and NUMERIC types. Referenced language codes must be included in the location's languages field.
+          items:
+            type: object
+            required:
+            - languageCode
+            properties:
+              languageCode:
+                type: string
+                description: Language code (e.g. "fr", "es").
+              title:
+                type: string
+                description: Translated field title.
+              visitorFacingTitle:
+                type: string
+                description: Translated visitor-facing title.
+        isRequiredInAppointments:
+          type: boolean
+          description: Whether required in appointments. Available for LAST_NAME and EMAIL types.
+    DaySchedule:
+      type: object
+      description: Schedule for a single day. Either set businessHours or closed.
+      properties:
+        businessHours:
+          type: array
+          description: Time ranges when the location is open.
+          items:
+            $ref: '#/components/schemas/TimeRange'
+        closed:
+          type: boolean
+          description: If true, the location is closed this day.
+    TimeRange:
+      type: object
+      description: A time range with opening and closing times.
+      properties:
+        opens:
+          $ref: '#/components/schemas/TimeOfDay'
+        closes:
+          $ref: '#/components/schemas/TimeOfDay'
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: X-Qminder-REST-API-Key
+      x-default: yourbusinessapikey
+x-readme:
+  headers: []
+  explorer-enabled: false
+  proxy-enabled: true
+x-readme-fauxas: true

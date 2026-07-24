@@ -1,0 +1,440 @@
+openapi: 3.1.0
+info:
+  title: Qminder Appointments Users API
+  version: '1.0'
+  description: The Qminder API allows you to integrate queue management into your own applications.
+servers:
+- url: https://api.qminder.com
+security:
+- sec0: []
+tags:
+- name: Users
+  description: Manage user accounts and permissions
+paths:
+  /v1/locations/{id}/users:
+    get:
+      summary: Getting a list of users
+      description: ''
+      operationId: getting-a-list-of-users
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the Location to query
+        schema:
+          type: integer
+          format: int32
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"data\": [\n    {\n      \"id\": 891,\n      \"email\": \"test-user@qminder.com\",\n      \"firstName\": \"Test\",\n      \"lastName\": \"User\",\n      \"selectedLocation\": 4022\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 891
+                          default: 0
+                        email:
+                          type: string
+                          example: test-user@qminder.com
+                        firstName:
+                          type: string
+                          example: Test
+                        lastName:
+                          type: string
+                          example: User
+                        selectedLocation:
+                          type: integer
+                          example: 4022
+                          default: 0
+      deprecated: false
+      tags:
+      - Users
+  /v1/users:
+    post:
+      summary: Creating a user
+      description: ''
+      operationId: creating-a-user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - email
+              - firstName
+              - lastName
+              - roles
+              properties:
+                email:
+                  type: string
+                  description: The email address of the new user. They must be able to receive an e-mail. The maximum length is 100 characters.
+                firstName:
+                  type: string
+                  description: The first name of the new user. The maximum length is 50 characters.
+                lastName:
+                  type: string
+                  description: The last name of the new user. The maximum length is 50 characters.
+                roles:
+                  type: string
+                  description: 'Array of access roles for the user. The array must have at least one access role. Access roles are JSON objects with the following fields: type (string) Mandatory. The access level. Either "CLERK", "MANAGER", or "ADMIN". location (number) Optional. The location where to grant access. Mandatory for CLERK and MANAGER access levels.'
+                  format: json
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - email
+              - firstName
+              - lastName
+              - roles
+              properties:
+                email:
+                  type: string
+                  description: The email address of the new user. They must be able to receive an e-mail. The maximum length is 100 characters.
+                firstName:
+                  type: string
+                  description: The first name of the new user. The maximum length is 50 characters.
+                lastName:
+                  type: string
+                  description: The last name of the new user. The maximum length is 50 characters.
+                roles:
+                  type: string
+                  description: 'Array of access roles for the user. The array must have at least one access role. Access roles are JSON objects with the following fields: type (string) Mandatory. The access level. Either "CLERK", "MANAGER", or "ADMIN". location (number) Optional. The location where to grant access. Mandatory for CLERK and MANAGER access levels.'
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"id\": \"226859\"\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  id:
+                    type: string
+                    example: '226859'
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl -X POST https://api.qminder.com/v1/users \\\n  -d \"email=johnny@qminder.com\" \\\n  -d \"firstName=Johnny\" \\\n  -d \"lastName=Bravo\" \\\n  -d 'roles=[{\"type\": \"CLERK\", \"location\": 1570 }]' \\\n  -H \"X-Qminder-REST-API-Key: KEY\""
+        samples-languages:
+        - curl
+      tags:
+      - Users
+  /v1/users/{id}:
+    get:
+      summary: Getting details of a User
+      description: ''
+      operationId: getting-details-of-a-user
+      parameters:
+      - name: id
+        in: path
+        description: The ID or email of the User to query
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"statusCode\": 200,\n    \"id\": 111111,\n    \"email\": \"test@qminder.com\",\n    \"firstName\": \"Test\",\n    \"lastName\": \"User\",\n    \"selectedLocation\": 18588,\n    \"roles\": [\n        {\n            \"id\": 1234,\n            \"type\": \"ADMIN\"\n        }\n    ]\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  id:
+                    type: integer
+                    example: 111111
+                    default: 0
+                  email:
+                    type: string
+                    example: test@qminder.com
+                  firstName:
+                    type: string
+                    example: Test
+                  lastName:
+                    type: string
+                    example: User
+                  selectedLocation:
+                    type: integer
+                    example: 18588
+                    default: 0
+                  roles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1234
+                          default: 0
+                        type:
+                          type: string
+                          example: ADMIN
+      deprecated: false
+      tags:
+      - Users
+  /v1/users/{id}/desk:
+    get:
+      summary: Getting user's selected desk id
+      description: ''
+      operationId: getting-users-selected-desk-id
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the User to get selected desk of
+        schema:
+          type: integer
+          format: int32
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"selectedDeskId\": 2442\n}"
+              schema:
+                type: object
+                properties:
+                  selectedDeskId:
+                    type: integer
+                    example: 2442
+                    default: 0
+      deprecated: false
+      tags:
+      - Users
+    post:
+      summary: Changing the user's selected desk
+      description: ''
+      operationId: changing-the-users-selected-desk
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the User to change the desk for
+        schema:
+          type: integer
+          format: int32
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - desk
+              properties:
+                desk:
+                  type: integer
+                  description: The ID of the desk to select. The desk has to be in the User's selected location.
+                  format: int32
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - desk
+              properties:
+                desk:
+                  type: integer
+                  description: The ID of the desk to select. The desk has to be in the User's selected location.
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl \\\n  -X POST \\\n  https://api.qminder.com/v1/users/342/desk \\\n  -d \"desk=58185\" \\\n  -H \"X-Qminder-REST-API-Key: KEY\""
+        samples-languages:
+        - curl
+      tags:
+      - Users
+    delete:
+      summary: Clearing the user's selected desk
+      description: ''
+      operationId: clearing-the-users-selected-desk
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the User to remove the desk for
+        schema:
+          type: integer
+          format: int32
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+      deprecated: false
+      tags:
+      - Users
+  /v1/users/{id}/lines:
+    get:
+      summary: Getting the user's selected lines
+      description: ''
+      operationId: getting-the-users-selected-lines
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the User to get lines for
+        schema:
+          type: integer
+          format: int32
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"selectedLines\":[2342, 4245, 3214]\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  selectedLines:
+                    type: array
+                    items:
+                      type: integer
+                      example: 2342
+                      default: 0
+      deprecated: false
+      tags:
+      - Users
+    post:
+      summary: Selecting lines
+      description: ''
+      operationId: selecting-lines
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the User to set the lines for
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                ? ''
+                : properties:
+                    ? ''
+                    : properties:
+                        ? ''
+                        : type: array
+                          description: Array of Line IDs to set as the User's selected lines.
+                          items:
+                            type: integer
+                            format: int32
+                      required:
+                      - ''
+                      type: object
+                  required: []
+                  type: object
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                ? ''
+                : properties:
+                    ? ''
+                    : properties:
+                        ? ''
+                        : type: array
+                          description: Array of Line IDs to set as the User's selected lines.
+                          items:
+                            type: integer
+                            format: int32
+                      required:
+                      - ''
+                      type: object
+                  required: []
+                  type: object
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+      deprecated: false
+      tags:
+      - Users
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: X-Qminder-REST-API-Key
+      x-default: yourbusinessapikey
+x-readme:
+  headers: []
+  explorer-enabled: false
+  proxy-enabled: true
+x-readme-fauxas: true

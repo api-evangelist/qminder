@@ -1,0 +1,1569 @@
+openapi: 3.1.0
+info:
+  title: Qminder Appointments Tickets API
+  version: '1.0'
+  description: The Qminder API allows you to integrate queue management into your own applications.
+servers:
+- url: https://api.qminder.com
+security:
+- sec0: []
+tags:
+- name: Tickets
+  description: Manage visitor queue entries
+paths:
+  /tickets:
+    post:
+      summary: Create a ticket
+      description: Creates a new ticket in the specified line.
+      operationId: create-ticket
+      parameters:
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - lineId
+              - firstName
+              properties:
+                lineId:
+                  type: string
+                  description: ID of the line to create the ticket in.
+                firstName:
+                  type: string
+                  minLength: 2
+                  maxLength: 50
+                  description: Visitor's first name (2-50 characters).
+                lastName:
+                  type: string
+                  maxLength: 50
+                  description: Visitor's last name (max 50 characters).
+                phoneNumber:
+                  type: string
+                  pattern: ^(\+)?([0-9]){5,20}$
+                  description: 'Phone number with optional + prefix (5-20 digits). Example: +12125551234'
+                email:
+                  type: string
+                  maxLength: 100
+                  description: Visitor's email address.
+                languageCode:
+                  type: string
+                  minLength: 2
+                  maxLength: 5
+                  default: en
+                  description: 'Language code for the visitor (default: en).'
+                source:
+                  type: string
+                  enum:
+                  - MANUAL
+                  - NAME
+                  - MICROSITE
+                  default: MANUAL
+                  description: Source of ticket creation. MANUAL = created by clerk, NAME = iPad Sign-in, MICROSITE = Visit Planner.
+                fields:
+                  type: array
+                  description: Custom input fields for the ticket. See [Input Fields query](/reference/queries/input-fields) to discover available IDs.
+                  items:
+                    type: object
+                    required:
+                    - inputFieldId
+                    properties:
+                      inputFieldId:
+                        type: string
+                        format: uuid
+                        description: UUID of the input field.
+                      value:
+                        type: string
+                        maxLength: 500
+                        description: Value for text/URL input fields (max 500 characters).
+                      optionIds:
+                        type: array
+                        items:
+                          type: string
+                          format: uuid
+                        description: UUIDs of selected options for select-type input fields.
+                labels:
+                  type: array
+                  description: Labels to attach to the ticket.
+                  items:
+                    type: object
+                    required:
+                    - value
+                    properties:
+                      value:
+                        type: string
+                        description: Label text.
+            example:
+              lineId: '12345'
+              firstName: John
+              lastName: Doe
+              phoneNumber: '+12125551234'
+              email: john@example.com
+              languageCode: en
+              source: MANUAL
+              fields:
+              - inputFieldId: 550e8400-e29b-41d4-a716-446655440000
+                value: Consultation
+              labels:
+              - value: VIP
+      responses:
+        '201':
+          description: Ticket created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Internal ticket ID.
+                    example: '226859'
+                  publicId:
+                    type: string
+                    description: Public-facing ticket ID.
+                    example: A-42
+              example:
+                id: '226859'
+                publicId: A-42
+        '400':
+          description: Validation error - invalid input data
+        '404':
+          description: Line, input fields, or language not found
+        '409':
+          description: Line is disabled or archived
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl -X POST https://api.qminder.com/tickets \\\n  -H \"X-Qminder-REST-API-Key: KEY\" \\\n  -H \"X-Qminder-API-Version: 2020-09-01\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"lineId\": \"12345\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"phoneNumber\": \"+12125551234\",\n    \"email\": \"john@example.com\"\n  }'"
+        samples-languages:
+        - curl
+      tags:
+      - Tickets
+  /v1/tickets/search:
+    get:
+      summary: Searching tickets
+      description: ''
+      operationId: searching-tickets
+      parameters:
+      - name: location
+        in: query
+        description: Search tickets only in the given Location.
+        schema:
+          type: integer
+          format: int32
+      - name: line
+        in: query
+        schema:
+          type: integer
+          format: int32
+          default: null
+      - name: status
+        in: query
+        description: Search tickets with only the given status. Multiple statuses can be searched by separating them with a comma. "NEW" will return tickets that are in queue, and have not been called. "CALLED" will return tickets that are currently being served. "SERVED" will return tickets that have been served. "CANCELLED_BY_CLERK" will return tickets that have been removed from queue.
+        schema:
+          type: string
+      - name: caller
+        in: query
+        description: Search tickets that have been called by the given user ID. Both "CALLED" and "SERVED" tickets will be returned, unless status is also specified.
+        schema:
+          type: string
+      - name: minCreated
+        in: query
+        description: Search tickets which have been created after the given timestamp. The timestamp can be in ISO 8601 format, eg "2020-05-03T00:00:00Z". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798.
+        schema:
+          type: string
+          format: date-time
+      - name: maxCreated
+        in: query
+        description: Search tickets which have been created before the given timestamp. The timestamp can be in ISO 8601 format, eg "2020-05-03T00:00:00Z". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798.
+        schema:
+          type: string
+          format: date-time
+      - name: minCalled
+        in: query
+        description: Search tickets which have been called after the given timestamp. The timestamp can be in ISO 8601 format, eg "2020-05-03T00:00:00Z". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798.
+        schema:
+          type: string
+          format: date-time
+      - name: maxCalled
+        in: query
+        description: Search tickets which have been called before the given timestamp. The timestamp can be in ISO 8601 format, eg "2020-05-03T00:00:00Z". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798.
+        schema:
+          type: string
+          format: date-time
+      - name: limit
+        in: query
+        description: Limit search results to the specified amount of tickets. With a limit of 100, only the 100 first results will be returned. The limit has to be between 1 and 20000.
+        schema:
+          type: integer
+          format: int32
+      - name: order
+        in: query
+        description: 'Order search results according to a ticket parameter. Order is specified using two words in one string, for example "id ASC". Valid order directions: ASC, DESC Valid ordering parameters: id, created, called, served'
+        schema:
+          type: string
+      - name: responseScope
+        in: query
+        description: 'Include additional data in the search results. Use multiple response scopes by separating them with a comma. Valid response scopes are: "MESSAGES" - include SMS messages with the response "INTERACTIONS" - include interaction data with the response "CONNECTED_TICKETS" - include connected tickets (other visits of the same person)'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"data\": [\n    {\n      \"id\": \"51999102\",\n      \"status\": \"SERVED\",\n      \"source\": \"MANUAL\",\n      \"line\": 88100,\n      \"firstName\": \"Jane\",\n      \"lastName\": \"Doe\",\n      \"orderAfter\": \"2015-04-29T12:29:40.701Z\",\n      \"created\": {\n        \"date\": \"2016-04-29T12:29:40.701Z\"\n      },\n      \"called\": {\n        \"date\": \"2016-05-05T14:05:29Z\",\n        \"caller\": 15144,\n        \"desk\": 3\n      },\n      \"served\": {\n        \"date\": \"2016-05-05T14:05:34Z\"\n      },\n      \"assigned\": {\n        \"assigner\": 15100,\n        \"assignee\": 15144\n      },\n      \"extra\": [\n        {\n          \"title\": \"Notes\",\n          \"value\": \"assistance required\"\n        }\n      ],\n      \"labels\": [\n        {\n          \"value\": \"VIP\",\n          \"color\": \"FF00FF\"\n        }\n      ],\n      \"interactions\": [\n        {\n          \"start\": \"2016-05-05T14:05:29Z\",\n          \"end\": \"2016-05-05T14:05:34Z\",\n          \"line\": 88100,\n          \"user\": 15144\n        }\n      ],\n      \"messages\": [\n        {\n          \"created\": {\n            \"date\": \"2017-06-15T18:43:41Z\"\n          },\n          \"body\": \"Hello Jane! You are now in the queue. We will let you know when it's your turn.\",\n          \"type\": \"OUTGOING\",\n          \"status\": \"DELIVERED\"\n        }\n      ]\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: '51999102'
+                        status:
+                          type: string
+                          example: SERVED
+                        source:
+                          type: string
+                          example: MANUAL
+                        line:
+                          type: integer
+                          example: 88100
+                          default: 0
+                        firstName:
+                          type: string
+                          example: Jane
+                        lastName:
+                          type: string
+                          example: Doe
+                        orderAfter:
+                          type: string
+                          example: '2015-04-29T12:29:40.701Z'
+                        created:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                              example: '2016-04-29T12:29:40.701Z'
+                        called:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                              example: '2016-05-05T14:05:29Z'
+                            caller:
+                              type: integer
+                              example: 15144
+                              default: 0
+                            desk:
+                              type: integer
+                              example: 3
+                              default: 0
+                        served:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                              example: '2016-05-05T14:05:34Z'
+                        assigned:
+                          type: object
+                          properties:
+                            assigner:
+                              type: integer
+                              example: 15100
+                              default: 0
+                            assignee:
+                              type: integer
+                              example: 15144
+                              default: 0
+                        extra:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              title:
+                                type: string
+                                example: Notes
+                              value:
+                                type: string
+                                example: assistance required
+                        labels:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              value:
+                                type: string
+                                example: VIP
+                              color:
+                                type: string
+                                example: FF00FF
+                        interactions:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              start:
+                                type: string
+                                example: '2016-05-05T14:05:29Z'
+                              end:
+                                type: string
+                                example: '2016-05-05T14:05:34Z'
+                              line:
+                                type: integer
+                                example: 88100
+                                default: 0
+                              user:
+                                type: integer
+                                example: 15144
+                                default: 0
+                        messages:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              created:
+                                type: object
+                                properties:
+                                  date:
+                                    type: string
+                                    example: '2017-06-15T18:43:41Z'
+                              body:
+                                type: string
+                                example: Hello Jane! You are now in the queue. We will let you know when it's your turn.
+                              type:
+                                type: string
+                                example: OUTGOING
+                              status:
+                                type: string
+                                example: DELIVERED
+      deprecated: false
+      tags:
+      - Tickets
+  /v1/tickets/count:
+    post:
+      summary: Counting tickets
+      description: ''
+      operationId: counting-tickets
+      parameters:
+      - name: location
+        in: query
+        description: Count tickets only in the given Location.
+        schema:
+          type: integer
+          format: int32
+      - name: line
+        in: query
+        description: Count tickets only in the given Line.
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Count tickets with only the given status. Multiple statuses can be searched by separating them with a comma. "NEW" will return tickets that are in queue, and have not been called. "CALLED" will return tickets that are currently being served. "SERVED" will return tickets that have been served. "CANCELLED_BY_CLERK" will return tickets that have been removed from queue.
+        schema:
+          type: string
+      - name: caller
+        in: query
+        description: Count tickets that have been called by the given user ID. Both "CALLED" and "SERVED" tickets will be returned, unless status is also specified.
+        schema:
+          type: string
+      - name: minCreated
+        in: query
+        description: Count tickets which have been created after the given timestamp. The timestamp can be in ISO 8601 format, eg "2020-05-03T00:00:00Z". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798.
+        schema:
+          type: string
+          format: date-time
+      - name: maxCreated
+        in: query
+        description: Count tickets which have been created before the given timestamp. The timestamp can be in ISO 8601 format, eg "2020-05-03T00:00:00Z". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798.
+        schema:
+          type: string
+          format: date-time
+      - name: minCalled
+        in: query
+        description: Count tickets which have been called before the given timestamp. The timestamp can be in ISO 8601 format, eg "2020-05-03T00:00:00Z". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798.
+        schema:
+          type: string
+          format: date-time
+      - name: maxCalled
+        in: query
+        description: Count tickets which have been called before the given timestamp. The timestamp can be in ISO 8601 format, eg "2020-05-03T00:00:00Z". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798.
+        schema:
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n    \"statusCode\": 200,\n    \"count\": 59\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  count:
+                    type: integer
+                    example: 59
+                    default: 0
+      deprecated: false
+      tags:
+      - Tickets
+  /v1/tickets/{id}/call:
+    post:
+      summary: Calling a ticket
+      description: ''
+      operationId: calling-a-ticket
+      parameters:
+      - name: id
+        in: path
+        description: ID of the ticket to call
+        schema:
+          type: string
+        required: true
+      - name: desk
+        in: query
+        description: Optional. The desk where the ticket will be called.
+        schema:
+          type: integer
+          format: int32
+      - name: user
+        in: query
+        description: Optional. The user who is calling the ticket.
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"id\": \"51999102\",\n  \"status\": \"CALLED\",\n  \"source\": \"MANUAL\",\n  \"line\": 88100,\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Doe\",\n  \"orderAfter\": \"2017-05-17T14:01:35.736Z\",\n  \"created\": {\n    \"date\": \"2021-09-13T13:49:54.735Z\"\n  },\n  \"labels\": [\n    {\n      \"value\": \"VIP\",\n      \"color\": \"FF00FF\"\n    }\n  ],\n  \"extra\": [\n    {\n      \"title\": \"Notes\",\n      \"value\": \"assistance required\"\n    }\n  ],\n  \"called\": {\n    \"date\": \"2021-09-22T08:11:18.572Z\",\n    \"caller\": 15144\n  },\n  \"assigned\": {\n    \"assigner\": 15100,\n    \"assignee\": 15144\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  id:
+                    type: string
+                    example: '51999102'
+                  status:
+                    type: string
+                    example: CALLED
+                  source:
+                    type: string
+                    example: MANUAL
+                  line:
+                    type: integer
+                    example: 88100
+                    default: 0
+                  firstName:
+                    type: string
+                    example: Jane
+                  lastName:
+                    type: string
+                    example: Doe
+                  orderAfter:
+                    type: string
+                    example: '2017-05-17T14:01:35.736Z'
+                  created:
+                    type: object
+                    properties:
+                      date:
+                        type: string
+                        example: '2021-09-13T13:49:54.735Z'
+                  labels:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          example: VIP
+                        color:
+                          type: string
+                          example: FF00FF
+                  extra:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        title:
+                          type: string
+                          example: Notes
+                        value:
+                          type: string
+                          example: assistance required
+                  called:
+                    type: object
+                    properties:
+                      date:
+                        type: string
+                        example: '2021-09-22T08:11:18.572Z'
+                      caller:
+                        type: integer
+                        example: 15144
+                        default: 0
+                  assigned:
+                    type: object
+                    properties:
+                      assigner:
+                        type: integer
+                        example: 15100
+                        default: 0
+                      assignee:
+                        type: integer
+                        example: 15144
+                        default: 0
+      deprecated: false
+      tags:
+      - Tickets
+  /v1/tickets/{id}/recall:
+    post:
+      summary: Re-calling a ticket
+      description: ''
+      operationId: re-calling-a-ticket
+      parameters:
+      - name: id
+        in: path
+        description: ID of a ticket to recall
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"result\": \"success\"\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  result:
+                    type: string
+                    example: success
+      deprecated: false
+      tags:
+      - Tickets
+  /tickets/{ticketId}:
+    patch:
+      summary: Editing a ticket
+      description: Updates ticket fields such as visitor name, contact information, line assignment, and language preference. Only include fields you want to change - omitted fields remain unchanged. Set a field to `null` to clear its value.
+      operationId: editing-a-ticket
+      parameters:
+      - name: ticketId
+        in: path
+        description: ID of the ticket to update
+        schema:
+          type: string
+        required: true
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      requestBody:
+        description: Ticket fields to update. All fields are optional - only include fields you want to change.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                  description: The visitor's first name. Must be 2-50 characters. Cannot be null or empty if included.
+                  minLength: 2
+                  maxLength: 50
+                  example: John
+                lastName:
+                  type: string
+                  description: The visitor's last name. Maximum 50 characters. Set to null to clear.
+                  maxLength: 50
+                  nullable: true
+                  example: Doe
+                email:
+                  type: string
+                  format: email
+                  description: The visitor's email address. Maximum 100 characters. Set to null to clear.
+                  maxLength: 100
+                  nullable: true
+                  example: john.doe@example.com
+                phoneNumber:
+                  type: string
+                  pattern: ^(\+)?([0-9]){5,20}$
+                  description: The visitor's phone number. 5-20 digits with optional + prefix. Set to null to clear.
+                  nullable: true
+                  example: '+12125551234'
+                line:
+                  type: string
+                  pattern: ^[0-9]+$
+                  description: ID of the line to move the ticket to. Must be a valid line in the same location.
+                  example: '12345'
+                languageCode:
+                  type: string
+                  description: The visitor's preferred language code (e.g., "en", "es"). Must be 2-5 characters.
+                  minLength: 2
+                  maxLength: 5
+                  example: en
+      responses:
+        '200':
+          description: Ticket updated successfully
+        '400':
+          description: Invalid request - validation failed
+          content:
+            application/json:
+              examples:
+                InvalidFirstName:
+                  summary: First name too short
+                  value:
+                    statusCode: 400
+                    message: First name must not be empty or blank
+                InvalidPhoneNumber:
+                  summary: Invalid phone number format
+                  value:
+                    statusCode: 400
+                    errors:
+                    - phoneNumber: must match "^(\+)?([0-9]){5,20}$"
+        '404':
+          description: Ticket or line not found
+          content:
+            application/json:
+              examples:
+                TicketNotFound:
+                  summary: Ticket does not exist
+                  value:
+                    message: Ticket with id 123456 not found
+                LineNotFound:
+                  summary: Target line does not exist
+                  value:
+                    message: Line with id 789 not found
+        '409':
+          description: Conflict - line is disabled or archived
+          content:
+            application/json:
+              examples:
+                LineDisabled:
+                  summary: Target line is disabled
+                  value:
+                    message: Line with id 789 is disabled
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl -X PATCH https://api.qminder.com/tickets/14848 \\\n  -H \"X-Qminder-REST-API-Key: YOUR_API_KEY\" \\\n  -H \"X-Qminder-API-Version: 2020-09-01\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"firstName\": \"John\",\n    \"lastName\": \"Smith\",\n    \"email\": \"john.smith@example.com\",\n    \"phoneNumber\": \"+12125551234\"\n  }'"
+        - language: typescript
+          code: "const response = await fetch('https://api.qminder.com/tickets/14848', {\n  method: 'PATCH',\n  headers: {\n    'X-Qminder-REST-API-Key': 'YOUR_API_KEY',\n    'X-Qminder-API-Version': '2020-09-01',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    firstName: 'John',\n    lastName: 'Smith',\n    email: 'john.smith@example.com',\n    phoneNumber: '+12125551234'\n  })\n});\n\nif (!response.ok) {\n  throw new Error(`HTTP error! status: ${response.status}`);\n}"
+        samples-languages:
+        - curl
+        - typescript
+      tags:
+      - Tickets
+  /v1/tickets/{id}/markserved:
+    post:
+      summary: Marking a ticket as served
+      description: ''
+      operationId: marking-a-ticket-as-served
+      parameters:
+      - name: id
+        in: path
+        description: ID of a ticket
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"result\": \"success\"\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  result:
+                    type: string
+                    example: success
+      deprecated: false
+      tags:
+      - Tickets
+  /v1/tickets/{id}/marknoshow:
+    post:
+      summary: Marking a ticket as no-show
+      description: ''
+      operationId: marking-a-ticket-as-no-show
+      parameters:
+      - name: id
+        in: path
+        description: ID of a ticket
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"result\": \"success\"\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  result:
+                    type: string
+                    example: success
+      deprecated: false
+      tags:
+      - Tickets
+  /v1/tickets/{id}/cancel:
+    post:
+      summary: Removing a ticket from the queue
+      description: ''
+      operationId: removing-a-ticket-from-the-queue
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the ticket to remove from queue.
+        schema:
+          type: string
+        required: true
+      - name: user
+        in: query
+        description: The ID of the user who removed the ticket.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"result\": \"success\"\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  result:
+                    type: string
+                    example: success
+      deprecated: false
+      tags:
+      - Tickets
+  /v1/tickets/{id}/returntoqueue:
+    post:
+      summary: Returning a ticket to the queue
+      description: ''
+      operationId: returning-a-ticket-to-the-queue
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the ticket to return to queue.
+        schema:
+          type: string
+        required: true
+      - name: user
+        in: query
+        description: The ID of the user to return to queue.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: position
+        in: query
+        description: 'The position the called ticket should be in the queue. Accepted values: "FIRST" = the ticket will be first in line. "LAST" = the ticket will be last in queue.'
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"result\": \"success\"\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  result:
+                    type: string
+                    example: success
+      deprecated: false
+      tags:
+      - Tickets
+  /v1/tickets/{id}/forward:
+    post:
+      summary: Forwarding a ticket
+      description: ''
+      operationId: forwarding-a-ticket
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the ticket to forward.
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - user
+              - line
+              properties:
+                user:
+                  type: integer
+                  description: The ID of the user who forwarded the ticket.
+                  format: int32
+                line:
+                  type: integer
+                  description: The ID of the Line to forward the ticket to.
+                  format: int32
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - user
+              - line
+              properties:
+                user:
+                  type: integer
+                  description: The ID of the user who forwarded the ticket.
+                  format: int32
+                line:
+                  type: integer
+                  description: The ID of the Line to forward the ticket to.
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl \\\n  -X POST \\\n  https://api.qminder.com/v1/tickets/14849/forward \\\n  -d \"user=14142\" \\\n  -d \"line=58190\" \\\n  -H \"X-Qminder-REST-API-Key: KEY\""
+        samples-languages:
+        - curl
+      tags:
+      - Tickets
+  /v1/tickets/{id}/labels/add:
+    post:
+      summary: Adding a label
+      description: ''
+      operationId: adding-a-label
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the ticket to add the label to
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - value
+              - user
+              properties:
+                value:
+                  type: string
+                  description: The text of the label. Up to 50 characters.
+                user:
+                  type: integer
+                  description: The ID of the user who added the label.
+                  format: int32
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - value
+              - user
+              properties:
+                value:
+                  type: string
+                  description: The text of the label. Up to 50 characters.
+                user:
+                  type: integer
+                  description: The ID of the user who added the label.
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"result\": \"success\"\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  result:
+                    type: string
+                    example: success
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl \\\n  -X POST \\\n  https://api.qminder.com/v1/tickets/14849/labels/add \\\n  -d \"value=Important\" \\\n  -d \"user=123\" \\\n  -H \"X-Qminder-REST-API-Key: KEY\""
+        samples-languages:
+        - curl
+      tags:
+      - Tickets
+  /v1/tickets/{id}/labels/remove:
+    post:
+      summary: Removing a label
+      description: ''
+      operationId: removing-a-label
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the ticket to remove the label from
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - value
+              - user
+              properties:
+                value:
+                  type: string
+                  description: The label text to remove.
+                user:
+                  type: integer
+                  description: The ID of the user who removed the label.
+                  format: int32
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - value
+              - user
+              properties:
+                value:
+                  type: string
+                  description: The label text to remove.
+                user:
+                  type: integer
+                  description: The ID of the user who removed the label.
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"result\": \"success\"\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  result:
+                    type: string
+                    example: success
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl \\\n  -X POST \\\n  https://api.qminder.com/v1/tickets/14849/labels/remove \\\n  -d \"value=Important\" \\\n  -d \"user=123\" \\\n  -H \"X-Qminder-REST-API-Key: KEY\""
+        samples-languages:
+        - curl
+      tags:
+      - Tickets
+  /v1/tickets/{id}/assign:
+    post:
+      summary: Assigning a ticket to a user
+      description: ''
+      operationId: assigning-a-ticket-to-a-user
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the ticket to assign.
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - assigner
+              - assignee
+              properties:
+                assigner:
+                  type: integer
+                  description: The ID of the user who assigned the ticket.
+                  format: int32
+                assignee:
+                  type: integer
+                  description: The ID of the user that the ticket will be assigned to.
+                  format: int32
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - assigner
+              - assignee
+              properties:
+                assigner:
+                  type: integer
+                  description: The ID of the user who assigned the ticket.
+                  format: int32
+                assignee:
+                  type: integer
+                  description: The ID of the user that the ticket will be assigned to.
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"result\": \"success\"\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  result:
+                    type: string
+                    example: success
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl \\\n  -X POST \\\n  https://api.qminder.com/v1/tickets/14849/assign \\\n  -d \"assigner=213\" \\\n  -d \"assignee=123\" \\\n  -H \"X-Qminder-REST-API-Key: KEY\""
+        samples-languages:
+        - curl
+      tags:
+      - Tickets
+  /v1/tickets/{id}/unassign:
+    post:
+      summary: Un-assigning a ticket
+      description: ''
+      operationId: un-assigning-a-ticket
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the ticket to assign.
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: integer
+                  description: The ID of the user who un-assigned the ticket.
+                  format: int32
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: integer
+                  description: The ID of the user who un-assigned the ticket.
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"result\": \"success\"\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  result:
+                    type: string
+                    example: success
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl \\\n  -X POST \\\n  https://api.qminder.com/v1/tickets/14849/unassign \\\n  -d \"user=213\" \\\n  -H \"X-Qminder-REST-API-Key: KEY\""
+        samples-languages:
+        - curl
+      tags:
+      - Tickets
+  /v1/tickets/{id}/reorder:
+    post:
+      summary: Reordering a ticket
+      description: ''
+      operationId: reordering-a-ticket
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the ticket to reorder.
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                after:
+                  type: integer
+                  description: The current ticket will be placed after this ID. If unset, then the ticket will be reordered to be first in the queue.
+                  format: int32
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                after:
+                  type: integer
+                  description: The current ticket will be placed after this ID. If unset, then the ticket will be reordered to be first in the queue.
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"result\": \"success\"\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  result:
+                    type: string
+                    example: success
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl \\\n  -X POST \\\n  https://api.qminder.com/v1/tickets/14850/reorder \\\n  -d \"after=14889\" \\\n  -H \"X-Qminder-REST-API-Key: KEY\""
+        samples-languages:
+        - curl
+      tags:
+      - Tickets
+  /v1/tickets/{id}:
+    get:
+      summary: Get details of a ticket
+      description: ''
+      operationId: get-details-of-a-ticket
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the ticket to get details of
+        schema:
+          type: string
+        required: true
+      - name: responseScope
+        in: query
+        description: 'Include additional data in the search results. Use multiple response scopes by separating them with a comma. Valid response scopes are: "MESSAGES" - include SMS messages with the response "INTERACTIONS" - include interaction data with the response "CONNECTED_TICKETS" - include connected tickets (other visits of the same person)'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"id\": \"13429905\",\n  \"status\": \"CALLED\",\n  \"source\": \"NAME\",\n  \"line\": 47466,\n  \"firstName\": \"Johnny\",\n  \"lastName\": \"Bravo\",\n  \"phoneNumber\": 13186190204,\n  \"created\": {\n    \"date\": \"2016-08-01T15:27:45.057Z\"\n  },\n  \"called\": {\n    \"date\": \"2020-05-06T13:13:16Z\",\n    \"caller\": 13860\n  }\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  id:
+                    type: string
+                    example: '13429905'
+                  status:
+                    type: string
+                    example: CALLED
+                  source:
+                    type: string
+                    example: NAME
+                  line:
+                    type: integer
+                    example: 47466
+                    default: 0
+                  firstName:
+                    type: string
+                    example: Johnny
+                  lastName:
+                    type: string
+                    example: Bravo
+                  phoneNumber:
+                    type: integer
+                    example: 13186190204
+                    default: 0
+                  created:
+                    type: object
+                    properties:
+                      date:
+                        type: string
+                        example: '2016-08-01T15:27:45.057Z'
+                  called:
+                    type: object
+                    properties:
+                      date:
+                        type: string
+                        example: '2020-05-06T13:13:16Z'
+                      caller:
+                        type: integer
+                        example: 13860
+                        default: 0
+      deprecated: false
+      tags:
+      - Tickets
+  /v1/tickets/{id}/messages:
+    get:
+      summary: Get messages of a ticket
+      description: ''
+      operationId: get-messages-of-a-ticket
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the ticket to load messages for.
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"messages\": [\n    {\n      \"created\": {\n        \"date\": \"2017-04-12T16:27:57Z\"\n      },\n      \"body\": \"It's your turn!\",\n      \"type\": \"OUTGOING\",\n      \"status\": \"SENT\",\n      \"userId\": 15000\n    },\n    {\n      \"created\": {\n        \"date\": \"2017-04-17T11:50:13Z\"\n      },\n      \"body\": \"Thank you!\",\n      \"type\": \"INCOMING\",\n      \"status\": \"NEW\"\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  messages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        created:
+                          type: object
+                          properties:
+                            date:
+                              type: string
+                              example: '2017-04-12T16:27:57Z'
+                        body:
+                          type: string
+                          example: It's your turn!
+                        type:
+                          type: string
+                          example: OUTGOING
+                        status:
+                          type: string
+                          example: SENT
+                        userId:
+                          type: integer
+                          example: 15000
+                          default: 0
+      deprecated: false
+      tags:
+      - Tickets
+    post:
+      summary: Sending an SMS message
+      description: ''
+      operationId: sending-an-sms-message
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the ticket to send the message to.
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - message
+              properties:
+                message:
+                  type: string
+                  description: The message to send. The message should be URL-encoded.
+                user:
+                  type: integer
+                  description: The user who sent the message.
+                  format: int32
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+              - message
+              properties:
+                message:
+                  type: string
+                  description: The message to send. The message should be URL-encoded.
+                user:
+                  type: integer
+                  description: The user who sent the message.
+                  format: int32
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"statusCode\": 200,\n  \"result\": \"success\"\n}"
+              schema:
+                type: object
+                properties:
+                  statusCode:
+                    type: integer
+                    example: 200
+                    default: 0
+                  result:
+                    type: string
+                    example: success
+      deprecated: false
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl \\\n  -X POST \\\n  https://api.qminder.com/v1/tickets/226859/messages \\\n  -d \"message=Hello%2C%20it%27s%20your%20turn%21\" \\\n  -d \"user=123\" \\\n  -H \"X-Qminder-REST-API-Key: KEY\""
+        samples-languages:
+        - curl
+      tags:
+      - Tickets
+  /v1/tickets/{ticketId}/fields/{inputFieldId}:
+    post:
+      summary: Save ticket input field value
+      description: Saves or updates a custom input field value on a ticket. Use `value` for text fields or `optionIds` for select-type fields.
+      operationId: save-ticket-field
+      parameters:
+      - name: ticketId
+        in: path
+        description: ID of the ticket
+        required: true
+        schema:
+          type: string
+      - name: inputFieldId
+        in: path
+        description: UUID of the input field
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                value:
+                  type: string
+                  maxLength: 500
+                  description: Text value for text or URL input fields (max 500 characters).
+                optionIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  description: UUIDs of selected options for select-type input fields.
+            examples:
+              textField:
+                summary: Text field value
+                value:
+                  value: Customer needs wheelchair access
+              selectField:
+                summary: Select field options
+                value:
+                  optionIds:
+                  - 550e8400-e29b-41d4-a716-446655440000
+      responses:
+        '200':
+          description: Input field value saved successfully
+        '400':
+          description: Both value and options are null, or invalid options provided
+        '404':
+          description: Ticket or input field not found
+        '409':
+          description: Ticket and input field are from different locations
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl -X POST https://api.qminder.com/v1/tickets/14848/fields/550e8400-e29b-41d4-a716-446655440000 \\\n  -H \"X-Qminder-REST-API-Key: YOUR_API_KEY\" \\\n  -H \"X-Qminder-API-Version: 2020-09-01\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"value\": \"Customer needs wheelchair access\"}'"
+        - language: typescript
+          code: "await fetch('https://api.qminder.com/v1/tickets/14848/fields/550e8400-e29b-41d4-a716-446655440000', {\n  method: 'POST',\n  headers: {\n    'X-Qminder-REST-API-Key': 'YOUR_API_KEY',\n    'X-Qminder-API-Version': '2020-09-01',\n    'Content-Type': 'application/json'\n  },\n  body: JSON.stringify({\n    value: 'Customer needs wheelchair access'\n  })\n});"
+        samples-languages:
+        - curl
+        - typescript
+      tags:
+      - Tickets
+    delete:
+      summary: Remove ticket input field value
+      description: Removes a custom input field value from a ticket. Cannot remove mandatory input fields.
+      operationId: remove-ticket-field
+      parameters:
+      - name: ticketId
+        in: path
+        description: ID of the ticket
+        required: true
+        schema:
+          type: string
+      - name: inputFieldId
+        in: path
+        description: UUID of the input field
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-Qminder-API-Version
+        in: header
+        description: API version. Must be set to `2020-09-01`.
+        required: true
+        schema:
+          type: string
+          enum:
+          - '2020-09-01'
+          default: '2020-09-01'
+      responses:
+        '200':
+          description: Input field value removed successfully
+        '400':
+          description: Mandatory input field cannot be removed
+        '404':
+          description: Ticket or input field not found
+        '409':
+          description: Ticket and input field are from different locations
+      x-readme:
+        code-samples:
+        - language: curl
+          code: "curl -X DELETE https://api.qminder.com/v1/tickets/14848/fields/550e8400-e29b-41d4-a716-446655440000 \\\n  -H \"X-Qminder-REST-API-Key: YOUR_API_KEY\" \\\n  -H \"X-Qminder-API-Version: 2020-09-01\""
+        - language: typescript
+          code: "await fetch('https://api.qminder.com/v1/tickets/14848/fields/550e8400-e29b-41d4-a716-446655440000', {\n  method: 'DELETE',\n  headers: {\n    'X-Qminder-REST-API-Key': 'YOUR_API_KEY',\n    'X-Qminder-API-Version': '2020-09-01'\n  }\n});"
+        samples-languages:
+        - curl
+        - typescript
+      tags:
+      - Tickets
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: X-Qminder-REST-API-Key
+      x-default: yourbusinessapikey
+x-readme:
+  headers: []
+  explorer-enabled: false
+  proxy-enabled: true
+x-readme-fauxas: true
