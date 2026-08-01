@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: searched
+source: https://github.com/Qminder/javascript-api
+packages:
+  - language: javascript
+    registry: npm
+    name: qminder-api
+    url: https://www.npmjs.com/package/qminder-api
+    install: npm install --save qminder-api
+    version: 17.0.4
+    license: Apache-2.0
+    repository: https://github.com/Qminder/javascript-api
+    description: >-
+      Official Qminder JavaScript/TypeScript client for the REST and GraphQL
+      APIs. Runs in Node.js 10+ and browsers. Written in TypeScript.
+    official: true

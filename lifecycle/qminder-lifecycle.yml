@@ -1,0 +1,18 @@
+generated: '2026-07-20'
+method: searched
+source: https://developer.qminder.com/reference/overview
+versioning:
+  scheme: uri-path
+  current: v1
+  notes: >-
+    Most endpoints are served under /v1/; some newer endpoints (locations,
+    input-fields, tickets, appointments create) are served at the root path
+    without the /v1/ prefix. Both live on https://api.qminder.com.
+status_page: https://status.qminder.com
+deprecation:
+  policy_url: null
+  sunset_header: false
+  notes: No formal deprecation/sunset policy is published.
+sla:
+  url: null
+deprecated_operations: []

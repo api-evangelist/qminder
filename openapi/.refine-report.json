@@ -1,0 +1,26 @@
+{
+  "provider": "qminder",
+  "sources": [
+    "qminder-appointments-api-openapi.yml",
+    "qminder-input-fields-api-openapi.yml",
+    "qminder-lines-api-openapi.yml",
+    "qminder-locations-api-openapi.yml",
+    "qminder-tickets-api-openapi.yml",
+    "qminder-users-api-openapi.yml",
+    "qminder-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "qminder-appointments-api-openapi.yml",
+    "qminder-input-fields-api-openapi.yml",
+    "qminder-lines-api-openapi.yml",
+    "qminder-locations-api-openapi.yml",
+    "qminder-tickets-api-openapi.yml",
+    "qminder-users-api-openapi.yml",
+    "qminder-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,16 @@
+generated: '2026-07-20'
+method: generated
+source: openapi/qminder-openapi-original.json
+skills:
+  - file: qminder-check-in-and-serve.md
+    name: Check a visitor into a queue and serve them
+    api: openapi/qminder-openapi-original.json
+    operations: [create-ticket, calling-a-ticket, marking-a-ticket-as-served]
+  - file: qminder-schedule-appointment.md
+    name: Schedule and check in an appointment
+    api: openapi/qminder-openapi-original.json
+    operations: [create-appointment, checkin-appointment, mark-appointment-noshow]
+  - file: qminder-manage-webhooks.md
+    name: Register and manage webhook listeners
+    api: openapi/qminder-openapi-original.json
+    operations: [adding-a-webhook, removing-a-webhook]

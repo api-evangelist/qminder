@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: searched
+source: https://developer.qminder.com/reference/webhooks-overview.md
+spec_type: Webhooks
+transport: http-post
+delivery:
+  content_type: application/json
+  signature_header: X-Qminder-Signature
+  signature_algorithm: HMAC-SHA256
+payload:
+  fields:
+    - type
+    - data
+management_api:
+  add: openapi/qminder-openapi-original.json#adding-a-webhook
+  remove: openapi/qminder-openapi-original.json#removing-a-webhook
+events:
+  - name: location_created
+    resource: location
+    description: A location is added to the Qminder account.
+  - name: location_changed
+    resource: location
+    description: A location's settings have changed.
+  - name: line_changed
+    resource: line
+    description: A line's settings have changed.
+  - name: ticket_created
+    resource: ticket
+    description: A ticket is added to a queue.
+  - name: ticket_called
+    resource: ticket
+    description: A ticket is called for service.
+  - name: ticket_recalled
+    resource: ticket
+    description: A ticket is re-called.
+  - name: ticket_changed
+    resource: ticket
+    description: A ticket's data is changed.
+  - name: ticket_served
+    resource: ticket
+    description: A ticket is marked as served.
+graphql_subscriptions:
+  note: >-
+    Qminder also exposes real-time GraphQL subscriptions (e.g. createdTickets,
+    calledTickets, servedTickets, changedTickets, appointmentChanged) as a
+    streaming alternative to webhooks.

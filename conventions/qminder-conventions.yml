@@ -1,0 +1,44 @@
+generated: '2026-07-20'
+method: searched
+source: https://developer.qminder.com/reference/overview
+authentication:
+  style: api-key
+  header: X-Qminder-REST-API-Key
+  query_param: rest-api-key
+  https_required: true
+  see: authentication/qminder-authentication.yml
+idempotency:
+  supported: false
+  notes: >-
+    No general Idempotency-Key header is documented. One resource-specific
+    pattern exists: creating an input field requires the CLIENT to generate the
+    UUID id, making that create naturally idempotent on retry. This is not a
+    provider-wide idempotency contract.
+pagination:
+  style: unknown
+  notes: List endpoints (locations, lines, users, ticket search) are documented without an explicit cursor/offset pagination contract in the OpenAPI.
+versioning:
+  style: uri-path
+  current: v1
+  see: lifecycle/qminder-lifecycle.yml
+partial_update:
+  style: patch-merge
+  notes: PATCH edit endpoints accept only the fields you want to change; omitted fields are unchanged; set a field to null to clear it.
+error_envelope:
+  media_type: application/json
+  fields: [statusCode, message, developerMessage]
+  see: errors/qminder-problem-types.yml
+rate_limiting:
+  limit: 5 requests/second per API key
+  header: X-Ratelimit-Remaining
+  exceeded_status: 429
+  see: rate-limits/qminder-rate-limits.yml
+events:
+  webhooks: true
+  signature_header: X-Qminder-Signature
+  algorithm: HMAC-SHA256
+  see: asyncapi/qminder-events-webhooks.yml
+graphql:
+  endpoint: https://api.qminder.com/graphql
+  subscriptions: true
+  notes: Real-time subscriptions available over GraphQL alongside the REST API.

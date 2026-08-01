@@ -1,0 +1,15 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/qminder-openapi-original.json
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: sec0
+  type: apiKey
+  in: header
+  parameter: X-Qminder-REST-API-Key
+  sources:
+  - openapi/qminder-openapi-original.json

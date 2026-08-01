@@ -1,0 +1,61 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/qminder-openapi-original.json
+entities:
+  - name: Location
+    description: A physical service site (building, service point, retail store).
+  - name: Line
+    description: A virtual queue within a location.
+  - name: Desk
+    description: A service point/counter within a location that users select.
+  - name: Ticket
+    description: A visitor's single visit to a location; moves through a line's queue.
+  - name: Appointment
+    description: A scheduled visit with a specific time slot, assigned to a user.
+  - name: InputField
+    description: A custom data field attached to a location that collects visitor info.
+  - name: User
+    description: A person who can log in to Qminder; can be assigned tickets and select desks/lines.
+  - name: TicketMessage
+    description: An SMS/message associated with a ticket.
+relationships:
+  - from: Line
+    to: Location
+    type: belongs_to
+    via: locationId
+  - from: Ticket
+    to: Line
+    type: belongs_to
+    via: lineId
+  - from: Ticket
+    to: User
+    type: has_one
+    via: assignee
+  - from: Ticket
+    to: TicketMessage
+    type: has_many
+    via: ticketId
+  - from: Appointment
+    to: User
+    type: belongs_to
+    via: assignee
+  - from: Appointment
+    to: Line
+    type: belongs_to
+    via: lineId
+  - from: InputField
+    to: Location
+    type: belongs_to
+    via: locationId
+  - from: Desk
+    to: Location
+    type: belongs_to
+    via: locationId
+  - from: User
+    to: Desk
+    type: has_one
+    via: selectedDesk
+  - from: User
+    to: Line
+    type: has_many
+    via: selectedLines

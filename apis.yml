@@ -1,7 +1,32 @@
 aid: qminder
 name: Qminder
-description: Qminder is a company surfaced as a portfolio company of seedcamp and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1
+description: >-
+  Qminder is a cloud-based queue management and appointment scheduling platform
+  that helps retail, healthcare, government, and education organizations manage
+  visitor flow, virtual queues, and service points across physical locations.
+  Its developer platform exposes a REST API and a GraphQL API (with real-time
+  subscriptions) at api.qminder.com for creating tickets, calling and serving
+  visitors, scheduling appointments, managing locations, lines, desks, users,
+  and custom input fields, plus webhooks for ticket, line, and location events.
+  An official JavaScript/TypeScript SDK (qminder-api) is published to npm.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.qminder.com/favicon.ico
 url: https://raw.githubusercontent.com/api-evangelist/qminder/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,15 +36,227 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
-apis: []
+- Queue Management
+- Appointment Scheduling
+- Visitor Management
+- Customer Experience
+- REST
+- GraphQL
+- Webhooks
+- SaaS
+apis:
+- aid: qminder:qminder-appointments-api
+  name: Qminder Appointments API
+  description: Manage scheduled appointments
+  humanURL: https://developer.qminder.com/
+  baseURL: https://api.qminder.com
+  tags:
+  - Appointments
+  properties:
+  - type: OpenAPI
+    url: openapi/qminder-appointments-api-openapi.yml
+  - type: Documentation
+    url: https://developer.qminder.com/
+  - type: APIReference
+    url: https://developer.qminder.com/api-reference/
+  - type: GettingStarted
+    url: https://developer.qminder.com/reference/overview
+  - type: Authentication
+    url: authentication/qminder-authentication.yml
+  - type: RateLimits
+    url: rate-limits/qminder-rate-limits.yml
+- aid: qminder:qminder-input-fields-api
+  name: Qminder Input Fields API
+  description: Manage custom data fields for locations
+  humanURL: https://developer.qminder.com/
+  baseURL: https://api.qminder.com
+  tags:
+  - Input Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/qminder-input-fields-api-openapi.yml
+  - type: Documentation
+    url: https://developer.qminder.com/
+  - type: APIReference
+    url: https://developer.qminder.com/api-reference/
+  - type: GettingStarted
+    url: https://developer.qminder.com/reference/overview
+  - type: Authentication
+    url: authentication/qminder-authentication.yml
+  - type: RateLimits
+    url: rate-limits/qminder-rate-limits.yml
+- aid: qminder:qminder-lines-api
+  name: Qminder Lines API
+  description: Manage virtual queues within locations
+  humanURL: https://developer.qminder.com/
+  baseURL: https://api.qminder.com
+  tags:
+  - Lines
+  properties:
+  - type: OpenAPI
+    url: openapi/qminder-lines-api-openapi.yml
+  - type: Documentation
+    url: https://developer.qminder.com/
+  - type: APIReference
+    url: https://developer.qminder.com/api-reference/
+  - type: GettingStarted
+    url: https://developer.qminder.com/reference/overview
+  - type: Authentication
+    url: authentication/qminder-authentication.yml
+  - type: RateLimits
+    url: rate-limits/qminder-rate-limits.yml
+- aid: qminder:qminder-locations-api
+  name: Qminder Locations API
+  description: Manage physical service locations
+  humanURL: https://developer.qminder.com/
+  baseURL: https://api.qminder.com
+  tags:
+  - Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/qminder-locations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.qminder.com/
+  - type: APIReference
+    url: https://developer.qminder.com/api-reference/
+  - type: GettingStarted
+    url: https://developer.qminder.com/reference/overview
+  - type: Authentication
+    url: authentication/qminder-authentication.yml
+  - type: RateLimits
+    url: rate-limits/qminder-rate-limits.yml
+- aid: qminder:qminder-tickets-api
+  name: Qminder Tickets API
+  description: Manage visitor queue entries
+  humanURL: https://developer.qminder.com/
+  baseURL: https://api.qminder.com
+  tags:
+  - Tickets
+  properties:
+  - type: OpenAPI
+    url: openapi/qminder-tickets-api-openapi.yml
+  - type: Documentation
+    url: https://developer.qminder.com/
+  - type: APIReference
+    url: https://developer.qminder.com/api-reference/
+  - type: GettingStarted
+    url: https://developer.qminder.com/reference/overview
+  - type: Authentication
+    url: authentication/qminder-authentication.yml
+  - type: RateLimits
+    url: rate-limits/qminder-rate-limits.yml
+- aid: qminder:qminder-users-api
+  name: Qminder Users API
+  description: Manage user accounts and permissions
+  humanURL: https://developer.qminder.com/
+  baseURL: https://api.qminder.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/qminder-users-api-openapi.yml
+  - type: Documentation
+    url: https://developer.qminder.com/
+  - type: APIReference
+    url: https://developer.qminder.com/api-reference/
+  - type: GettingStarted
+    url: https://developer.qminder.com/reference/overview
+  - type: Authentication
+    url: authentication/qminder-authentication.yml
+  - type: RateLimits
+    url: rate-limits/qminder-rate-limits.yml
+- aid: qminder:qminder-webhooks-api
+  name: Qminder Webhooks API
+  description: Manage webhook subscriptions
+  humanURL: https://developer.qminder.com/
+  baseURL: https://api.qminder.com
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/qminder-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.qminder.com/
+  - type: APIReference
+    url: https://developer.qminder.com/api-reference/
+  - type: GettingStarted
+    url: https://developer.qminder.com/reference/overview
+  - type: Authentication
+    url: authentication/qminder-authentication.yml
+  - type: RateLimits
+    url: rate-limits/qminder-rate-limits.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DeveloperPortal
+  url: https://developer.qminder.com/
+- type: Documentation
+  url: https://developer.qminder.com/
+- type: APIReference
+  url: https://developer.qminder.com/api-reference/
+- type: GettingStarted
+  url: https://developer.qminder.com/reference/overview
+- type: OpenAPI
+  url: openapi/qminder-openapi-original.json
+- type: LLMsTxt
+  url: llms/qminder-llms.txt
+- type: Authentication
+  url: authentication/qminder-authentication.yml
+- type: SDKs
+  url: packages/qminder-packages.yml
+- type: Packages
+  url: packages/qminder-packages.yml
+- type: MCPServer
+  url: mcp/qminder-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/qminder-agentic-access.yml
+- type: Webhooks
+  url: asyncapi/qminder-events-webhooks.yml
+- type: RateLimits
+  url: rate-limits/qminder-rate-limits.yml
+- type: ErrorCatalog
+  url: errors/qminder-problem-types.yml
+- type: Conventions
+  url: conventions/qminder-conventions.yml
+- type: DataModel
+  url: data-model/qminder-data-model.yml
+- type: Conformance
+  url: conformance/qminder-conformance.yml
+- type: Compliance
+  url: https://www.qminder.com/security/
+- type: TrustCenter
+  url: security/qminder-trust-center.yml
+- type: DomainSecurity
+  url: security/qminder-domain-security.yml
+- type: Overlay
+  url: overlays/qminder-openapi-overlay.yaml
+- type: Lifecycle
+  url: lifecycle/qminder-lifecycle.yml
+- type: StatusPage
+  url: https://status.qminder.com
+- type: GitHubOrganization
+  url: https://github.com/Qminder
+- type: Blog
+  url: https://www.qminder.com/blog/
+- type: Support
+  url: https://support.qminder.com
+- type: Pricing
+  url: https://www.qminder.com/pricing/
+- type: SignUp
+  url: https://dashboard.qminder.com/signup
+- type: Login
+  url: https://dashboard.qminder.com
+- type: TermsOfService
+  url: https://www.qminder.com/terms-of-service/
+- type: PrivacyPolicy
+  url: https://www.qminder.com/privacy-policy/
 - type: Website
-  url: http://qminder.com
+  url: https://www.qminder.com

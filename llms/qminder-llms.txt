@@ -1,0 +1,162 @@
+---
+generated: '2026-07-20'
+method: searched
+source: https://developer.qminder.com/llms.txt
+---
+# Qminder API
+
+## Docs
+
+- [Cancel an appointment](https://developer.qminder.com/api-reference/appointments/cancel-an-appointment.md): Cancels a scheduled appointment.
+- [Check in an appointment](https://developer.qminder.com/api-reference/appointments/check-in-an-appointment.md): Checks in a visitor for their scheduled appointment, moving them to the queue.
+- [Create an appointment](https://developer.qminder.com/api-reference/appointments/create-an-appointment.md): Creates a scheduled appointment for a visitor. Appointments have a specific time slot and are assigned to a user.
+- [Create an auto-assigning appointment](https://developer.qminder.com/api-reference/appointments/create-an-auto-assigning-appointment.md): Creates a scheduled appointment that will be automatically assigned to an available user based on their availability.
+- [Edit an appointment](https://developer.qminder.com/api-reference/appointments/edit-an-appointment.md): Updates an appointment's time slot or assignee. Only include fields you want to change.
+- [Mark appointment as no-show](https://developer.qminder.com/api-reference/appointments/mark-appointment-as-no-show.md): Marks a scheduled appointment as no-show when the visitor doesn't arrive.
+- [Create an input field](https://developer.qminder.com/api-reference/input-fields/create-an-input-field.md): Creates a new input field for a location. The client must generate a UUID for the input field ID. EMAIL and PHONE_NUMBER types are singletons — only one of each is allowed per location.
+- [Edit an input field](https://developer.qminder.com/api-reference/input-fields/edit-an-input-field.md): Updates an existing input field. Only include fields you want to change — omitted fields remain unchanged. Set `visitorFacingTitle` to `null` to clear it.
+- [Archiving a line](https://developer.qminder.com/api-reference/lines/archiving-a-line.md)
+- [Create a line](https://developer.qminder.com/api-reference/lines/create-a-line.md): Creates a new line (queue) within a location.
+- [Deletion of a line](https://developer.qminder.com/api-reference/lines/deletion-of-a-line.md)
+- [Disabling a line](https://developer.qminder.com/api-reference/lines/disabling-a-line.md)
+- [Editing a line](https://developer.qminder.com/api-reference/lines/editing-a-line.md)
+- [Enabling a line](https://developer.qminder.com/api-reference/lines/enabling-a-line.md)
+- [Get details of a line](https://developer.qminder.com/api-reference/lines/get-details-of-a-line.md)
+- [Get list of lines](https://developer.qminder.com/api-reference/lines/get-list-of-lines.md)
+- [Unarchiving a line](https://developer.qminder.com/api-reference/lines/unarchiving-a-line.md)
+- [Create a location](https://developer.qminder.com/api-reference/locations/create-a-location.md): Creates a new location in the account.
+- [Edit a location](https://developer.qminder.com/api-reference/locations/edit-a-location.md): Updates an existing location. Only include the fields you want to change. Omitted fields remain unchanged.
+- [Get desks of a Location](https://developer.qminder.com/api-reference/locations/get-desks-of-a-location.md)
+- [Get details of a location](https://developer.qminder.com/api-reference/locations/get-details-of-a-location.md)
+- [Get the list of locations](https://developer.qminder.com/api-reference/locations/get-the-list-of-locations.md)
+- [Adding a label](https://developer.qminder.com/api-reference/tickets/adding-a-label.md)
+- [Assigning a ticket to a user](https://developer.qminder.com/api-reference/tickets/assigning-a-ticket-to-a-user.md)
+- [Calling a ticket](https://developer.qminder.com/api-reference/tickets/calling-a-ticket.md)
+- [Counting tickets](https://developer.qminder.com/api-reference/tickets/counting-tickets.md)
+- [Create a ticket](https://developer.qminder.com/api-reference/tickets/create-a-ticket.md): Creates a new ticket in the specified line.
+- [Editing a ticket](https://developer.qminder.com/api-reference/tickets/editing-a-ticket.md): Updates ticket fields such as visitor name, contact information, line assignment, and language preference. Only include fields you want to change - omitted fields remain unchanged. Set a field to `null` to clear its value.
+- [Forwarding a ticket](https://developer.qminder.com/api-reference/tickets/forwarding-a-ticket.md)
+- [Get details of a ticket](https://developer.qminder.com/api-reference/tickets/get-details-of-a-ticket.md)
+- [Get messages of a ticket](https://developer.qminder.com/api-reference/tickets/get-messages-of-a-ticket.md)
+- [Marking a ticket as no-show](https://developer.qminder.com/api-reference/tickets/marking-a-ticket-as-no-show.md)
+- [Marking a ticket as served](https://developer.qminder.com/api-reference/tickets/marking-a-ticket-as-served.md)
+- [Re-calling a ticket](https://developer.qminder.com/api-reference/tickets/re-calling-a-ticket.md)
+- [Remove ticket input field value](https://developer.qminder.com/api-reference/tickets/remove-ticket-input-field-value.md): Removes a custom input field value from a ticket. Cannot remove mandatory input fields.
+- [Removing a label](https://developer.qminder.com/api-reference/tickets/removing-a-label.md)
+- [Removing a ticket from the queue](https://developer.qminder.com/api-reference/tickets/removing-a-ticket-from-the-queue.md)
+- [Reordering a ticket](https://developer.qminder.com/api-reference/tickets/reordering-a-ticket.md)
+- [Returning a ticket to the queue](https://developer.qminder.com/api-reference/tickets/returning-a-ticket-to-the-queue.md)
+- [Save ticket input field value](https://developer.qminder.com/api-reference/tickets/save-ticket-input-field-value.md): Saves or updates a custom input field value on a ticket. Use `value` for text fields or `optionIds` for select-type fields.
+- [Searching tickets](https://developer.qminder.com/api-reference/tickets/searching-tickets.md)
+- [Sending an SMS message](https://developer.qminder.com/api-reference/tickets/sending-an-sms-message.md)
+- [Un-assigning a ticket](https://developer.qminder.com/api-reference/tickets/un-assigning-a-ticket.md)
+- [Changing the user's selected desk](https://developer.qminder.com/api-reference/users/changing-the-users-selected-desk.md)
+- [Clearing the user's selected desk](https://developer.qminder.com/api-reference/users/clearing-the-users-selected-desk.md)
+- [Creating a user](https://developer.qminder.com/api-reference/users/creating-a-user.md)
+- [Getting a list of users](https://developer.qminder.com/api-reference/users/getting-a-list-of-users.md)
+- [Getting details of a User](https://developer.qminder.com/api-reference/users/getting-details-of-a-user.md)
+- [Getting the user's selected lines](https://developer.qminder.com/api-reference/users/getting-the-users-selected-lines.md)
+- [Getting user's selected desk id](https://developer.qminder.com/api-reference/users/getting-users-selected-desk-id.md)
+- [Selecting lines](https://developer.qminder.com/api-reference/users/selecting-lines.md)
+- [Adding a webhook](https://developer.qminder.com/api-reference/webhooks/adding-a-webhook.md)
+- [Removing a webhook](https://developer.qminder.com/api-reference/webhooks/removing-a-webhook.md)
+- [Appointments](https://developer.qminder.com/reference/appointments.md): Appointments represent scheduled visits with a specific time slot.
+- [CRM Integration Template](https://developer.qminder.com/reference/crm-integration-template.md): A template for integrating Qminder with your CRM to identify VIP customers at check-in.
+- [Overview](https://developer.qminder.com/reference/graphql-api.md)
+- [Direction](https://developer.qminder.com/reference/graphql/enums/direction.md)
+- [InputFieldType](https://developer.qminder.com/reference/graphql/enums/input-field-type.md)
+- [MessageType](https://developer.qminder.com/reference/graphql/enums/message-type.md)
+- [OrderableField](https://developer.qminder.com/reference/graphql/enums/orderable-field.md)
+- [PaymentInterval](https://developer.qminder.com/reference/graphql/enums/payment-interval.md)
+- [PaymentMethod](https://developer.qminder.com/reference/graphql/enums/payment-method.md)
+- [Sentiment](https://developer.qminder.com/reference/graphql/enums/sentiment.md)
+- [TicketStatus](https://developer.qminder.com/reference/graphql/enums/ticket-status.md)
+- [AppointmentFilter](https://developer.qminder.com/reference/graphql/inputs/appointment-filter.md)
+- [InteractionsFilter](https://developer.qminder.com/reference/graphql/inputs/interactions-filter.md)
+- [Order](https://developer.qminder.com/reference/graphql/inputs/order.md)
+- [Account](https://developer.qminder.com/reference/graphql/objects/account.md)
+- [Appointment](https://developer.qminder.com/reference/graphql/objects/appointment.md)
+- [Desk](https://developer.qminder.com/reference/graphql/objects/desk.md)
+- [InputField](https://developer.qminder.com/reference/graphql/objects/input-field.md)
+- [Interaction](https://developer.qminder.com/reference/graphql/objects/interaction.md)
+- [Ipad](https://developer.qminder.com/reference/graphql/objects/ipad.md)
+- [Line](https://developer.qminder.com/reference/graphql/objects/line.md)
+- [Location](https://developer.qminder.com/reference/graphql/objects/location.md)
+- [Ticket](https://developer.qminder.com/reference/graphql/objects/ticket.md)
+- [TicketMessage](https://developer.qminder.com/reference/graphql/objects/ticket-message.md)
+- [TV](https://developer.qminder.com/reference/graphql/objects/tv.md)
+- [User](https://developer.qminder.com/reference/graphql/objects/user.md)
+- [account](https://developer.qminder.com/reference/graphql/queries/account.md)
+- [allUsers](https://developer.qminder.com/reference/graphql/queries/all-users.md)
+- [iPad](https://developer.qminder.com/reference/graphql/queries/i-pad.md)
+- [inputField](https://developer.qminder.com/reference/graphql/queries/input-field.md)
+- [line](https://developer.qminder.com/reference/graphql/queries/line.md)
+- [location](https://developer.qminder.com/reference/graphql/queries/location.md)
+- [locations](https://developer.qminder.com/reference/graphql/queries/locations.md)
+- [mcpClient](https://developer.qminder.com/reference/graphql/queries/mcp-client.md)
+- [me](https://developer.qminder.com/reference/graphql/queries/me.md)
+- [myCalledTickets](https://developer.qminder.com/reference/graphql/queries/my-called-tickets.md)
+- [productChanges](https://developer.qminder.com/reference/graphql/queries/product-changes.md)
+- [ticket](https://developer.qminder.com/reference/graphql/queries/ticket.md)
+- [ticketSearch](https://developer.qminder.com/reference/graphql/queries/ticket-search.md)
+- [TV](https://developer.qminder.com/reference/graphql/queries/tv.md)
+- [user](https://developer.qminder.com/reference/graphql/queries/user.md)
+- [userAppointmentsAvailability](https://developer.qminder.com/reference/graphql/queries/user-appointments-availability.md)
+- [users](https://developer.qminder.com/reference/graphql/queries/users.md)
+- [BigDecimal](https://developer.qminder.com/reference/graphql/scalars/big-decimal.md)
+- [Date](https://developer.qminder.com/reference/graphql/scalars/date.md): ISO 8601 date-time with timezone
+- [Duration](https://developer.qminder.com/reference/graphql/scalars/duration.md): Time duration in ISO 8601 format
+- [JSON](https://developer.qminder.com/reference/graphql/scalars/json.md): Arbitrary JSON data
+- [LocalDate](https://developer.qminder.com/reference/graphql/scalars/local-date.md): Date without time component
+- [LocalTime](https://developer.qminder.com/reference/graphql/scalars/local-time.md): Time without date component
+- [Long](https://developer.qminder.com/reference/graphql/scalars/long.md)
+- [Short](https://developer.qminder.com/reference/graphql/scalars/short.md)
+- [appointmentChanged](https://developer.qminder.com/reference/graphql/subscriptions/appointment-changed.md)
+- [calledTickets](https://developer.qminder.com/reference/graphql/subscriptions/called-tickets.md)
+- [cancelledTickets](https://developer.qminder.com/reference/graphql/subscriptions/cancelled-tickets.md)
+- [changedDeskSelection](https://developer.qminder.com/reference/graphql/subscriptions/changed-desk-selection.md)
+- [changedDesks](https://developer.qminder.com/reference/graphql/subscriptions/changed-desks.md)
+- [changedInputFields](https://developer.qminder.com/reference/graphql/subscriptions/changed-input-fields.md)
+- [changedIpads](https://developer.qminder.com/reference/graphql/subscriptions/changed-ipads.md)
+- [changedLines](https://developer.qminder.com/reference/graphql/subscriptions/changed-lines.md)
+- [changedLocation](https://developer.qminder.com/reference/graphql/subscriptions/changed-location.md)
+- [changedLocationLine](https://developer.qminder.com/reference/graphql/subscriptions/changed-location-line.md)
+- [changedOpeningHours2](https://developer.qminder.com/reference/graphql/subscriptions/changed-opening-hours-2.md)
+- [changedTicketFields](https://developer.qminder.com/reference/graphql/subscriptions/changed-ticket-fields.md)
+- [changedTicketLabels](https://developer.qminder.com/reference/graphql/subscriptions/changed-ticket-labels.md)
+- [changedTickets](https://developer.qminder.com/reference/graphql/subscriptions/changed-tickets.md)
+- [changedTV](https://developer.qminder.com/reference/graphql/subscriptions/changed-tv.md)
+- [createdTickets](https://developer.qminder.com/reference/graphql/subscriptions/created-tickets.md)
+- [deletedIpads](https://developer.qminder.com/reference/graphql/subscriptions/deleted-ipads.md)
+- [deletedTV](https://developer.qminder.com/reference/graphql/subscriptions/deleted-tv.md)
+- [markedAllTicketMessagesAsRead](https://developer.qminder.com/reference/graphql/subscriptions/marked-all-ticket-messages-as-read.md)
+- [recalledTickets](https://developer.qminder.com/reference/graphql/subscriptions/recalled-tickets.md)
+- [reorderedTicketsList](https://developer.qminder.com/reference/graphql/subscriptions/reordered-tickets-list.md)
+- [servedTickets](https://developer.qminder.com/reference/graphql/subscriptions/served-tickets.md)
+- [ticketStateChanged](https://developer.qminder.com/reference/graphql/subscriptions/ticket-state-changed.md)
+- [tvTickets](https://developer.qminder.com/reference/graphql/subscriptions/tv-tickets.md)
+- [Overview](https://developer.qminder.com/reference/input-fields.md): Input fields are custom data fields attached to locations that collect information from visitors.
+- [Creating an Input Field](https://developer.qminder.com/reference/input-fields/creating-an-input-field.md): Create a new input field for a location.
+- [Editing an Input Field](https://developer.qminder.com/reference/input-fields/editing-an-input-field.md): Update an existing input field's properties.
+- [Overview](https://developer.qminder.com/reference/lines.md): Lines represent virtual queues in Qminder.
+- [Creating a Line](https://developer.qminder.com/reference/lines/creating-a-line.md): Create a new line (queue) within a location.
+- [Overview](https://developer.qminder.com/reference/locations.md): Locations represent physical locations in Qminder, such as buildings, service points or retail store locations.
+- [Creating a Location](https://developer.qminder.com/reference/locations/creating-a-location.md): Create a new location in your Qminder account.
+- [Overview](https://developer.qminder.com/reference/overview.md): This page will help you get started with Qminder API.
+- [Input Fields](https://developer.qminder.com/reference/queries/input-fields.md)
+- [Locations](https://developer.qminder.com/reference/queries/locations.md)
+- [Visitors](https://developer.qminder.com/reference/queries/visitors.md)
+- [Overview](https://developer.qminder.com/reference/tickets.md): Tickets represent a visitor's single visit to a Location.
+- [Attaching External Info](https://developer.qminder.com/reference/tickets/attaching-external-info.md): Enrich tickets with structured data from external systems like CRMs, EHRs, or payment platforms.
+- [Creating a Ticket](https://developer.qminder.com/reference/tickets/creating-a-ticket.md): Create a new ticket by adding a visitor to a queue line.
+- [Editing a Ticket](https://developer.qminder.com/reference/tickets/editing-a-ticket.md): Update a ticket's visitor information, line assignment, or language preference.
+- [Users](https://developer.qminder.com/reference/users.md): Every person who can log in to Qminder has a corresponding User object.
+- [Webhooks](https://developer.qminder.com/reference/webhooks.md): Using this API, Webhook endpoint URLs can be managed programmatically.
+- [Lines](https://developer.qminder.com/reference/webhooks-lines.md): Qminder's backend sends HTTP requests to registered URLs every time a Line in the account has changed.
+- [Locations](https://developer.qminder.com/reference/webhooks-locations.md): Qminder's backend sends HTTP requests to registered URLs every time a Location has been created or changed.
+- [Overview](https://developer.qminder.com/reference/webhooks-overview.md): Webhooks let you register an URL that Qminder's servers will send a HTTP request to, anytime the following actions happen in your account:
+- [Tickets](https://developer.qminder.com/reference/webhooks-tickets.md): Qminder's backend sends HTTP requests to registered URLs every time a Ticket is created, called, served, re-called or changed.
+
+## OpenAPI Specs
+
+- [openapi](https://developer.qminder.com/api-reference/openapi.json)

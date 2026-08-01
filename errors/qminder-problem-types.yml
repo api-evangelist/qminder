@@ -1,0 +1,35 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/qminder-openapi-original.json
+format: custom-json
+envelope:
+  description: >-
+    Qminder returns errors as a JSON body with an HTTP status code in the
+    400-599 range. The body is NOT RFC 9457 problem+json; it uses a bespoke
+    envelope.
+  media_type: application/json
+  fields:
+    - name: statusCode
+      description: Numeric HTTP status code.
+    - name: message
+      description: Human-readable message intended for end users.
+    - name: developerMessage
+      description: Technical detail intended for developers.
+docs: https://developer.qminder.com/reference/overview
+problems:
+  - status: 400
+    title: Validation error
+    description: Invalid input data.
+    remediation: Check required fields and value formats against the endpoint schema.
+  - status: 404
+    title: Not found
+    description: The referenced resource (location, line, ticket, user, ...) does not exist.
+    remediation: Verify the resource id.
+  - status: 409
+    title: Conflict
+    description: The request conflicts with the current state of the resource.
+    remediation: Reconcile state; e.g. an EMAIL/PHONE_NUMBER input field is a singleton per location.
+  - status: 429
+    title: Rate limit exceeded
+    description: More than 5 requests per second per API key.
+    remediation: Back off; honor the X-Ratelimit-Remaining header.

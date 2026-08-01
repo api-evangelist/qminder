@@ -1,0 +1,21 @@
+generated: '2026-07-20'
+method: searched
+source: https://developer.qminder.com/reference/overview
+scope: per-user-api-key
+algorithm: token-bucket
+rate_limits:
+  - name: rest-api
+    limit_count: 5
+    window: 1s
+    description: 5 requests per second per user / API key.
+    burst: 40
+    replenish_rate: 10
+    replenish_window: 1s
+signaling:
+  headers:
+    - name: X-Ratelimit-Remaining
+      description: Requests remaining in the current bucket.
+  exceeded_status: 429
+notes: >-
+  Token bucket with a 40-request burst capacity, replenished at 10 requests per
+  second. Exceeding the limit returns HTTP 429.
