@@ -203,7 +203,7 @@ common:
 - type: GettingStarted
   url: https://developer.qminder.com/reference/overview
 - type: OpenAPI
-  url: openapi/qminder-openapi-original.json
+  url: openapi/_original/qminder-openapi-original.json
 - type: LLMsTxt
   url: llms/qminder-llms.txt
 - type: Authentication
