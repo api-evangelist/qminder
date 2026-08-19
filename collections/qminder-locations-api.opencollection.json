@@ -1,0 +1,125 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qminder Appointments Locations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qminder-REST-API-Key",
+      "value": "{{X-Qminder-REST-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/locations",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new location in the account."
+        },
+        {
+          "info": {
+            "name": "Edit a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.qminder.com/locations/:locationId",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "locationId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the location to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing location. Only include the fields you want to change. Omitted fields remain unchanged."
+        },
+        {
+          "info": {
+            "name": "Get details of a location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.qminder.com/v1/locations/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a Location"
+              }
+            ]
+          },
+          "docs": "Get details of a location"
+        },
+        {
+          "info": {
+            "name": "Get desks of a Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.qminder.com/v1/locations/:id/desks",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a Location"
+              }
+            ]
+          },
+          "docs": "Get desks of a Location"
+        },
+        {
+          "info": {
+            "name": "Get the list of locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.qminder.com/v1/locations"
+          },
+          "docs": "Get the list of locations"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

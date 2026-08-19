@@ -1,0 +1,1438 @@
+{
+  "item": [
+    {
+      "id": "eb38c909-78e8-4537-849f-ffc7f285b3d6",
+      "name": "Appointments",
+      "description": {
+        "content": "Manage scheduled appointments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "998ce0d3-386a-4d4e-909d-dda20c5e39ef",
+          "name": "Create an appointment",
+          "request": {
+            "name": "Create an appointment",
+            "description": {
+              "content": "Creates a scheduled appointment for a visitor. Appointments have a specific time slot and are assigned to a user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "appointments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version. Must be set to `2020-09-01`.",
+                "key": "X-Qminder-API-Version",
+                "value": "2020-09-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lineId\": \"<integer>\",\n  \"firstName\": \"<string>\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"assigneeId\": \"<integer>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"email\": \"<email>\",\n  \"languageCode\": \"en\",\n  \"fields\": [\n    {\n      \"inputFieldId\": \"<uuid>\",\n      \"value\": \"<string>\",\n      \"optionIds\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    {\n      \"inputFieldId\": \"<uuid>\",\n      \"value\": \"<string>\",\n      \"optionIds\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    }\n  ],\n  \"labels\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d5fa94c3-367d-4795-a63b-a70691bf4202",
+              "name": "Appointment created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineId\": 12345,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phoneNumber\": \"+12125551234\",\n  \"email\": \"john@example.com\",\n  \"startTime\": \"2024-12-15T10:00:00Z\",\n  \"endTime\": \"2024-12-15T10:30:00Z\",\n  \"assigneeId\": 789\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"226859\",\n  \"publicId\": \"A-42\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a67ca7a8-0d01-4055-9240-ef56ad4a7fe6",
+              "name": "Validation error - invalid input data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineId\": 12345,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phoneNumber\": \"+12125551234\",\n  \"email\": \"john@example.com\",\n  \"startTime\": \"2024-12-15T10:00:00Z\",\n  \"endTime\": \"2024-12-15T10:30:00Z\",\n  \"assigneeId\": 789\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e6aff3a8-c80c-47a2-9921-4bc54f123bb8",
+              "name": "Line, user, or input fields not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineId\": 12345,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phoneNumber\": \"+12125551234\",\n  \"email\": \"john@example.com\",\n  \"startTime\": \"2024-12-15T10:00:00Z\",\n  \"endTime\": \"2024-12-15T10:30:00Z\",\n  \"assigneeId\": 789\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3b5dec22-23bc-4eef-becc-b5d924b97fb6",
+              "name": "Line is disabled or archived",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineId\": 12345,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phoneNumber\": \"+12125551234\",\n  \"email\": \"john@example.com\",\n  \"startTime\": \"2024-12-15T10:00:00Z\",\n  \"endTime\": \"2024-12-15T10:30:00Z\",\n  \"assigneeId\": 789\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a77f7613-ba75-4f0f-9965-203abb10101e",
+          "name": "Create an auto-assigning appointment",
+          "request": {
+            "name": "Create an auto-assigning appointment",
+            "description": {
+              "content": "Creates a scheduled appointment that will be automatically assigned to an available user based on their availability.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "appointments",
+                "auto-assign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version. Must be set to `2020-09-01`.",
+                "key": "X-Qminder-API-Version",
+                "value": "2020-09-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lineId\": \"<integer>\",\n  \"firstName\": \"<string>\",\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"email\": \"<email>\",\n  \"languageCode\": \"en\",\n  \"fields\": [\n    {\n      \"inputFieldId\": \"<uuid>\",\n      \"value\": \"<string>\",\n      \"optionIds\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    {\n      \"inputFieldId\": \"<uuid>\",\n      \"value\": \"<string>\",\n      \"optionIds\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    }\n  ],\n  \"labels\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "19179681-8f96-478f-ab73-aa2077bd4b2f",
+              "name": "Appointment created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    "auto-assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineId\": 12345,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"startTime\": \"2024-12-15T10:00:00Z\",\n  \"endTime\": \"2024-12-15T10:30:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"226859\",\n  \"publicId\": \"A-42\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d017cc1-2b48-46dd-9d87-d9951c02409f",
+              "name": "Validation error - invalid input data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    "auto-assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineId\": 12345,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"startTime\": \"2024-12-15T10:00:00Z\",\n  \"endTime\": \"2024-12-15T10:30:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ccf04347-d033-42e0-8c47-c748fefa9b8a",
+              "name": "Line or input fields not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    "auto-assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineId\": 12345,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"startTime\": \"2024-12-15T10:00:00Z\",\n  \"endTime\": \"2024-12-15T10:30:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dfa83ab8-eca9-4875-822e-1467554f5fc1",
+              "name": "Line is disabled or archived",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    "auto-assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineId\": 12345,\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"startTime\": \"2024-12-15T10:00:00Z\",\n  \"endTime\": \"2024-12-15T10:30:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d6355292-6c28-4cf6-8033-731e7f8c219d",
+          "name": "Edit an appointment",
+          "request": {
+            "name": "Edit an appointment",
+            "description": {
+              "content": "Updates an appointment's time slot or assignee. Only include fields you want to change.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "appointments",
+                ":ticketId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketId",
+                  "description": "(Required) ID of the appointment ticket to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version. Must be set to `2020-09-01`.",
+                "key": "X-Qminder-API-Version",
+                "value": "2020-09-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"startTime\": \"<dateTime>\",\n  \"endTime\": \"<dateTime>\",\n  \"assigneeId\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8fccf510-67b2-4bda-b321-48868f1ffc90",
+              "name": "Appointment updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    ":ticketId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the appointment ticket to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"startTime\": \"2024-12-15T11:00:00Z\",\n  \"endTime\": \"2024-12-15T11:30:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5b5cca8b-bf9d-4503-bd50-c815ed775768",
+              "name": "Appointment or user not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    ":ticketId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the appointment ticket to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"startTime\": \"2024-12-15T11:00:00Z\",\n  \"endTime\": \"2024-12-15T11:30:00Z\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab6f39d0-6c50-401e-9f1d-59ca9281cdab",
+          "name": "Cancel an appointment",
+          "request": {
+            "name": "Cancel an appointment",
+            "description": {
+              "content": "Cancels a scheduled appointment.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "appointments",
+                ":ticketId",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketId",
+                  "description": "(Required) ID of the appointment ticket to cancel"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version. Must be set to `2020-09-01`.",
+                "key": "X-Qminder-API-Version",
+                "value": "2020-09-01"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a7e2646-27c4-4641-a400-93a29ac05f99",
+              "name": "Appointment cancelled successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    ":ticketId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the appointment ticket to cancel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f2d20bb5-b671-4cb3-adec-fc7e1c85053d",
+              "name": "Ticket is not in scheduled status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    ":ticketId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the appointment ticket to cancel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c50abd21-2326-41b4-b285-5b1b473cb775",
+              "name": "Appointment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    ":ticketId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the appointment ticket to cancel"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b9df7b7-c6fe-4ef0-9780-078234f37558",
+          "name": "Check in an appointment",
+          "request": {
+            "name": "Check in an appointment",
+            "description": {
+              "content": "Checks in a visitor for their scheduled appointment, moving them to the queue.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "appointments",
+                ":ticketId",
+                "checkin"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketId",
+                  "description": "(Required) ID of the appointment ticket to check in"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version. Must be set to `2020-09-01`.",
+                "key": "X-Qminder-API-Version",
+                "value": "2020-09-01"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "47cb7050-cd77-49f8-959b-84e80b991182",
+              "name": "Appointment checked in successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    ":ticketId",
+                    "checkin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the appointment ticket to check in"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6f608086-2517-45e0-9dea-2931186ddc1d",
+              "name": "Ticket is not in scheduled status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    ":ticketId",
+                    "checkin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the appointment ticket to check in"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "09b8dcd8-5ee4-45ed-bf68-5e3cc3fd8e91",
+              "name": "Appointment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    ":ticketId",
+                    "checkin"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the appointment ticket to check in"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75f60186-2191-4a85-85f5-2f8f05012ea3",
+          "name": "Mark appointment as no-show",
+          "request": {
+            "name": "Mark appointment as no-show",
+            "description": {
+              "content": "Marks a scheduled appointment as no-show when the visitor doesn't arrive.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "appointments",
+                ":ticketId",
+                "marknoshow"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketId",
+                  "description": "(Required) ID of the appointment ticket to mark as no-show"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version. Must be set to `2020-09-01`.",
+                "key": "X-Qminder-API-Version",
+                "value": "2020-09-01"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "25ec55f3-d37b-46dd-b056-b5d0816640c1",
+              "name": "Appointment marked as no-show successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    ":ticketId",
+                    "marknoshow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the appointment ticket to mark as no-show"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dfcd3859-f874-40a0-a224-93c0d036aef6",
+              "name": "Ticket is not in scheduled status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    ":ticketId",
+                    "marknoshow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the appointment ticket to mark as no-show"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d4f579aa-97bc-4b0f-8cc7-71fcf1a11b11",
+              "name": "Appointment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appointments",
+                    ":ticketId",
+                    "marknoshow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the appointment ticket to mark as no-show"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.qminder.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Qminder-REST-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8176bd31-5b18-48ac-a401-51e5d63744cc",
+    "name": "Qminder Appointments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Qminder API allows you to integrate queue management into your own applications.",
+      "type": "text/plain"
+    }
+  }
+}

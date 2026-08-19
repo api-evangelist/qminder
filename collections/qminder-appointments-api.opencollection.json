@@ -1,0 +1,172 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qminder Appointments API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qminder-REST-API-Key",
+      "value": "{{X-Qminder-REST-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Appointments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/appointments",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a scheduled appointment for a visitor. Appointments have a specific time slot and are assigned to a user."
+        },
+        {
+          "info": {
+            "name": "Create an auto-assigning appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/appointments/auto-assign",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a scheduled appointment that will be automatically assigned to an available user based on their availability."
+        },
+        {
+          "info": {
+            "name": "Edit an appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.qminder.com/v1/appointments/:ticketId",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ticketId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the appointment ticket to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an appointment's time slot or assignee. Only include fields you want to change."
+        },
+        {
+          "info": {
+            "name": "Cancel an appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/appointments/:ticketId/cancel",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ticketId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the appointment ticket to cancel"
+              }
+            ]
+          },
+          "docs": "Cancels a scheduled appointment."
+        },
+        {
+          "info": {
+            "name": "Check in an appointment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/appointments/:ticketId/checkin",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ticketId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the appointment ticket to check in"
+              }
+            ]
+          },
+          "docs": "Checks in a visitor for their scheduled appointment, moving them to the queue."
+        },
+        {
+          "info": {
+            "name": "Mark appointment as no-show",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/appointments/:ticketId/marknoshow",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ticketId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the appointment ticket to mark as no-show"
+              }
+            ]
+          },
+          "docs": "Marks a scheduled appointment as no-show when the visitor doesn't arrive."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

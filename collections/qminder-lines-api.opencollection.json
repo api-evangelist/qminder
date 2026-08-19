@@ -1,0 +1,216 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qminder Appointments Lines API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qminder-REST-API-Key",
+      "value": "{{X-Qminder-REST-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lines",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get list of lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.qminder.com/v1/locations/:id/lines",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a location"
+              }
+            ]
+          },
+          "docs": "Get list of lines"
+        },
+        {
+          "info": {
+            "name": "Create a line",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/locations/:id/lines",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a Location"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new line (queue) within a location."
+        },
+        {
+          "info": {
+            "name": "Get details of a line",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.qminder.com/v1/lines/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a line"
+              }
+            ]
+          },
+          "docs": "Get details of a line"
+        },
+        {
+          "info": {
+            "name": "Editing a line",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/lines/:id",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a Line"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Editing a line"
+        },
+        {
+          "info": {
+            "name": "Deletion of a line",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.qminder.com/v1/lines/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a line"
+              }
+            ]
+          },
+          "docs": "Deletion of a line"
+        },
+        {
+          "info": {
+            "name": "Enabling a line",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/lines/:id/enable",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Enabling a line"
+        },
+        {
+          "info": {
+            "name": "Disabling a line",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/lines/:id/disable",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a line"
+              }
+            ]
+          },
+          "docs": "Disabling a line"
+        },
+        {
+          "info": {
+            "name": "Archiving a line",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/lines/:id/archive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a line"
+              }
+            ]
+          },
+          "docs": "Archiving a line"
+        },
+        {
+          "info": {
+            "name": "Unarchiving a line",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/lines/:id/unarchive",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a line"
+              }
+            ]
+          },
+          "docs": "Unarchiving a line"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

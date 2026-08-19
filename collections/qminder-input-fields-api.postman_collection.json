@@ -1,0 +1,584 @@
+{
+  "item": [
+    {
+      "id": "736f5d7f-9786-4bed-8f3e-1d831577354c",
+      "name": "Input Fields",
+      "description": {
+        "content": "Manage custom data fields for locations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a918592a-7a78-49eb-929a-d01713104e99",
+          "name": "Create an input field",
+          "request": {
+            "name": "Create an input field",
+            "description": {
+              "content": "Creates a new input field for a location. The client must generate a UUID for the input field ID. EMAIL and PHONE_NUMBER types are singletons — only one of each is allowed per location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "input-fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version. Must be set to `2020-09-01`.",
+                "key": "X-Qminder-API-Version",
+                "value": "2020-09-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uuid>\",\n  \"location\": {\n    \"id\": \"<integer>\"\n  },\n  \"type\": \"<string>\",\n  \"isMandatoryBeforeAdded\": \"<boolean>\",\n  \"isMandatoryBeforeServed\": \"<boolean>\",\n  \"isMandatoryInRemoteSignIn\": \"<boolean>\",\n  \"isVisibleInWaitingDrawer\": \"<boolean>\",\n  \"isVisibleInServingDrawer\": \"<boolean>\",\n  \"showInRemoteSignIn\": \"<boolean>\",\n  \"visibleForLines\": [\n    {\n      \"id\": \"<integer>\"\n    },\n    {\n      \"id\": \"<integer>\"\n    }\n  ],\n  \"title\": \"<string>\",\n  \"visitorFacingTitle\": \"<string>\",\n  \"multiSelect\": \"<boolean>\",\n  \"options\": [\n    {\n      \"id\": \"<uuid>\",\n      \"title\": \"<string>\",\n      \"color\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"title\": \"<string>\",\n      \"color\": \"<string>\"\n    }\n  ],\n  \"constraints\": {\n    \"scale\": \"<integer>\",\n    \"min\": \"<number>\",\n    \"max\": \"<number>\"\n  },\n  \"translations\": [\n    {\n      \"languageCode\": \"<string>\",\n      \"title\": \"<string>\",\n      \"visitorFacingTitle\": \"<string>\"\n    },\n    {\n      \"languageCode\": \"<string>\",\n      \"title\": \"<string>\",\n      \"visitorFacingTitle\": \"<string>\"\n    }\n  ],\n  \"isRequiredInAppointments\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ed2a3719-0d72-49fd-b1ae-e1fec5d8a709",
+              "name": "Input field created successfully. Response body is empty.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "input-fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"location\": {\n    \"id\": 12345\n  },\n  \"type\": \"TEXT\",\n  \"title\": \"Reason for visit\",\n  \"isMandatoryBeforeAdded\": true,\n  \"isMandatoryBeforeServed\": false,\n  \"isMandatoryInRemoteSignIn\": false,\n  \"isVisibleInWaitingDrawer\": true,\n  \"isVisibleInServingDrawer\": true,\n  \"showInRemoteSignIn\": true,\n  \"visibleForLines\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7cfb0067-26d1-450f-b8c4-d72d6644c1f4",
+              "name": "Bad request — missing or invalid fields",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "input-fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"location\": {\n    \"id\": 12345\n  },\n  \"type\": \"TEXT\",\n  \"title\": \"Reason for visit\",\n  \"isMandatoryBeforeAdded\": true,\n  \"isMandatoryBeforeServed\": false,\n  \"isMandatoryInRemoteSignIn\": false,\n  \"isVisibleInWaitingDrawer\": true,\n  \"isVisibleInServingDrawer\": true,\n  \"showInRemoteSignIn\": true,\n  \"visibleForLines\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"duplicate_items_in_request\",\n  \"message\": \"Duplicate option titles\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee7b24e1-455c-414c-b881-25de9df2c01d",
+              "name": "Location not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "input-fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"location\": {\n    \"id\": 12345\n  },\n  \"type\": \"TEXT\",\n  \"title\": \"Reason for visit\",\n  \"isMandatoryBeforeAdded\": true,\n  \"isMandatoryBeforeServed\": false,\n  \"isMandatoryInRemoteSignIn\": false,\n  \"isVisibleInWaitingDrawer\": true,\n  \"isVisibleInServingDrawer\": true,\n  \"showInRemoteSignIn\": true,\n  \"visibleForLines\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"resource_missing\",\n  \"message\": \"Location not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "90a7abf9-53e7-4a9a-9e66-f18dcfcc1789",
+              "name": "Conflict — duplicate input field ID, or singleton type already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "input-fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"550e8400-e29b-41d4-a716-446655440000\",\n  \"location\": {\n    \"id\": 12345\n  },\n  \"type\": \"TEXT\",\n  \"title\": \"Reason for visit\",\n  \"isMandatoryBeforeAdded\": true,\n  \"isMandatoryBeforeServed\": false,\n  \"isMandatoryInRemoteSignIn\": false,\n  \"isVisibleInWaitingDrawer\": true,\n  \"isVisibleInServingDrawer\": true,\n  \"showInRemoteSignIn\": true,\n  \"visibleForLines\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"input_field_duplicate\",\n  \"message\": \"Input field with this ID already exists\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85ad057c-89a4-4e6a-b8f3-f2ff21aa6b95",
+          "name": "Edit an input field",
+          "request": {
+            "name": "Edit an input field",
+            "description": {
+              "content": "Updates an existing input field. Only include fields you want to change — omitted fields remain unchanged. Set `visitorFacingTitle` to `null` to clear it.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "input-fields",
+                ":inputFieldId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "inputFieldId",
+                  "description": "(Required) UUID of the input field to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version. Must be set to `2020-09-01`.",
+                "key": "X-Qminder-API-Version",
+                "value": "2020-09-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"visitorFacingTitle\": \"<string>\",\n  \"isVisibleInWaitingDrawer\": \"<boolean>\",\n  \"isVisibleInServingDrawer\": \"<boolean>\",\n  \"isMandatoryBeforeAdded\": \"<boolean>\",\n  \"isMandatoryBeforeServed\": \"<boolean>\",\n  \"isMandatoryInRemoteSignIn\": \"<boolean>\",\n  \"showInRemoteSignIn\": \"<boolean>\",\n  \"visibleForLines\": [\n    {\n      \"id\": \"<integer>\"\n    },\n    {\n      \"id\": \"<integer>\"\n    }\n  ],\n  \"multiSelect\": \"<boolean>\",\n  \"options\": [\n    {\n      \"id\": \"<uuid>\",\n      \"title\": \"<string>\",\n      \"color\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"title\": \"<string>\",\n      \"color\": \"<string>\"\n    }\n  ],\n  \"constraints\": {\n    \"min\": \"<number>\",\n    \"max\": \"<number>\",\n    \"scale\": \"<integer>\"\n  },\n  \"translations\": [\n    {\n      \"languageCode\": \"<string>\",\n      \"title\": \"<string>\",\n      \"visitorFacingTitle\": \"<string>\"\n    },\n    {\n      \"languageCode\": \"<string>\",\n      \"title\": \"<string>\",\n      \"visitorFacingTitle\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c502eb50-5865-4ca2-a9ab-bdf2377fb28f",
+              "name": "Input field updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "input-fields",
+                    ":inputFieldId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inputFieldId",
+                      "description": "(Required) UUID of the input field to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Visit reason\",\n  \"isVisibleInWaitingDrawer\": false,\n  \"isMandatoryBeforeServed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c31d74c6-9640-4b0d-bd0c-87b46ed0c89f",
+              "name": "Invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "input-fields",
+                    ":inputFieldId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inputFieldId",
+                      "description": "(Required) UUID of the input field to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Visit reason\",\n  \"isVisibleInWaitingDrawer\": false,\n  \"isMandatoryBeforeServed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"invalid_arguments\",\n  \"message\": \"title is not applicable for this input field type\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae7ad5be-91db-4004-b4b1-65e159fc2178",
+              "name": "Input field not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "input-fields",
+                    ":inputFieldId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inputFieldId",
+                      "description": "(Required) UUID of the input field to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"Visit reason\",\n  \"isVisibleInWaitingDrawer\": false,\n  \"isMandatoryBeforeServed\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"resource_missing\",\n  \"message\": \"Input field not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.qminder.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Qminder-REST-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "6783b521-a5ff-467c-8e3b-b66e1732e891",
+    "name": "Qminder Appointments Input Fields API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Qminder API allows you to integrate queue management into your own applications.",
+      "type": "text/plain"
+    }
+  }
+}

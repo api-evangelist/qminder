@@ -1,0 +1,630 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qminder Appointments Tickets API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qminder-REST-API-Key",
+      "value": "{{X-Qminder-REST-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tickets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/tickets",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new ticket in the specified line."
+        },
+        {
+          "info": {
+            "name": "Searching tickets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.qminder.com/v1/tickets/search",
+            "params": [
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Search tickets only in the given Location."
+              },
+              {
+                "name": "line",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Search tickets with only the given status. Multiple statuses can be searched by separating them with a comma. \"NEW\" will return tickets that are in queue, and have not been called. \"CALLED\" will return tickets that are currently being served. \"SERVED\" will return tickets that have been served. \"CANCELLED_BY_CLERK\" will return tickets that have been removed from queue."
+              },
+              {
+                "name": "caller",
+                "value": "",
+                "type": "query",
+                "description": "Search tickets that have been called by the given user ID. Both \"CALLED\" and \"SERVED\" tickets will be returned, unless status is also specified."
+              },
+              {
+                "name": "minCreated",
+                "value": "",
+                "type": "query",
+                "description": "Search tickets which have been created after the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+              },
+              {
+                "name": "maxCreated",
+                "value": "",
+                "type": "query",
+                "description": "Search tickets which have been created before the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+              },
+              {
+                "name": "minCalled",
+                "value": "",
+                "type": "query",
+                "description": "Search tickets which have been called after the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+              },
+              {
+                "name": "maxCalled",
+                "value": "",
+                "type": "query",
+                "description": "Search tickets which have been called before the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit search results to the specified amount of tickets. With a limit of 100, only the 100 first results will be returned. The limit has to be between 1 and 20000."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Order search results according to a ticket parameter. Order is specified using two words in one string, for example \"id ASC\". Valid order directions: ASC, DESC Valid ordering parameters: id, created, called, served"
+              },
+              {
+                "name": "responseScope",
+                "value": "",
+                "type": "query",
+                "description": "Include additional data in the search results. Use multiple response scopes by separating them with a comma. Valid response scopes are: \"MESSAGES\" - include SMS messages with the response \"INTERACTIONS\" - include interaction data with the response \"CONNECTED_TICKETS\" - include connected tickets (other visits of the same person)"
+              }
+            ]
+          },
+          "docs": "Searching tickets"
+        },
+        {
+          "info": {
+            "name": "Counting tickets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/count",
+            "params": [
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Count tickets only in the given Location."
+              },
+              {
+                "name": "line",
+                "value": "",
+                "type": "query",
+                "description": "Count tickets only in the given Line."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Count tickets with only the given status. Multiple statuses can be searched by separating them with a comma. \"NEW\" will return tickets that are in queue, and have not been called. \"CALLED\" will return tickets that are currently being served. \"SERVED\" will return tickets that have been served. \"CANCELLED_BY_CLERK\" will return tickets that have been removed from queue."
+              },
+              {
+                "name": "caller",
+                "value": "",
+                "type": "query",
+                "description": "Count tickets that have been called by the given user ID. Both \"CALLED\" and \"SERVED\" tickets will be returned, unless status is also specified."
+              },
+              {
+                "name": "minCreated",
+                "value": "",
+                "type": "query",
+                "description": "Count tickets which have been created after the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+              },
+              {
+                "name": "maxCreated",
+                "value": "",
+                "type": "query",
+                "description": "Count tickets which have been created before the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+              },
+              {
+                "name": "minCalled",
+                "value": "",
+                "type": "query",
+                "description": "Count tickets which have been called before the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+              },
+              {
+                "name": "maxCalled",
+                "value": "",
+                "type": "query",
+                "description": "Count tickets which have been called before the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+              }
+            ]
+          },
+          "docs": "Counting tickets"
+        },
+        {
+          "info": {
+            "name": "Calling a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/:id/call",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the ticket to call"
+              },
+              {
+                "name": "desk",
+                "value": "",
+                "type": "query",
+                "description": "Optional. The desk where the ticket will be called."
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "Optional. The user who is calling the ticket."
+              }
+            ]
+          },
+          "docs": "Calling a ticket"
+        },
+        {
+          "info": {
+            "name": "Re-calling a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/:id/recall",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a ticket to recall"
+              }
+            ]
+          },
+          "docs": "Re-calling a ticket"
+        },
+        {
+          "info": {
+            "name": "Editing a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.qminder.com/tickets/:ticketId",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ticketId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the ticket to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates ticket fields such as visitor name, contact information, line assignment, and language preference. Only include fields you want to change - omitted fields remain unchanged. Set a field to `null` to clear its value."
+        },
+        {
+          "info": {
+            "name": "Marking a ticket as served",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/:id/markserved",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a ticket"
+              }
+            ]
+          },
+          "docs": "Marking a ticket as served"
+        },
+        {
+          "info": {
+            "name": "Marking a ticket as no-show",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/:id/marknoshow",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "ID of a ticket"
+              }
+            ]
+          },
+          "docs": "Marking a ticket as no-show"
+        },
+        {
+          "info": {
+            "name": "Removing a ticket from the queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/:id/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the ticket to remove from queue."
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the user who removed the ticket."
+              }
+            ]
+          },
+          "docs": "Removing a ticket from the queue"
+        },
+        {
+          "info": {
+            "name": "Returning a ticket to the queue",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/:id/returntoqueue",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the ticket to return to queue."
+              },
+              {
+                "name": "user",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the user to return to queue."
+              },
+              {
+                "name": "position",
+                "value": "",
+                "type": "query",
+                "description": "The position the called ticket should be in the queue. Accepted values: \"FIRST\" = the ticket will be first in line. \"LAST\" = the ticket will be last in queue."
+              }
+            ]
+          },
+          "docs": "Returning a ticket to the queue"
+        },
+        {
+          "info": {
+            "name": "Forwarding a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/:id/forward",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the ticket to forward."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Forwarding a ticket"
+        },
+        {
+          "info": {
+            "name": "Adding a label",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/:id/labels/add",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the ticket to add the label to"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adding a label"
+        },
+        {
+          "info": {
+            "name": "Removing a label",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/:id/labels/remove",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the ticket to remove the label from"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removing a label"
+        },
+        {
+          "info": {
+            "name": "Assigning a ticket to a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/:id/assign",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the ticket to assign."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assigning a ticket to a user"
+        },
+        {
+          "info": {
+            "name": "Un-assigning a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/:id/unassign",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the ticket to assign."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Un-assigning a ticket"
+        },
+        {
+          "info": {
+            "name": "Reordering a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/:id/reorder",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the ticket to reorder."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reordering a ticket"
+        },
+        {
+          "info": {
+            "name": "Get details of a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.qminder.com/v1/tickets/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the ticket to get details of"
+              },
+              {
+                "name": "responseScope",
+                "value": "",
+                "type": "query",
+                "description": "Include additional data in the search results. Use multiple response scopes by separating them with a comma. Valid response scopes are: \"MESSAGES\" - include SMS messages with the response \"INTERACTIONS\" - include interaction data with the response \"CONNECTED_TICKETS\" - include connected tickets (other visits of the same person)"
+              }
+            ]
+          },
+          "docs": "Get details of a ticket"
+        },
+        {
+          "info": {
+            "name": "Get messages of a ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.qminder.com/v1/tickets/:id/messages",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the ticket to load messages for."
+              }
+            ]
+          },
+          "docs": "Get messages of a ticket"
+        },
+        {
+          "info": {
+            "name": "Sending an SMS message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/:id/messages",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the ticket to send the message to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sending an SMS message"
+        },
+        {
+          "info": {
+            "name": "Save ticket input field value",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/tickets/:ticketId/fields/:inputFieldId",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ticketId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the ticket"
+              },
+              {
+                "name": "inputFieldId",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the input field"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Saves or updates a custom input field value on a ticket. Use `value` for text fields or `optionIds` for select-type fields."
+        },
+        {
+          "info": {
+            "name": "Remove ticket input field value",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.qminder.com/v1/tickets/:ticketId/fields/:inputFieldId",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "ticketId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the ticket"
+              },
+              {
+                "name": "inputFieldId",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the input field"
+              }
+            ]
+          },
+          "docs": "Removes a custom input field value from a ticket. Cannot remove mandatory input fields."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

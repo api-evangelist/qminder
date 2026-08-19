@@ -1,0 +1,748 @@
+{
+  "item": [
+    {
+      "id": "b3e585bb-6141-4911-a23c-f14f2784de86",
+      "name": "Locations",
+      "description": {
+        "content": "Manage physical service locations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e74b5def-6028-4dec-aeb3-383a55f7792f",
+          "name": "Create a location",
+          "request": {
+            "name": "Create a location",
+            "description": {
+              "content": "Creates a new location in the account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version. Must be set to `2020-09-01`.",
+                "key": "X-Qminder-API-Version",
+                "value": "2020-09-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<number>\",\n  \"longitude\": \"<number>\",\n  \"address\": \"<string>\",\n  \"country\": \"<string>\",\n  \"languages\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"inputFields\": [\n    {\n      \"id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"isMandatoryBeforeAdded\": \"<boolean>\",\n      \"isMandatoryBeforeServed\": \"<boolean>\",\n      \"isMandatoryInRemoteSignIn\": \"<boolean>\",\n      \"isVisibleInWaitingDrawer\": \"<boolean>\",\n      \"isVisibleInServingDrawer\": \"<boolean>\",\n      \"showInRemoteSignIn\": \"<boolean>\",\n      \"title\": \"<string>\",\n      \"visitorFacingTitle\": \"<string>\",\n      \"multiSelect\": \"<boolean>\",\n      \"options\": [\n        {\n          \"id\": \"<uuid>\",\n          \"title\": \"<string>\",\n          \"color\": \"<string>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"title\": \"<string>\",\n          \"color\": \"<string>\"\n        }\n      ],\n      \"constraints\": {\n        \"scale\": \"<integer>\",\n        \"min\": \"<number>\",\n        \"max\": \"<number>\"\n      },\n      \"translations\": [\n        {\n          \"languageCode\": \"<string>\",\n          \"title\": \"<string>\",\n          \"visitorFacingTitle\": \"<string>\"\n        },\n        {\n          \"languageCode\": \"<string>\",\n          \"title\": \"<string>\",\n          \"visitorFacingTitle\": \"<string>\"\n        }\n      ],\n      \"isRequiredInAppointments\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"type\": \"<string>\",\n      \"isMandatoryBeforeAdded\": \"<boolean>\",\n      \"isMandatoryBeforeServed\": \"<boolean>\",\n      \"isMandatoryInRemoteSignIn\": \"<boolean>\",\n      \"isVisibleInWaitingDrawer\": \"<boolean>\",\n      \"isVisibleInServingDrawer\": \"<boolean>\",\n      \"showInRemoteSignIn\": \"<boolean>\",\n      \"title\": \"<string>\",\n      \"visitorFacingTitle\": \"<string>\",\n      \"multiSelect\": \"<boolean>\",\n      \"options\": [\n        {\n          \"id\": \"<uuid>\",\n          \"title\": \"<string>\",\n          \"color\": \"<string>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"title\": \"<string>\",\n          \"color\": \"<string>\"\n        }\n      ],\n      \"constraints\": {\n        \"scale\": \"<integer>\",\n        \"min\": \"<number>\",\n        \"max\": \"<number>\"\n      },\n      \"translations\": [\n        {\n          \"languageCode\": \"<string>\",\n          \"title\": \"<string>\",\n          \"visitorFacingTitle\": \"<string>\"\n        },\n        {\n          \"languageCode\": \"<string>\",\n          \"title\": \"<string>\",\n          \"visitorFacingTitle\": \"<string>\"\n        }\n      ],\n      \"isRequiredInAppointments\": \"<boolean>\"\n    }\n  ],\n  \"lines\": [\n    {\n      \"name\": \"<string>\",\n      \"color\": \"<string>\",\n      \"disabled\": \"<boolean>\",\n      \"translations\": [\n        {\n          \"languageCode\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"languageCode\": \"<string>\",\n          \"name\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"openingHours\": {\n    \"regular\": {\n      \"mon\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"closes\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"opens\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"closes\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"closed\": \"<boolean>\"\n      },\n      \"tue\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"closes\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"opens\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"closes\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"closed\": \"<boolean>\"\n      },\n      \"wed\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"closes\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"opens\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"closes\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"closed\": \"<boolean>\"\n      },\n      \"thu\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"closes\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"opens\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"closes\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"closed\": \"<boolean>\"\n      },\n      \"fri\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"closes\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"opens\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"closes\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"closed\": \"<boolean>\"\n      },\n      \"sat\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"closes\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"opens\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"closes\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"closed\": \"<boolean>\"\n      },\n      \"sun\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"closes\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          },\n          {\n            \"opens\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"closes\": {\n              \"hours\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"minutes\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          }\n        ],\n        \"closed\": \"<boolean>\"\n      }\n    },\n    \"exceptions\": [\n      {\n        \"date\": \"<date>\",\n        \"closed\": \"<boolean>\",\n        \"closedReason\": \"<string>\",\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"closes\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            }\n          },\n          {\n            \"opens\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"closes\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            }\n          }\n        ]\n      },\n      {\n        \"date\": \"<date>\",\n        \"closed\": \"<boolean>\",\n        \"closedReason\": \"<string>\",\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"closes\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            }\n          },\n          {\n            \"opens\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            },\n            \"closes\": {\n              \"hours\": \"<integer>\",\n              \"minutes\": \"<integer>\"\n            }\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "77f1bf1d-42a5-4f18-822e-05a3a09375a2",
+              "name": "Location created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"SF City Hall\",\n  \"latitude\": 37.7792792,\n  \"longitude\": -122.4214304,\n  \"address\": \"1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102, United States\",\n  \"country\": \"US\",\n  \"languages\": [\n    \"en\",\n    \"et\",\n    \"fr-CA\"\n  ],\n  \"inputFields\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440001\",\n      \"type\": \"FIRST_NAME\",\n      \"isMandatoryBeforeAdded\": false,\n      \"isMandatoryBeforeServed\": false,\n      \"isMandatoryInRemoteSignIn\": false,\n      \"isVisibleInWaitingDrawer\": true,\n      \"isVisibleInServingDrawer\": true,\n      \"showInRemoteSignIn\": true\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440002\",\n      \"type\": \"LAST_NAME\",\n      \"isMandatoryBeforeAdded\": false,\n      \"isMandatoryBeforeServed\": false,\n      \"isMandatoryInRemoteSignIn\": false,\n      \"isVisibleInWaitingDrawer\": true,\n      \"isVisibleInServingDrawer\": true,\n      \"showInRemoteSignIn\": true\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440003\",\n      \"type\": \"TEXT\",\n      \"title\": \"Reason for visit\",\n      \"isMandatoryBeforeAdded\": true,\n      \"isMandatoryBeforeServed\": false,\n      \"isMandatoryInRemoteSignIn\": false,\n      \"isVisibleInWaitingDrawer\": true,\n      \"isVisibleInServingDrawer\": true,\n      \"showInRemoteSignIn\": true\n    }\n  ],\n  \"lines\": [\n    {\n      \"name\": \"Customer Support\",\n      \"color\": \"TEAL\"\n    },\n    {\n      \"name\": \"Returns\",\n      \"color\": \"CORAL\"\n    }\n  ],\n  \"openingHours\": {\n    \"regular\": {\n      \"mon\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": 9,\n              \"minutes\": 0\n            },\n            \"closes\": {\n              \"hours\": 17,\n              \"minutes\": 0\n            }\n          }\n        ]\n      },\n      \"tue\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": 9,\n              \"minutes\": 0\n            },\n            \"closes\": {\n              \"hours\": 17,\n              \"minutes\": 0\n            }\n          }\n        ]\n      },\n      \"wed\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": 9,\n              \"minutes\": 0\n            },\n            \"closes\": {\n              \"hours\": 17,\n              \"minutes\": 0\n            }\n          }\n        ]\n      },\n      \"thu\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": 9,\n              \"minutes\": 0\n            },\n            \"closes\": {\n              \"hours\": 17,\n              \"minutes\": 0\n            }\n          }\n        ]\n      },\n      \"fri\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": 9,\n              \"minutes\": 0\n            },\n            \"closes\": {\n              \"hours\": 17,\n              \"minutes\": 0\n            }\n          }\n        ]\n      },\n      \"sat\": {\n        \"closed\": true\n      },\n      \"sun\": {\n        \"closed\": true\n      }\n    },\n    \"exceptions\": [\n      {\n        \"date\": \"2026-05-01\",\n        \"closed\": true,\n        \"closedReason\": \"Holiday\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"12345\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d358b2fc-810a-4a8a-9371-9c59eeb07eff",
+              "name": "Validation error - invalid input data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"SF City Hall\",\n  \"latitude\": 37.7792792,\n  \"longitude\": -122.4214304,\n  \"address\": \"1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102, United States\",\n  \"country\": \"US\",\n  \"languages\": [\n    \"en\",\n    \"et\",\n    \"fr-CA\"\n  ],\n  \"inputFields\": [\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440001\",\n      \"type\": \"FIRST_NAME\",\n      \"isMandatoryBeforeAdded\": false,\n      \"isMandatoryBeforeServed\": false,\n      \"isMandatoryInRemoteSignIn\": false,\n      \"isVisibleInWaitingDrawer\": true,\n      \"isVisibleInServingDrawer\": true,\n      \"showInRemoteSignIn\": true\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440002\",\n      \"type\": \"LAST_NAME\",\n      \"isMandatoryBeforeAdded\": false,\n      \"isMandatoryBeforeServed\": false,\n      \"isMandatoryInRemoteSignIn\": false,\n      \"isVisibleInWaitingDrawer\": true,\n      \"isVisibleInServingDrawer\": true,\n      \"showInRemoteSignIn\": true\n    },\n    {\n      \"id\": \"550e8400-e29b-41d4-a716-446655440003\",\n      \"type\": \"TEXT\",\n      \"title\": \"Reason for visit\",\n      \"isMandatoryBeforeAdded\": true,\n      \"isMandatoryBeforeServed\": false,\n      \"isMandatoryInRemoteSignIn\": false,\n      \"isVisibleInWaitingDrawer\": true,\n      \"isVisibleInServingDrawer\": true,\n      \"showInRemoteSignIn\": true\n    }\n  ],\n  \"lines\": [\n    {\n      \"name\": \"Customer Support\",\n      \"color\": \"TEAL\"\n    },\n    {\n      \"name\": \"Returns\",\n      \"color\": \"CORAL\"\n    }\n  ],\n  \"openingHours\": {\n    \"regular\": {\n      \"mon\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": 9,\n              \"minutes\": 0\n            },\n            \"closes\": {\n              \"hours\": 17,\n              \"minutes\": 0\n            }\n          }\n        ]\n      },\n      \"tue\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": 9,\n              \"minutes\": 0\n            },\n            \"closes\": {\n              \"hours\": 17,\n              \"minutes\": 0\n            }\n          }\n        ]\n      },\n      \"wed\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": 9,\n              \"minutes\": 0\n            },\n            \"closes\": {\n              \"hours\": 17,\n              \"minutes\": 0\n            }\n          }\n        ]\n      },\n      \"thu\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": 9,\n              \"minutes\": 0\n            },\n            \"closes\": {\n              \"hours\": 17,\n              \"minutes\": 0\n            }\n          }\n        ]\n      },\n      \"fri\": {\n        \"businessHours\": [\n          {\n            \"opens\": {\n              \"hours\": 9,\n              \"minutes\": 0\n            },\n            \"closes\": {\n              \"hours\": 17,\n              \"minutes\": 0\n            }\n          }\n        ]\n      },\n      \"sat\": {\n        \"closed\": true\n      },\n      \"sun\": {\n        \"closed\": true\n      }\n    },\n    \"exceptions\": [\n      {\n        \"date\": \"2026-05-01\",\n        \"closed\": true,\n        \"closedReason\": \"Holiday\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd9aa7b4-c8b9-4838-be51-2cb0f642fc0f",
+          "name": "Edit a location",
+          "request": {
+            "name": "Edit a location",
+            "description": {
+              "content": "Updates an existing location. Only include the fields you want to change. Omitted fields remain unchanged.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "locations",
+                ":locationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "12345",
+                  "key": "locationId",
+                  "description": "(Required) ID of the location to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version. Must be set to `2020-09-01`.",
+                "key": "X-Qminder-API-Version",
+                "value": "2020-09-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"latitude\": \"<number>\",\n  \"longitude\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d29de9b3-7b72-48e5-b24e-c374d81e18ab",
+              "name": "Location updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":locationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "12345",
+                      "key": "locationId",
+                      "description": "(Required) ID of the location to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"SF City Hall\",\n  \"latitude\": 37.7792792,\n  \"longitude\": -122.4214304\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0c3bf327-20d3-4d4f-9eac-ee0957dcc793",
+              "name": "Validation error - invalid input data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":locationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "12345",
+                      "key": "locationId",
+                      "description": "(Required) ID of the location to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"SF City Hall\",\n  \"latitude\": 37.7792792,\n  \"longitude\": -122.4214304\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"invalid_location_timezone\",\n  \"message\": \"The provided coordinates would change the location's timezone, which is not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd3b0353-3718-40ea-bfe0-0eb9fd19e1d7",
+              "name": "Location not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "locations",
+                    ":locationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "12345",
+                      "key": "locationId",
+                      "description": "(Required) ID of the location to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"SF City Hall\",\n  \"latitude\": 37.7792792,\n  \"longitude\": -122.4214304\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"resource_missing\",\n  \"message\": \"Locations with following ids were not found: [12345]\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eedae4de-0d58-47ae-955b-83c5371fe143",
+          "name": "Get details of a location",
+          "request": {
+            "name": "Get details of a location",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "locations",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "123",
+                  "key": "id",
+                  "description": "(Required) ID of a Location"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "458ae444-2393-4756-bdac-2466d28eaff6",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "locations",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "123",
+                      "key": "id",
+                      "description": "(Required) ID of a Location"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"id\\\": 57175,\\n  \\\"name\\\": \\\"White House\\\",\\n  \\\"latitude\\\": 38.8976805,\\n  \\\"longitude\\\": -77.0387185,\\n  \\\"country\\\": \\\"us\\\",\\n  \\\"address\\\": \\\"1600 Pennsylvania Ave NW, Washington, DC 20500, United States\\\",\\n  \\\"selectingDeskMandatory\\\": true,\\n  \\\"timezoneOffset\\\": -240\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9e37bf9-6789-45f6-81b1-f7524811f381",
+          "name": "Get desks of a Location",
+          "request": {
+            "name": "Get desks of a Location",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "locations",
+                ":id",
+                "desks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "123",
+                  "key": "id",
+                  "description": "(Required) ID of a Location"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ea163f2e-c083-4a81-ab7e-84072657079a",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "locations",
+                    ":id",
+                    "desks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "123",
+                      "key": "id",
+                      "description": "(Required) ID of a Location"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n    \\\"statusCode\\\": 200,\\n    \\\"desks\\\": [\\n      {\\n        \\\"id\\\": 159909,\\n        \\\"name\\\": \\\"Front desk\\\"\\n      },\\n      {\\n        \\\"id\\\": 159533,\\n        \\\"name\\\": \\\"Cabinet 1\\\"\\n      },\\n      {\\n        \\\"id\\\": 159534,\\n        \\\"name\\\": \\\"Cabinet 2\\\"\\n      },\\n      {\\n        \\\"id\\\": 1595643,\\n        \\\"name\\\": \\\"Cabinet 3\\\"\\n      }\\n    ]\\n  }\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c598fff-e8af-4753-86cb-6d46b9bb95e8",
+          "name": "Get the list of locations",
+          "request": {
+            "name": "Get the list of locations",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95cf8238-07f8-41e7-bf0c-7131a656c34a",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"data\\\": [\\n    {\\n      \\\"id\\\": 28594,\\n      \\\"name\\\": \\\"White House\\\",\\n      \\\"latitude\\\": 38.8976763,\\n      \\\"longitude\\\": -77.0365298,\\n      \\\"country\\\": \\\"United States\\\",\\n      \\\"address\\\": \\\"1600 Pennsylvania Ave NW, Washington, DC 20500, United States\\\",\\n      \\\"selectingDeskMandatory\\\": false,\\n      \\\"timezoneOffset\\\": -240\\n    },\\n    {\\n      \\\"id\\\": 39599,\\n      \\\"name\\\": \\\"SF City Hall\\\",\\n      \\\"latitude\\\": 37.7792792,\\n      \\\"longitude\\\": -122.4214304,\\n      \\\"country\\\": \\\"United States\\\",\\n      \\\"address\\\": \\\"1 Dr Carlton B Goodlett Pl, San Francisco, CA 94102, United States\\\",\\n      \\\"selectingDeskMandatory\\\": false,\\n      \\\"timezoneOffset\\\": -420\\n    }\\n  ]\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.qminder.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Qminder-REST-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "edccc904-5ed1-45cf-82ef-14e11192c880",
+    "name": "Qminder Appointments Locations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Qminder API allows you to integrate queue management into your own applications.",
+      "type": "text/plain"
+    }
+  }
+}

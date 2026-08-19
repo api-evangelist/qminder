@@ -2,39 +2,43 @@ generated: '2026-07-20'
 method: derived
 status: candidate
 source: openapi/qminder-openapi-original.json
-notes: >-
-  No official hosted/remote MCP server is published by Qminder as of this pass.
-  The GraphQL schema exposes an internal `mcpClient` query, indicating MCP-facing
-  work, but no public server endpoint is documented. Tools below are a candidate
-  surface derived from the REST OpenAPI operations.
+notes: No official hosted/remote MCP server is published by Qminder as of this pass. The GraphQL schema
+  exposes an internal `mcpClient` query, indicating MCP-facing work, but no public server endpoint is
+  documented. Tools below are a candidate surface derived from the REST OpenAPI operations.
 server:
   name: qminder
   transport: http
 tools:
-  - name: create_ticket
-    description: Create a new ticket (add a visitor to a line/queue).
-    source_operation: openapi/qminder-openapi-original.json#create-ticket
-  - name: call_ticket
-    description: Call the next/specified ticket for service.
-    source_operation: openapi/qminder-openapi-original.json#calling-a-ticket
-  - name: mark_ticket_served
-    description: Mark a ticket as served.
-    source_operation: openapi/qminder-openapi-original.json#marking-a-ticket-as-served
-  - name: search_tickets
-    description: Search tickets across lines and locations.
-    source_operation: openapi/qminder-openapi-original.json#searching-tickets
-  - name: create_appointment
-    description: Create a scheduled appointment for a visitor.
-    source_operation: openapi/qminder-openapi-original.json#create-appointment
-  - name: checkin_appointment
-    description: Check in a visitor for their appointment.
-    source_operation: openapi/qminder-openapi-original.json#checkin-appointment
-  - name: list_locations
-    description: Get the list of locations in the account.
-    source_operation: openapi/qminder-openapi-original.json#get-the-list-of-locations
-  - name: list_lines
-    description: Get the list of lines for a location.
-    source_operation: openapi/qminder-openapi-original.json#get-list-of-lines
-  - name: add_webhook
-    description: Register a webhook listener URL.
-    source_operation: openapi/qminder-openapi-original.json#adding-a-webhook
+- name: create_ticket
+  description: Create a new ticket (add a visitor to a line/queue).
+  source_operation: openapi/qminder-openapi-original.json#create-ticket
+- name: call_ticket
+  description: Call the next/specified ticket for service.
+  source_operation: openapi/qminder-openapi-original.json#calling-a-ticket
+- name: mark_ticket_served
+  description: Mark a ticket as served.
+  source_operation: openapi/qminder-openapi-original.json#marking-a-ticket-as-served
+- name: search_tickets
+  description: Search tickets across lines and locations.
+  source_operation: openapi/qminder-openapi-original.json#searching-tickets
+- name: create_appointment
+  description: Create a scheduled appointment for a visitor.
+  source_operation: openapi/qminder-openapi-original.json#create-appointment
+- name: checkin_appointment
+  description: Check in a visitor for their appointment.
+  source_operation: openapi/qminder-openapi-original.json#checkin-appointment
+- name: list_locations
+  description: Get the list of locations in the account.
+  source_operation: openapi/qminder-openapi-original.json#get-the-list-of-locations
+- name: list_lines
+  description: Get the list of lines for a location.
+  source_operation: openapi/qminder-openapi-original.json#get-list-of-lines
+- name: add_webhook
+  description: Register a webhook listener URL.
+  source_operation: openapi/qminder-openapi-original.json#adding-a-webhook
+deployment:
+  mode: none
+  verified: derived
+  tools: 9
+  checked: '2026-08-12'
+  source: catalog MCP census

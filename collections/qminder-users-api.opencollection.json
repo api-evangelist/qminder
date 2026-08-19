@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qminder Appointments Users API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qminder-REST-API-Key",
+      "value": "{{X-Qminder-REST-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Getting a list of users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.qminder.com/v1/locations/:id/users",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the Location to query"
+              }
+            ]
+          },
+          "docs": "Getting a list of users"
+        },
+        {
+          "info": {
+            "name": "Creating a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creating a user"
+        },
+        {
+          "info": {
+            "name": "Getting details of a User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.qminder.com/v1/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID or email of the User to query"
+              }
+            ]
+          },
+          "docs": "Getting details of a User"
+        },
+        {
+          "info": {
+            "name": "Getting user's selected desk id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.qminder.com/v1/users/:id/desk",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the User to get selected desk of"
+              }
+            ]
+          },
+          "docs": "Getting user's selected desk id"
+        },
+        {
+          "info": {
+            "name": "Changing the user's selected desk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/users/:id/desk",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the User to change the desk for"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Changing the user's selected desk"
+        },
+        {
+          "info": {
+            "name": "Clearing the user's selected desk",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.qminder.com/v1/users/:id/desk",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the User to remove the desk for"
+              }
+            ]
+          },
+          "docs": "Clearing the user's selected desk"
+        },
+        {
+          "info": {
+            "name": "Getting the user's selected lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.qminder.com/v1/users/:id/lines",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the User to get lines for"
+              }
+            ]
+          },
+          "docs": "Getting the user's selected lines"
+        },
+        {
+          "info": {
+            "name": "Selecting lines",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/v1/users/:id/lines",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the User to set the lines for"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Selecting lines"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

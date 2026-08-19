@@ -1,0 +1,3509 @@
+{
+  "item": [
+    {
+      "id": "163b22f1-54c9-49ac-9f1a-fa79925567f1",
+      "name": "Tickets",
+      "description": {
+        "content": "Manage visitor queue entries",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1949bf0a-61cc-49b5-b277-45716f53eb10",
+          "name": "Create a ticket",
+          "request": {
+            "name": "Create a ticket",
+            "description": {
+              "content": "Creates a new ticket in the specified line.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tickets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version. Must be set to `2020-09-01`.",
+                "key": "X-Qminder-API-Version",
+                "value": "2020-09-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"lineId\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"email\": \"<string>\",\n  \"languageCode\": \"en\",\n  \"source\": \"MANUAL\",\n  \"fields\": [\n    {\n      \"inputFieldId\": \"<uuid>\",\n      \"value\": \"<string>\",\n      \"optionIds\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    {\n      \"inputFieldId\": \"<uuid>\",\n      \"value\": \"<string>\",\n      \"optionIds\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    }\n  ],\n  \"labels\": [\n    {\n      \"value\": \"<string>\"\n    },\n    {\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a8e5a5e6-0fe4-4d8a-8887-da6c33c411a8",
+              "name": "Ticket created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineId\": \"12345\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phoneNumber\": \"+12125551234\",\n  \"email\": \"john@example.com\",\n  \"languageCode\": \"en\",\n  \"source\": \"MANUAL\",\n  \"fields\": [\n    {\n      \"inputFieldId\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"value\": \"Consultation\"\n    }\n  ],\n  \"labels\": [\n    {\n      \"value\": \"VIP\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"226859\",\n  \"publicId\": \"A-42\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed384f03-6dc9-47cf-bf0e-a79198cd5abc",
+              "name": "Validation error - invalid input data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineId\": \"12345\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phoneNumber\": \"+12125551234\",\n  \"email\": \"john@example.com\",\n  \"languageCode\": \"en\",\n  \"source\": \"MANUAL\",\n  \"fields\": [\n    {\n      \"inputFieldId\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"value\": \"Consultation\"\n    }\n  ],\n  \"labels\": [\n    {\n      \"value\": \"VIP\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8948e608-05bd-403d-aa14-e91fa89772e2",
+              "name": "Line, input fields, or language not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineId\": \"12345\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phoneNumber\": \"+12125551234\",\n  \"email\": \"john@example.com\",\n  \"languageCode\": \"en\",\n  \"source\": \"MANUAL\",\n  \"fields\": [\n    {\n      \"inputFieldId\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"value\": \"Consultation\"\n    }\n  ],\n  \"labels\": [\n    {\n      \"value\": \"VIP\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1ac117e4-02f1-4bf9-ab0b-d85905032cd5",
+              "name": "Line is disabled or archived",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"lineId\": \"12345\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phoneNumber\": \"+12125551234\",\n  \"email\": \"john@example.com\",\n  \"languageCode\": \"en\",\n  \"source\": \"MANUAL\",\n  \"fields\": [\n    {\n      \"inputFieldId\": \"550e8400-e29b-41d4-a716-446655440000\",\n      \"value\": \"Consultation\"\n    }\n  ],\n  \"labels\": [\n    {\n      \"value\": \"VIP\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3770837a-931c-43fc-97b4-6f66d334a91b",
+          "name": "Searching tickets",
+          "request": {
+            "name": "Searching tickets",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<integer>",
+                  "description": "Search tickets only in the given Location."
+                },
+                {
+                  "disabled": false,
+                  "key": "line",
+                  "value": ""
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Search tickets with only the given status. Multiple statuses can be searched by separating them with a comma. \"NEW\" will return tickets that are in queue, and have not been called. \"CALLED\" will return tickets that are currently being served. \"SERVED\" will return tickets that have been served. \"CANCELLED_BY_CLERK\" will return tickets that have been removed from queue."
+                },
+                {
+                  "disabled": false,
+                  "key": "caller",
+                  "value": "<string>",
+                  "description": "Search tickets that have been called by the given user ID. Both \"CALLED\" and \"SERVED\" tickets will be returned, unless status is also specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "minCreated",
+                  "value": "<dateTime>",
+                  "description": "Search tickets which have been created after the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxCreated",
+                  "value": "<dateTime>",
+                  "description": "Search tickets which have been created before the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+                },
+                {
+                  "disabled": false,
+                  "key": "minCalled",
+                  "value": "<dateTime>",
+                  "description": "Search tickets which have been called after the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxCalled",
+                  "value": "<dateTime>",
+                  "description": "Search tickets which have been called before the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit search results to the specified amount of tickets. With a limit of 100, only the 100 first results will be returned. The limit has to be between 1 and 20000."
+                },
+                {
+                  "disabled": false,
+                  "key": "order",
+                  "value": "<string>",
+                  "description": "Order search results according to a ticket parameter. Order is specified using two words in one string, for example \"id ASC\". Valid order directions: ASC, DESC Valid ordering parameters: id, created, called, served"
+                },
+                {
+                  "disabled": false,
+                  "key": "responseScope",
+                  "value": "<string>",
+                  "description": "Include additional data in the search results. Use multiple response scopes by separating them with a comma. Valid response scopes are: \"MESSAGES\" - include SMS messages with the response \"INTERACTIONS\" - include interaction data with the response \"CONNECTED_TICKETS\" - include connected tickets (other visits of the same person)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cb1e111d-f3c5-41a6-bc36-cb24a2a6c35c",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "location",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "line",
+                      "value": ""
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "caller",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "minCreated",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "maxCreated",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "minCalled",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "maxCalled",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "order",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "responseScope",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"data\\\": [\\n    {\\n      \\\"id\\\": \\\"51999102\\\",\\n      \\\"status\\\": \\\"SERVED\\\",\\n      \\\"source\\\": \\\"MANUAL\\\",\\n      \\\"line\\\": 88100,\\n      \\\"firstName\\\": \\\"Jane\\\",\\n      \\\"lastName\\\": \\\"Doe\\\",\\n      \\\"orderAfter\\\": \\\"2015-04-29T12:29:40.701Z\\\",\\n      \\\"created\\\": {\\n        \\\"date\\\": \\\"2016-04-29T12:29:40.701Z\\\"\\n      },\\n      \\\"called\\\": {\\n        \\\"date\\\": \\\"2016-05-05T14:05:29Z\\\",\\n        \\\"caller\\\": 15144,\\n        \\\"desk\\\": 3\\n      },\\n      \\\"served\\\": {\\n        \\\"date\\\": \\\"2016-05-05T14:05:34Z\\\"\\n      },\\n      \\\"assigned\\\": {\\n        \\\"assigner\\\": 15100,\\n        \\\"assignee\\\": 15144\\n      },\\n      \\\"extra\\\": [\\n        {\\n          \\\"title\\\": \\\"Notes\\\",\\n          \\\"value\\\": \\\"assistance required\\\"\\n        }\\n      ],\\n      \\\"labels\\\": [\\n        {\\n          \\\"value\\\": \\\"VIP\\\",\\n          \\\"color\\\": \\\"FF00FF\\\"\\n        }\\n      ],\\n      \\\"interactions\\\": [\\n        {\\n          \\\"start\\\": \\\"2016-05-05T14:05:29Z\\\",\\n          \\\"end\\\": \\\"2016-05-05T14:05:34Z\\\",\\n          \\\"line\\\": 88100,\\n          \\\"user\\\": 15144\\n        }\\n      ],\\n      \\\"messages\\\": [\\n        {\\n          \\\"created\\\": {\\n            \\\"date\\\": \\\"2017-06-15T18:43:41Z\\\"\\n          },\\n          \\\"body\\\": \\\"Hello Jane! You are now in the queue. We will let you know when it's your turn.\\\",\\n          \\\"type\\\": \\\"OUTGOING\\\",\\n          \\\"status\\\": \\\"DELIVERED\\\"\\n        }\\n      ]\\n    }\\n  ]\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05b26ca8-1bad-496f-9691-0939d9afd05f",
+          "name": "Counting tickets",
+          "request": {
+            "name": "Counting tickets",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                "count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<integer>",
+                  "description": "Count tickets only in the given Location."
+                },
+                {
+                  "disabled": false,
+                  "key": "line",
+                  "value": "<integer>",
+                  "description": "Count tickets only in the given Line."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Count tickets with only the given status. Multiple statuses can be searched by separating them with a comma. \"NEW\" will return tickets that are in queue, and have not been called. \"CALLED\" will return tickets that are currently being served. \"SERVED\" will return tickets that have been served. \"CANCELLED_BY_CLERK\" will return tickets that have been removed from queue."
+                },
+                {
+                  "disabled": false,
+                  "key": "caller",
+                  "value": "<string>",
+                  "description": "Count tickets that have been called by the given user ID. Both \"CALLED\" and \"SERVED\" tickets will be returned, unless status is also specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "minCreated",
+                  "value": "<dateTime>",
+                  "description": "Count tickets which have been created after the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxCreated",
+                  "value": "<dateTime>",
+                  "description": "Count tickets which have been created before the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+                },
+                {
+                  "disabled": false,
+                  "key": "minCalled",
+                  "value": "<dateTime>",
+                  "description": "Count tickets which have been called before the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+                },
+                {
+                  "disabled": false,
+                  "key": "maxCalled",
+                  "value": "<dateTime>",
+                  "description": "Count tickets which have been called before the given timestamp. The timestamp can be in ISO 8601 format, eg \"2020-05-03T00:00:00Z\". Alternatively, the timestamp can be a Unix timestamp, eg 1588767798."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4fd77a68-5e6e-4ec6-8fcc-fa8a72875fc0",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    "count"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "location",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "line",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "caller",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "minCreated",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "maxCreated",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "minCalled",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "maxCalled",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n    \\\"statusCode\\\": 200,\\n    \\\"count\\\": 59\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "661d182a-488d-4437-8e2c-9684fe830def",
+          "name": "Calling a ticket",
+          "request": {
+            "name": "Calling a ticket",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id",
+                "call"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "desk",
+                  "value": "<integer>",
+                  "description": "Optional. The desk where the ticket will be called."
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<integer>",
+                  "description": "Optional. The user who is calling the ticket."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of the ticket to call"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5cfab57d-9611-47b0-9f9b-e75f95bfc510",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id",
+                    "call"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "desk",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "user",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of the ticket to call"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"id\\\": \\\"51999102\\\",\\n  \\\"status\\\": \\\"CALLED\\\",\\n  \\\"source\\\": \\\"MANUAL\\\",\\n  \\\"line\\\": 88100,\\n  \\\"firstName\\\": \\\"Jane\\\",\\n  \\\"lastName\\\": \\\"Doe\\\",\\n  \\\"orderAfter\\\": \\\"2017-05-17T14:01:35.736Z\\\",\\n  \\\"created\\\": {\\n    \\\"date\\\": \\\"2021-09-13T13:49:54.735Z\\\"\\n  },\\n  \\\"labels\\\": [\\n    {\\n      \\\"value\\\": \\\"VIP\\\",\\n      \\\"color\\\": \\\"FF00FF\\\"\\n    }\\n  ],\\n  \\\"extra\\\": [\\n    {\\n      \\\"title\\\": \\\"Notes\\\",\\n      \\\"value\\\": \\\"assistance required\\\"\\n    }\\n  ],\\n  \\\"called\\\": {\\n    \\\"date\\\": \\\"2021-09-22T08:11:18.572Z\\\",\\n    \\\"caller\\\": 15144\\n  },\\n  \\\"assigned\\\": {\\n    \\\"assigner\\\": 15100,\\n    \\\"assignee\\\": 15144\\n  }\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89f4d6c0-3c96-445a-a4c7-056b5ca0c33c",
+          "name": "Re-calling a ticket",
+          "request": {
+            "name": "Re-calling a ticket",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id",
+                "recall"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of a ticket to recall"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ed50669a-b85d-409c-845c-e0183a91f4b0",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id",
+                    "recall"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of a ticket to recall"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"result\\\": \\\"success\\\"\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9803bdea-9849-48f9-a5a1-9f56c36af337",
+          "name": "Editing a ticket",
+          "request": {
+            "name": "Editing a ticket",
+            "description": {
+              "content": "Updates ticket fields such as visitor name, contact information, line assignment, and language preference. Only include fields you want to change - omitted fields remain unchanged. Set a field to `null` to clear its value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tickets",
+                ":ticketId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketId",
+                  "description": "(Required) ID of the ticket to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version. Must be set to `2020-09-01`.",
+                "key": "X-Qminder-API-Version",
+                "value": "2020-09-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phoneNumber\": \"<string>\",\n  \"line\": \"<string>\",\n  \"languageCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f7d90ad4-84de-4196-8a7f-e3555240fd4e",
+              "name": "Ticket updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tickets",
+                    ":ticketId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the ticket to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phoneNumber\": \"+12125551234\",\n  \"line\": \"12345\",\n  \"languageCode\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3a1a88de-f68c-466b-81e0-d83e5ad63047",
+              "name": "Invalid request - validation failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tickets",
+                    ":ticketId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the ticket to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phoneNumber\": \"+12125551234\",\n  \"line\": \"12345\",\n  \"languageCode\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": 400,\n  \"message\": \"First name must not be empty or blank\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ca46ce6-69d2-4aab-9132-cacb4116c51f",
+              "name": "Ticket or line not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tickets",
+                    ":ticketId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the ticket to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phoneNumber\": \"+12125551234\",\n  \"line\": \"12345\",\n  \"languageCode\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Ticket with id 123456 not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02e9d641-dff7-4219-91d4-7f56fe729df4",
+              "name": "Conflict - line is disabled or archived",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tickets",
+                    ":ticketId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the ticket to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phoneNumber\": \"+12125551234\",\n  \"line\": \"12345\",\n  \"languageCode\": \"en\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Line with id 789 is disabled\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1f9da306-7876-4d5b-8b8f-0450d6223be3",
+          "name": "Marking a ticket as served",
+          "request": {
+            "name": "Marking a ticket as served",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id",
+                "markserved"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of a ticket"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5323e78c-e632-4c23-8b58-e4d69ef1c546",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id",
+                    "markserved"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of a ticket"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"result\\\": \\\"success\\\"\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "00854bf5-4be5-435f-b045-a3b0c9c8d850",
+          "name": "Marking a ticket as no-show",
+          "request": {
+            "name": "Marking a ticket as no-show",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id",
+                "marknoshow"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) ID of a ticket"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2951189-91fa-44ba-b695-7eab8b38ff9a",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id",
+                    "marknoshow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) ID of a ticket"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"result\\\": \\\"success\\\"\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3edab8d7-90c6-4e15-8e18-c126dffc6ebd",
+          "name": "Removing a ticket from the queue",
+          "request": {
+            "name": "Removing a ticket from the queue",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<integer>",
+                  "description": "(Required) The ID of the user who removed the ticket."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the ticket to remove from queue."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ce046ae-d5b3-4bdd-8ef5-d52a7c0c78a3",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the ticket to remove from queue."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"result\\\": \\\"success\\\"\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab4d58d1-d339-453a-99ce-d69ce978f8ca",
+          "name": "Returning a ticket to the queue",
+          "request": {
+            "name": "Returning a ticket to the queue",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id",
+                "returntoqueue"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<integer>",
+                  "description": "(Required) The ID of the user to return to queue."
+                },
+                {
+                  "disabled": false,
+                  "key": "position",
+                  "value": "<string>",
+                  "description": "(Required) The position the called ticket should be in the queue. Accepted values: \"FIRST\" = the ticket will be first in line. \"LAST\" = the ticket will be last in queue."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the ticket to return to queue."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42b2f27d-f2bb-4402-8cd2-75c501fa28d5",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id",
+                    "returntoqueue"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "user",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "position",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the ticket to return to queue."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"result\\\": \\\"success\\\"\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c7484cc-2504-46a7-b2f4-8143b6a02220",
+          "name": "Forwarding a ticket",
+          "request": {
+            "name": "Forwarding a ticket",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id",
+                "forward"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the ticket to forward."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<integer>",
+                  "description": "(Required) The ID of the user who forwarded the ticket."
+                },
+                {
+                  "disabled": false,
+                  "key": "line",
+                  "value": "<integer>",
+                  "description": "(Required) The ID of the Line to forward the ticket to."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "68b5fca8-1a77-46bf-8de4-92d5a7011698",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id",
+                    "forward"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the ticket to forward."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The ID of the user who forwarded the ticket.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The ID of the Line to forward the ticket to.",
+                        "type": "text/plain"
+                      },
+                      "key": "line",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b410234-6ca4-48a1-a91d-c4da3a0adfaf",
+          "name": "Adding a label",
+          "request": {
+            "name": "Adding a label",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id",
+                "labels",
+                "add"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the ticket to add the label to"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "(Required) The text of the label. Up to 50 characters."
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<integer>",
+                  "description": "(Required) The ID of the user who added the label."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fd8fa037-2c9b-4c9e-8e5d-3040a1dbf287",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id",
+                    "labels",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the ticket to add the label to"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The text of the label. Up to 50 characters.",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The ID of the user who added the label.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"result\\\": \\\"success\\\"\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53586886-2c5a-4d52-b344-d7dde8449001",
+          "name": "Removing a label",
+          "request": {
+            "name": "Removing a label",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id",
+                "labels",
+                "remove"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the ticket to remove the label from"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "(Required) The label text to remove."
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<integer>",
+                  "description": "(Required) The ID of the user who removed the label."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "60c83afe-b27c-4120-87bf-02e00f37e42d",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id",
+                    "labels",
+                    "remove"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the ticket to remove the label from"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The label text to remove.",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The ID of the user who removed the label.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"result\\\": \\\"success\\\"\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e1c782d1-4bb3-4866-adc9-0fb43831732a",
+          "name": "Assigning a ticket to a user",
+          "request": {
+            "name": "Assigning a ticket to a user",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id",
+                "assign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the ticket to assign."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "assigner",
+                  "value": "<integer>",
+                  "description": "(Required) The ID of the user who assigned the ticket."
+                },
+                {
+                  "disabled": false,
+                  "key": "assignee",
+                  "value": "<integer>",
+                  "description": "(Required) The ID of the user that the ticket will be assigned to."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bd39ef7b-59ea-42e3-bd94-59737e9367b9",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id",
+                    "assign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the ticket to assign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The ID of the user who assigned the ticket.",
+                        "type": "text/plain"
+                      },
+                      "key": "assigner",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The ID of the user that the ticket will be assigned to.",
+                        "type": "text/plain"
+                      },
+                      "key": "assignee",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"result\\\": \\\"success\\\"\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6654db8-2257-4b5c-8e4b-faf5c44836b5",
+          "name": "Un-assigning a ticket",
+          "request": {
+            "name": "Un-assigning a ticket",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id",
+                "unassign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the ticket to assign."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<integer>",
+                  "description": "The ID of the user who un-assigned the ticket."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8d7e3a41-bbfc-492c-a6fe-04a66f5386aa",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id",
+                    "unassign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the ticket to assign."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The ID of the user who un-assigned the ticket.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"result\\\": \\\"success\\\"\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2daafdcd-1f57-4fe8-8c8d-2434062bbdbf",
+          "name": "Reordering a ticket",
+          "request": {
+            "name": "Reordering a ticket",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id",
+                "reorder"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the ticket to reorder."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "after",
+                  "value": "<integer>",
+                  "description": "The current ticket will be placed after this ID. If unset, then the ticket will be reordered to be first in the queue."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e878dcbc-a7ab-400c-a68c-095b680d0871",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id",
+                    "reorder"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the ticket to reorder."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The current ticket will be placed after this ID. If unset, then the ticket will be reordered to be first in the queue.",
+                        "type": "text/plain"
+                      },
+                      "key": "after",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"result\\\": \\\"success\\\"\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0b177f5-3eb7-48a2-a92e-c785636c2885",
+          "name": "Get details of a ticket",
+          "request": {
+            "name": "Get details of a ticket",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "responseScope",
+                  "value": "<string>",
+                  "description": "Include additional data in the search results. Use multiple response scopes by separating them with a comma. Valid response scopes are: \"MESSAGES\" - include SMS messages with the response \"INTERACTIONS\" - include interaction data with the response \"CONNECTED_TICKETS\" - include connected tickets (other visits of the same person)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the ticket to get details of"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9af8e81f-619c-467a-b83d-9dcc03c7b34e",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "responseScope",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the ticket to get details of"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"id\\\": \\\"13429905\\\",\\n  \\\"status\\\": \\\"CALLED\\\",\\n  \\\"source\\\": \\\"NAME\\\",\\n  \\\"line\\\": 47466,\\n  \\\"firstName\\\": \\\"Johnny\\\",\\n  \\\"lastName\\\": \\\"Bravo\\\",\\n  \\\"phoneNumber\\\": 13186190204,\\n  \\\"created\\\": {\\n    \\\"date\\\": \\\"2016-08-01T15:27:45.057Z\\\"\\n  },\\n  \\\"called\\\": {\\n    \\\"date\\\": \\\"2020-05-06T13:13:16Z\\\",\\n    \\\"caller\\\": 13860\\n  }\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88c13bef-8105-4a83-b3a0-c966793c3ff8",
+          "name": "Get messages of a ticket",
+          "request": {
+            "name": "Get messages of a ticket",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the ticket to load messages for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a4e37a19-2e65-4b03-b764-34ad967e7bd1",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the ticket to load messages for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"messages\\\": [\\n    {\\n      \\\"created\\\": {\\n        \\\"date\\\": \\\"2017-04-12T16:27:57Z\\\"\\n      },\\n      \\\"body\\\": \\\"It's your turn!\\\",\\n      \\\"type\\\": \\\"OUTGOING\\\",\\n      \\\"status\\\": \\\"SENT\\\",\\n      \\\"userId\\\": 15000\\n    },\\n    {\\n      \\\"created\\\": {\\n        \\\"date\\\": \\\"2017-04-17T11:50:13Z\\\"\\n      },\\n      \\\"body\\\": \\\"Thank you!\\\",\\n      \\\"type\\\": \\\"INCOMING\\\",\\n      \\\"status\\\": \\\"NEW\\\"\\n    }\\n  ]\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c0cc03f-ac7e-4eca-a001-3bea0aaf84b9",
+          "name": "Sending an SMS message",
+          "request": {
+            "name": "Sending an SMS message",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":id",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the ticket to send the message to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "message",
+                  "value": "<string>",
+                  "description": "(Required) The message to send. The message should be URL-encoded."
+                },
+                {
+                  "disabled": false,
+                  "key": "user",
+                  "value": "<integer>",
+                  "description": "The user who sent the message."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cbd63569-4d60-4f4a-a1db-50d367ee6d99",
+              "name": "200",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":id",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the ticket to send the message to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) The message to send. The message should be URL-encoded.",
+                        "type": "text/plain"
+                      },
+                      "key": "message",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "The user who sent the message.",
+                        "type": "text/plain"
+                      },
+                      "key": "user",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"{\\n  \\\"statusCode\\\": 200,\\n  \\\"result\\\": \\\"success\\\"\\n}\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5ab2aa4-f2fb-41d3-80d8-e086d8f35241",
+          "name": "Save ticket input field value",
+          "request": {
+            "name": "Save ticket input field value",
+            "description": {
+              "content": "Saves or updates a custom input field value on a ticket. Use `value` for text fields or `optionIds` for select-type fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":ticketId",
+                "fields",
+                ":inputFieldId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketId",
+                  "description": "(Required) ID of the ticket"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "inputFieldId",
+                  "description": "(Required) UUID of the input field"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version. Must be set to `2020-09-01`.",
+                "key": "X-Qminder-API-Version",
+                "value": "2020-09-01"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"value\": \"<string>\",\n  \"optionIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53c499a6-1b81-44bc-9203-ab8349dd2e01",
+              "name": "Input field value saved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":ticketId",
+                    "fields",
+                    ":inputFieldId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the ticket"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inputFieldId",
+                      "description": "(Required) UUID of the input field"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"Customer needs wheelchair access\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9c351256-3508-4543-8b07-fce0774845a9",
+              "name": "Both value and options are null, or invalid options provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":ticketId",
+                    "fields",
+                    ":inputFieldId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the ticket"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inputFieldId",
+                      "description": "(Required) UUID of the input field"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"Customer needs wheelchair access\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d24c0a85-96fd-49e3-94a0-49f9097c3467",
+              "name": "Ticket or input field not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":ticketId",
+                    "fields",
+                    ":inputFieldId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the ticket"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inputFieldId",
+                      "description": "(Required) UUID of the input field"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"Customer needs wheelchair access\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "59d6fb3d-1d24-4da5-9f53-38d0996f8f86",
+              "name": "Ticket and input field are from different locations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":ticketId",
+                    "fields",
+                    ":inputFieldId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the ticket"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inputFieldId",
+                      "description": "(Required) UUID of the input field"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"value\": \"Customer needs wheelchair access\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9af3d8b9-ac21-451a-8f5e-8db6810fa7ac",
+          "name": "Remove ticket input field value",
+          "request": {
+            "name": "Remove ticket input field value",
+            "description": {
+              "content": "Removes a custom input field value from a ticket. Cannot remove mandatory input fields.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tickets",
+                ":ticketId",
+                "fields",
+                ":inputFieldId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ticketId",
+                  "description": "(Required) ID of the ticket"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "inputFieldId",
+                  "description": "(Required) UUID of the input field"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) API version. Must be set to `2020-09-01`.",
+                "key": "X-Qminder-API-Version",
+                "value": "2020-09-01"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ded13c2c-1809-46ca-8712-8585a2151fb0",
+              "name": "Input field value removed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":ticketId",
+                    "fields",
+                    ":inputFieldId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the ticket"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inputFieldId",
+                      "description": "(Required) UUID of the input field"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "23c30b03-0e1c-4533-a6f5-235dd5e0bf1b",
+              "name": "Mandatory input field cannot be removed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":ticketId",
+                    "fields",
+                    ":inputFieldId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the ticket"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inputFieldId",
+                      "description": "(Required) UUID of the input field"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3bba0511-5cf1-4e66-a23c-71856b6f1645",
+              "name": "Ticket or input field not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":ticketId",
+                    "fields",
+                    ":inputFieldId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the ticket"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inputFieldId",
+                      "description": "(Required) UUID of the input field"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f941c8b5-ae63-431c-a959-c977af608367",
+              "name": "Ticket and input field are from different locations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tickets",
+                    ":ticketId",
+                    "fields",
+                    ":inputFieldId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ticketId",
+                      "description": "(Required) ID of the ticket"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inputFieldId",
+                      "description": "(Required) UUID of the input field"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Qminder-REST-API-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) API version. Must be set to `2020-09-01`.",
+                    "key": "X-Qminder-API-Version",
+                    "value": "2020-09-01"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.qminder.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Qminder-REST-API-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "946ac055-c613-4b86-a4a5-6eaf808ccaea",
+    "name": "Qminder Appointments Tickets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Qminder API allows you to integrate queue management into your own applications.",
+      "type": "text/plain"
+    }
+  }
+}

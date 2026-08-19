@@ -1,0 +1,76 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Qminder Appointments Input Fields API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Qminder-REST-API-Key",
+      "value": "{{X-Qminder-REST-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Input Fields",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an input field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.qminder.com/input-fields",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new input field for a location. The client must generate a UUID for the input field ID. EMAIL and PHONE_NUMBER types are singletons — only one of each is allowed per location."
+        },
+        {
+          "info": {
+            "name": "Edit an input field",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.qminder.com/input-fields/:inputFieldId",
+            "headers": [
+              {
+                "name": "X-Qminder-API-Version",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "inputFieldId",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the input field to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing input field. Only include fields you want to change — omitted fields remain unchanged. Set `visitorFacingTitle` to `null` to clear it."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
