@@ -45,6 +45,16 @@ tags:
 - Customer Experience
 - REST
 - GraphQL
+- Webhook
+- Software-as-a-Service
+tags_raw:
+- Company
+- Queue Management
+- Appointment Scheduling
+- Visitor Management
+- Customer Experience
+- REST
+- GraphQL
 - Webhooks
 - SaaS
 apis:
@@ -154,6 +164,8 @@ apis:
   humanURL: https://developer.qminder.com/
   baseURL: https://api.qminder.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
@@ -174,6 +186,8 @@ apis:
   humanURL: https://developer.qminder.com/
   baseURL: https://api.qminder.com
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
