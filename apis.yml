@@ -138,6 +138,8 @@ apis:
   humanURL: https://developer.qminder.com/
   baseURL: https://api.qminder.com
   tags:
+  - Location
+  tags_raw:
   - Locations
   properties:
   - type: OpenAPI
