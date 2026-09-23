@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Qminder Appointments Lines API
+  title: Qminder Lines API
   version: '1.0'
   description: The Qminder API allows you to integrate queue management into your own applications.
 servers:

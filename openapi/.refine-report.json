@@ -1,13 +1,7 @@
 {
   "provider": "qminder",
   "sources": [
-    "qminder-appointments-api-openapi.yml",
-    "qminder-input-fields-api-openapi.yml",
-    "qminder-lines-api-openapi.yml",
-    "qminder-locations-api-openapi.yml",
-    "qminder-tickets-api-openapi.yml",
-    "qminder-users-api-openapi.yml",
-    "qminder-webhooks-api-openapi.yml"
+    "_original/qminder-openapi-original.json"
   ],
   "outputs": [
     "qminder-appointments-api-openapi.yml",
@@ -21,6 +15,18 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "qminder-openapi-original.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "qminder-appointments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "qminder-input-fields-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "qminder-lines-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "qminder-locations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "qminder-tickets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "qminder-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "qminder-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
