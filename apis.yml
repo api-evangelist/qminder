@@ -61,6 +61,7 @@ tags:
 - GraphQL
 - Webhook
 - Software-as-a-Service
+- Scheduling
 tags_raw:
 - Company
 - Queue Management
@@ -71,6 +72,7 @@ tags_raw:
 - GraphQL
 - Webhooks
 - SaaS
+- Scheduling
 apis:
 - aid: qminder:qminder-appointments-api
   name: Qminder Appointments API
@@ -160,6 +162,8 @@ apis:
   humanURL: https://developer.qminder.com/
   baseURL: https://api.qminder.com
   tags:
+  - Ticketing
+  tags_raw:
   - Tickets
   properties:
   - type: OpenAPI
