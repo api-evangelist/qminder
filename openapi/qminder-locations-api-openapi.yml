@@ -487,34 +487,6 @@ components:
           $ref: '#/components/schemas/TimeOfDay'
         closes:
           $ref: '#/components/schemas/TimeOfDay'
-    TimeOfDay:
-      type: object
-      description: A time of day.
-      properties:
-        hours:
-          type: integer
-          minimum: 0
-          maximum: 23
-          description: Hour (0-23).
-        minutes:
-          type: integer
-          minimum: 0
-          maximum: 59
-          description: Minutes (0-59).
-    LineTranslationRequest:
-      type: object
-      description: A name translation for a line.
-      required:
-      - languageCode
-      properties:
-        languageCode:
-          type: string
-          description: Language code (e.g. "fr", "es").
-        name:
-          type: string
-          maxLength: 30
-          description: Translated line name (max 30 characters). Can be null as a placeholder.
-          nullable: true
     LineRequest:
       type: object
       description: A line (service) to create with the location.
@@ -671,6 +643,34 @@ components:
         closed:
           type: boolean
           description: If true, the location is closed this day.
+    TimeOfDay:
+      type: object
+      description: A time of day.
+      properties:
+        hours:
+          type: integer
+          minimum: 0
+          maximum: 23
+          description: Hour (0-23).
+        minutes:
+          type: integer
+          minimum: 0
+          maximum: 59
+          description: Minutes (0-59).
+    LineTranslationRequest:
+      type: object
+      description: A name translation for a line.
+      required:
+      - languageCode
+      properties:
+        languageCode:
+          type: string
+          description: Language code (e.g. "fr", "es").
+        name:
+          type: string
+          maxLength: 30
+          description: Translated line name (max 30 characters). Can be null as a placeholder.
+          nullable: true
   securitySchemes:
     sec0:
       type: apiKey
