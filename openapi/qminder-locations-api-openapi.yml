@@ -479,14 +479,20 @@ paths:
       - Locations
 components:
   schemas:
-    TimeRange:
+    TimeOfDay:
       type: object
-      description: A time range with opening and closing times.
+      description: A time of day.
       properties:
-        opens:
-          $ref: '#/components/schemas/TimeOfDay'
-        closes:
-          $ref: '#/components/schemas/TimeOfDay'
+        hours:
+          type: integer
+          minimum: 0
+          maximum: 23
+          description: Hour (0-23).
+        minutes:
+          type: integer
+          minimum: 0
+          maximum: 59
+          description: Minutes (0-59).
     LineRequest:
       type: object
       description: A line (service) to create with the location.
@@ -520,6 +526,18 @@ components:
           description: Name translations for multi-language support. Referenced language codes must be included in the location's languages field.
           items:
             $ref: '#/components/schemas/LineTranslationRequest'
+    DaySchedule:
+      type: object
+      description: Schedule for a single day. Either set businessHours or closed.
+      properties:
+        businessHours:
+          type: array
+          description: Time ranges when the location is open.
+          items:
+            $ref: '#/components/schemas/TimeRange'
+        closed:
+          type: boolean
+          description: If true, the location is closed this day.
     LocationInputField:
       type: object
       description: An input field to create with the location. Uses the same schema as POST /input-fields, but without `location` (auto-set) and `visibleForLines` (lines don't exist yet).
@@ -631,32 +649,6 @@ components:
         isRequiredInAppointments:
           type: boolean
           description: Whether required in appointments. Available for LAST_NAME and EMAIL types.
-    DaySchedule:
-      type: object
-      description: Schedule for a single day. Either set businessHours or closed.
-      properties:
-        businessHours:
-          type: array
-          description: Time ranges when the location is open.
-          items:
-            $ref: '#/components/schemas/TimeRange'
-        closed:
-          type: boolean
-          description: If true, the location is closed this day.
-    TimeOfDay:
-      type: object
-      description: A time of day.
-      properties:
-        hours:
-          type: integer
-          minimum: 0
-          maximum: 23
-          description: Hour (0-23).
-        minutes:
-          type: integer
-          minimum: 0
-          maximum: 59
-          description: Minutes (0-59).
     LineTranslationRequest:
       type: object
       description: A name translation for a line.
@@ -671,6 +663,14 @@ components:
           maxLength: 30
           description: Translated line name (max 30 characters). Can be null as a placeholder.
           nullable: true
+    TimeRange:
+      type: object
+      description: A time range with opening and closing times.
+      properties:
+        opens:
+          $ref: '#/components/schemas/TimeOfDay'
+        closes:
+          $ref: '#/components/schemas/TimeOfDay'
   securitySchemes:
     sec0:
       type: apiKey
