@@ -1,0 +1,37 @@
+slug: qminder
+provider: Qminder
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Webhooks
+  spec_file: qminder-webhooks-api-openapi.yml
+  capability_id: BC-4270.80
+  capability_id_l1: BC-4270
+  capability_name: Webhook & Event Subscription Management
+  confidence: 0.72
+  evidence: POST /v1/webhooks  adding-a-webhook  Adding a webhook; DELETE /v1/webhooks/{id}  removing-a-webhook
+  reason: The operations are purely the create/delete lifecycle of outbound webhook subscriptions on the
+    vendor's developer platform, which is exactly Webhook & Event Subscription Management. Confidence
+    held below 0.8 because only two generic operations are present and no event-schema or delivery-reliability
+    surface is shown.
+- tag: Tickets
+  spec_file: qminder-tickets-api-openapi.yml
+  capability_id: BC-430.10
+  capability_id_l1: BC-430
+  capability_name: Customer Inquiry Management
+  confidence: 0.7
+  evidence: POST /v1/tickets/{id}/call 'Calling a ticket'; 'Marking a ticket as served'; 'Returning a
+    ticket to the queue'; 'Forwarding a ticket'
+  reason: 'Visitor queue tickets are captured, routed/called to desks, forwarded and marked served — inbound
+    contact handling, routing and resolution, i.e. Customer Inquiry Management. Not IT incident ticketing:
+    the objects are queued visitors at service points.'
