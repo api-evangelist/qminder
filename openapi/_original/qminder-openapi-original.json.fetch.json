@@ -1,0 +1,12 @@
+{
+ "url": "https://developer.qminder.com/api-reference/openapi.json",
+ "requested_url": "https://developer.qminder.com/api-reference/openapi.json",
+ "status": 200,
+ "content_type": "application/json",
+ "bytes": 204026,
+ "sha256": "b7795ff7b06a5744ec6a2b05a376a12c1fa30a6bb78adc92a686d45a41827a5c",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "byte-identical",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the archived file is byte-identical to what the provider serves."
+}
