@@ -438,3 +438,9 @@ x-readme:
   explorer-enabled: false
   proxy-enabled: true
 x-readme-fauxas: true
+x-provenance:
+  method: harvested
+  publisher: Qminder
+  source: https://developer.qminder.com/api-reference/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
