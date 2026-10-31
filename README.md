@@ -64,6 +64,147 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Qminder is a company surfaced as a portfolio company of seedcamp and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Qminder is a cloud-based queue management and appointment scheduling platform that helps retail, healthcare, government, and education organizations manage visitor flow, virtual queues, and service points across physical locations. Its developer platform exposes a REST API and a GraphQL API (with real-time subscriptions) at api.qminder.com for creating tickets, calling and serving visitors, scheduling appointments, managing locations, lines, desks, users, and custom input fields, plus webhooks for ticket, line, and location events. An official JavaScript/TypeScript SDK (qminder-api) is published to npm.
 
-Backed by: seedcamp — http://qminder.com
+**Areas:** Company · Queue Management · Appointment Scheduling · Visitor Management · Customer Experience · REST · GraphQL · Webhook · Software-as-a-Service · Scheduling
+
+## Qminder on APIs.io
+
+Everything profiled for Qminder is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/qminder/](https://apis.io/providers/qminder/)** — or go straight to one of the APIs or properties below.
+
+### APIs (7)
+
+- [Qminder Appointments API](https://apis.io/apis/qminder/qminder-appointments-api/) — Manage scheduled appointments
+- [Qminder Input Fields API](https://apis.io/apis/qminder/qminder-input-fields-api/) — Manage custom data fields for locations
+- [Qminder Lines API](https://apis.io/apis/qminder/qminder-lines-api/) — Manage virtual queues within locations
+- [Qminder Locations API](https://apis.io/apis/qminder/qminder-locations-api/) — Manage physical service locations
+- [Qminder Tickets API](https://apis.io/apis/qminder/qminder-tickets-api/) — Manage visitor queue entries
+- [Qminder Users API](https://apis.io/apis/qminder/qminder-users-api/) — Manage user accounts and permissions
+- [Qminder Webhooks API](https://apis.io/apis/qminder/qminder-webhooks-api/) — Manage webhook subscriptions
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Qminder Events Webhooks](https://apis.io/asyncapis/qminder/qminder-events-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [qminder](https://apis.io/servers/qminder/qminder/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Qminder Agentic Access](https://apis.io/agentic-access/qminder/qminder-agentic-access/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [Qminder Appointments API](https://apis.io/collections/qminder/open-qminder-appointments-api/)
+- [Qminder Appointments Input Fields API](https://apis.io/collections/qminder/open-qminder-input-fields-api/)
+- [Qminder Appointments Lines API](https://apis.io/collections/qminder/open-qminder-lines-api/)
+- [Qminder Appointments Locations API](https://apis.io/collections/qminder/open-qminder-locations-api/)
+- [Qminder Appointments Tickets API](https://apis.io/collections/qminder/open-qminder-tickets-api/)
+- [Qminder Appointments Users API](https://apis.io/collections/qminder/open-qminder-users-api/)
+- [Qminder Appointments Webhooks API](https://apis.io/collections/qminder/open-qminder-webhooks-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Qminder Openapi Overlay](https://apis.io/overlays/qminder/qminder-openapi-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Qminder Authentication](https://apis.io/security/qminder/qminder-authentication/)
+- [Qminder Domain Security](https://apis.io/security/qminder/qminder-domain-security/)
+- [Qminder Trust Center](https://apis.io/security/qminder/qminder-trust-center/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Qminder Rate Limits](https://apis.io/rate-limits/qminder/qminder-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.qminder.com)
+- [Documentation](https://developer.qminder.com/)
+- [Getting started](https://developer.qminder.com/reference/overview)
+- [API reference](https://developer.qminder.com/api-reference/)
+- [Pricing](https://www.qminder.com/pricing/)
+- [Sign up](https://dashboard.qminder.com/signup)
+- [Support](https://support.qminder.com)
+- [Blog](https://www.qminder.com/blog/)
+- [Compliance](https://www.qminder.com/security/)
+- [Terms of service](https://www.qminder.com/terms-of-service/)
+- [Privacy policy](https://www.qminder.com/privacy-policy/)
+- [GitHub](https://github.com/Qminder)
+- [Status](https://status.qminder.com)
+
+## API Evangelist rating
+
+**Kin Score 53.8** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 54.5 |
+| Contract governance | 18.2 |
+| Operational transparency | 47.4 |
+| Developer ergonomics | 61.3 |
+| Access clarity | 53.9 |
+
+**Agent readiness 32.8** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 29.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/qminder/](https://apis.io/providers/qminder/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Qminder: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/qminder/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
